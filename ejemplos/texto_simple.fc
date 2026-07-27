@@ -5,3 +5,4 @@ función principal() -> Entero32 {
     texto_liberar(t);
     retornar largo;
 }
+

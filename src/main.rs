@@ -109,7 +109,7 @@ fn main() {
             }
         }
         Comandos::Version => {
-            println!("Falcato 0.1.0");
+            println!("mejia 0.1.0");
             println!("Lenguaje de programación de sistemas iberohablante");
         }
         Comandos::Test { archivos } => {
@@ -119,8 +119,8 @@ fn main() {
             }
         }
         Comandos::Lsp => {
-            eprintln!("[Falcato LSP] Iniciando servidor...");
-            eprintln!("[Falcato LSP] Usando stdio para comunicación");
+            eprintln!("[mejia LSP] Iniciando servidor...");
+            eprintln!("[mejia LSP] Usando stdio para comunicación");
             let runtime = tokio::runtime::Runtime::new()
                 .expect("No se pudo crear runtime de Tokio");
             runtime.block_on(async {
@@ -149,7 +149,7 @@ fn compilar(
     }
 
     // Ruta multi-archivo con Resolver
-    println!("[Falcato] Compilando {} archivo(s)...", archivos.len());
+    println!("[mejia] Compilando {} archivo(s)...", archivos.len());
 
     let base_dir = Path::new(&archivos[0]).parent()
         .unwrap_or_else(|| Path::new("."))
@@ -163,7 +163,7 @@ fn compilar(
 
     resolver.calcular_orden()?;
 
-    println!("[Falcato] Orden de compilación: {:?}", resolver.orden);
+    println!("[mejia] Orden de compilación: {:?}", resolver.orden);
 
     let objetos = resolver.compilar_todo()?;
 
@@ -181,7 +181,7 @@ fn compilar(
     let rutas_obj: Vec<&str> = objetos.iter().map(|(_, ruta)| ruta.as_str()).collect();
     link_objetos(&rutas_obj, &binario, target, release)?;
 
-    println!("[Falcato] Binario generado: {}", binario);
+    println!("[mejia] Binario generado: {}", binario);
     Ok(())
 }
 
@@ -208,12 +208,12 @@ fn compilar_individual(
                 .collect();
             format!("Errores de parseo:\n{}", msgs.join("\n"))
         })?;
-    println!("[Falcato] AST generado: {} declaraciones", programa.declaraciones.len());
+    println!("[mejia] AST generado: {} declaraciones", programa.declaraciones.len());
 
     let mut semantica = AnalizadorSemantico::nuevo();
     semantica.analizar(&programa)
         .map_err(|e| format!("Errores semánticos:\n{}", e))?;
-    println!("[Falcato] Análisis semántico: sin errores de concordancia");
+    println!("[mejia] Análisis semántico: sin errores de concordancia");
 
     let mut codegen = Codegen::nuevo("main")
         .map_err(|e| format!("Error inicializando codegen: {}", e))?;
@@ -222,7 +222,7 @@ fn compilar_individual(
 
     let obj_ruta = format!("{}.o", archivo.strip_suffix(".fc").unwrap_or(archivo));
     codegen.escribir_objeto(&obj_ruta)?;
-    println!("[Falcato] Objeto generado: {}", obj_ruta);
+    println!("[mejia] Objeto generado: {}", obj_ruta);
 
     let binario = output.map(String::from)
         .unwrap_or_else(|| {
@@ -234,7 +234,7 @@ fn compilar_individual(
         });
 
     link_objeto(&obj_ruta, &binario, target, false)?;
-    println!("[Falcato] Binario generado: {}", binario);
+    println!("[mejia] Binario generado: {}", binario);
     Ok(())
 }
 
@@ -248,7 +248,7 @@ fn compilar_y_ejecutar(archivos: &[String], args: &[String]) -> Result<(), Strin
     
     compilar(archivos, Some(&binario), None, false)?;
 
-    println!("[Falcato] Ejecutando '{}'...", binario);
+    println!("[mejia] Ejecutando '{}'...", binario);
     
     let mut cmd = Command::new(&binario);
     cmd.args(args);
@@ -327,7 +327,7 @@ fn ejecutar_pruebas(archivos: &[String]) -> Result<(), String> {
         .collect();
 
     if pruebas.is_empty() {
-        println!("[Falcato] No se encontraron pruebas.");
+        println!("[mejia] No se encontraron pruebas.");
         return Ok(());
     }
 
@@ -445,7 +445,7 @@ fn ejecutar_pruebas(archivos: &[String]) -> Result<(), String> {
     let binario = format!("{}_test.exe", archivo.strip_suffix(".fc").unwrap_or(archivo));
     link_objeto(&obj_ruta, &binario, None, false)?;
 
-    println!("[Falcato] Binario de pruebas generado: {}", binario);
+    println!("[mejia] Binario de pruebas generado: {}", binario);
     println!();
 
     let status = Command::new(&binario)
@@ -552,3 +552,4 @@ fn link_objetos(
 
     Ok(())
 }
+

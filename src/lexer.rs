@@ -2,7 +2,7 @@ use logos::Logos;
 use crate::span::{Posicion, Span};
 use std::sync::Arc;
 
-/// Tokens del lenguaje Falcato
+/// Tokens del lenguaje mejia
 #[derive(Logos, Debug, Clone, PartialEq, Eq, Hash)]
 #[logos(skip r"[ \t\r\n]+")]
 #[logos(skip r"//[^\n]*")]
@@ -563,3 +563,4 @@ el c: Entero32 = a + b * 2;"#;
         assert!(matches!(tokens[4].token, Token::ArticuloLas));
     }
 }
+

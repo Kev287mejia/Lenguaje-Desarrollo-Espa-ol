@@ -7,7 +7,7 @@ use cranelift_module::{Linkage, Module};
 use cranelift_object::{ObjectBuilder, ObjectModule};
 
 use crate::ast::*;
-use crate::backend::BackendFalcato;
+use crate::backend::Backendmejia;
 use crate::error::{Errores, ErrorCompilador, CategoriaError};
 use crate::span::Span;
 
@@ -3279,7 +3279,7 @@ impl Codegen {
             Expresion::Ruta(path, span) => {
                 // Ruta cualificada sin llamada (ej: pasar función como valor)
                 // Por ahora: error, ya que no soportamos funciones como valores
-                eprintln!("[Falcato] Error: ruta '{}' no es una expresión válida sin llamada",
+                eprintln!("[mejia] Error: ruta '{}' no es una expresión válida sin llamada",
                     path.join("::"));
                 Err(())
             }
@@ -7033,8 +7033,8 @@ impl Codegen {
     }
 }
 
-/// Implementación del trait BackendFalcato para el backend Cranelift.
-impl BackendFalcato for Codegen {
+/// Implementación del trait Backendmejia para el backend Cranelift.
+impl Backendmejia for Codegen {
     fn nuevo(nombre_modulo: &str) -> Result<Self, String> {
         Codegen::nuevo(nombre_modulo)
     }
@@ -7047,3 +7047,4 @@ impl BackendFalcato for Codegen {
         self.escribir_objeto(ruta)
     }
 }
+

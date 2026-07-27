@@ -21,3 +21,4 @@ función principal() -> Entero32 {
     puts("Texto liberado automáticamente");
     retornar 0;
 }
+

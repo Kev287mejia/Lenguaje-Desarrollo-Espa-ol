@@ -13,3 +13,4 @@ función principal() -> Entero32 {
     // Si no es Exito, es Error
     retornar 1;
 }
+

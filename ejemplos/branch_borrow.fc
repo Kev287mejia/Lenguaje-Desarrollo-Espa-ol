@@ -19,3 +19,4 @@ función principal() -> Entero32 estricto {
     
     retornar resultado;  // 42
 }
+

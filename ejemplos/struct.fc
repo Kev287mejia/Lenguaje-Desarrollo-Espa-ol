@@ -1,4 +1,4 @@
-// Ejemplo de structs en Falcato
+// Ejemplo de structs en mejia
 // Los structs se declaran con 'estructural'
 
 estructural Punto {
@@ -15,3 +15,4 @@ función principal() -> Entero32 {
     
     retornar suma;
 }
+

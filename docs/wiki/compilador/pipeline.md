@@ -17,7 +17,7 @@ let fuente = fs::read_to_string(archivo)?;
 Se invoca al lexer para que trocee el texto:
 
 ```rust
-let lexer = LexerFalcato::nuevo(&fuente, archivo);
+let lexer = Lexermejia::nuevo(&fuente, archivo);
 let tokens = lexer.tokenizar();
 ```
 
@@ -25,7 +25,7 @@ let tokens = lexer.tokenizar();
 Los tokens pasan al parser, que construye el árbol:
 
 ```rust
-let programa = ParserFalcato::parse(tokens)?;
+let programa = Parsermejia::parse(tokens)?;
 ```
 
 ### 4. Análisis Semántico (`src/main.rs:148-151`)
@@ -87,3 +87,4 @@ prepara una obra de teatro:
 Las funciones genéricas se guardan para monomorfizarse en el
 punto de llamada, que es donde se sabe con qué tipo concreto
 trabajan.
+

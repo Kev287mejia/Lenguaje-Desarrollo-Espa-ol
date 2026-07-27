@@ -15,3 +15,4 @@ función principal() {
     el resultado: Entero32 = tarea_async(1);
     imprimir_linea("=== Fin ===");
 }
+

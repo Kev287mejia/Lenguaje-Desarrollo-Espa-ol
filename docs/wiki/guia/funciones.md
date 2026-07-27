@@ -1,6 +1,6 @@
 # Funciones
 
-Las funciones son, en Falcato, el modo principal de organizar el
+Las funciones son, en mejia, el modo principal de organizar el
 pensamiento computacional. Cada función recibe unos parámetros
 —con su artículo y tipo, que esto es España— y retorna un valor,
 o no, según su declaración.
@@ -9,7 +9,7 @@ o no, según su declaración.
 
 Así se declara una función, con toda la pompa necesaria:
 
-```falcato
+```mejia
 función nombre(param1: Tipo, param2: Tipo) -> TipoRetorno {
     // cuerpo de la función
     retornar valor;
@@ -21,7 +21,7 @@ función nombre(param1: Tipo, param2: Tipo) -> TipoRetorno {
 Si la función no retorna nada —que no toda acción requiere recompensa—,
 se omite la flecha:
 
-```falcato
+```mejia
 función solo_efectos() {
     // cuerpo, sin retorno, que el placer está en ejecutar
 }
@@ -29,10 +29,10 @@ función solo_efectos() {
 
 ## Parámetros con artículos
 
-Cada parámetro lleva su artículo, porque Falcato es puntilloso
+Cada parámetro lleva su artículo, porque mejia es puntilloso
 con el régimen de propiedad:
 
-```falcato
+```mejia
 función suma(el a: Entero32, el b: Entero32) -> Entero32 {
     retornar a + b;
 }
@@ -42,7 +42,7 @@ función suma(el a: Entero32, el b: Entero32) -> Entero32 {
 
 Llamar a una función es cosa sencilla:
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     el resultado = suma(10, 20);
     retornar resultado;
@@ -54,7 +54,7 @@ función principal() -> Entero32 {
 Mas ¡ay del que yerra! El compilador verifica que los argumentos
 concuerden en número y tipo:
 
-```falcato
+```mejia
 función suma(el a: Entero32, el b: Entero32) -> Entero32 { ... }
 
 suma(10)            // Error: espera 2 argumentos, se pasó 1
@@ -63,15 +63,15 @@ suma(10, verdadero) // Error: argumento 2 espera Entero32, encontrado Booleano
 
 ## FFI (Funciones externas)
 
-Cuando Falcato necesita hablar con C —que es lengua común en
+Cuando mejia necesita hablar con C —que es lengua común en
 la república de los sistemas— se usa `inseguro` y se declara
 la función sin cuerpo:
 
-```falcato
+```mejia
 inseguro función puts(el mensaje: Palabra);
 
 función principal() {
-    puts("¡Hola, Falcato!");
+    puts("¡Hola, mejia!");
     retornar 0;
 }
 
@@ -85,8 +85,9 @@ Características principales:
 Para comodidad de los que vienen de otras tierras, estas tres formas
 son equivalentes:
 
-```falcato
+```mejia
 función foo() { }
 funcion foo() { }   // sin tilde, que no pasa nada
 fn foo() { }        // para los que extrañan el Rust
 ```
+

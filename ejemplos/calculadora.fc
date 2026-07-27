@@ -1,6 +1,6 @@
-// Calculadora Falcato — Demo completa: Resultado<T,E>, loops, arrays, Texto
+// Calculadora mejia — Demo completa: Resultado<T,E>, loops, arrays, Texto
 //
-// falcato build calculadora.fc -o calculadora.exe
+// mejia build calculadora.fc -o calculadora.exe
 // .\calculadora.exe
 //
 // 1=Suma, 2=Resta, 3=Multiplicacion, 4=Division
@@ -17,7 +17,7 @@ funcion ejecutar(la opcion: Entero32, el a: Entero32, el b: Entero32) -> Resulta
 }
 
 funcion principal() -> Entero32 {
-    imprimir_linea("=== CALCULADORA FALCATO ===");
+    imprimir_linea("=== CALCULADORA mejia ===");
     imprimir_linea("");
 
     el a: Entero32 = 42;
@@ -72,3 +72,4 @@ funcion principal() -> Entero32 {
 
 // NOTA: probar con .\calculadora.exe; el codigo de salida es el resultado
 // de 100 + 200 = 300
+

@@ -177,3 +177,4 @@ pub fn parse_tipo(cursor: &mut ParserCursor) -> Result<Tipo, ErrorSintaxis> {
         _ => Err(ErrorSintaxis::tipo_esperado(span)),
     }
 }
+

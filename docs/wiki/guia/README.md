@@ -1,9 +1,9 @@
-# Guía del Lenguaje Falcato
+# Guía del Lenguaje mejia
 
 Ésta es la guía del lenguaje **tal como vive y respira** en el
 compilador de hoy. No hallaréis aquí fantasías de futuros remotos
 ni promesas de lo que algún día será —sólo la sintaxis y semántica
-que el fiero analizador de Falcato entiende y ejecuta.
+que el fiero analizador de mejia entiende y ejecuta.
 
 ## Contenido
 
@@ -15,3 +15,4 @@ que el fiero analizador de Falcato entiende y ejecuta.
 6. [Structs](structs-y-enums.md) — Declaración, inicialización, acceso a campos
 7. [Enums](structs-y-enums.md) — Declaración, constructores, pattern matching
 8. [Genéricos](generics.md) — Type params, const generics, bounds
+

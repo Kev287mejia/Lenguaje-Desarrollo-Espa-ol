@@ -818,3 +818,4 @@ fn parse_patron(cursor: &mut ParserCursor) -> Result<crate::ast::PatronMatch, Er
         }
     }
 }
+

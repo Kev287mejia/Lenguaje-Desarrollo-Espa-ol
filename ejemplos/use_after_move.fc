@@ -10,3 +10,4 @@ función principal() -> Entero32 verificado {
     // En Nivel 1 (verificado), esto debería reportar un error
     retornar x;
 }
+

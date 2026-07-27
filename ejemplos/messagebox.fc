@@ -1,7 +1,7 @@
 // Fase GUI-1: MessageBox nativo en Windows
 // FFI directo a user32!MessageBoxA
 //
-// Compilar: .\target\debug\falcato.exe build ejemplos\messagebox.fc
+// Compilar: .\target\debug\mejia.exe build ejemplos\messagebox.fc
 // Ejecutar: .\messagebox.exe
 
 // --- FFI a user32.dll ---
@@ -18,7 +18,7 @@ inseguro función MessageBoxA(el hwnd: Entero32, el texto: Palabra, el titulo: P
 
 función principal() -> Entero32 {
     // Mensaje informativo simple
-    el r1 = MessageBoxA(0, "Hola desde Falcato!\n\nWin32 MessageBox nativo\nvia FFI directo a user32.dll", "Falcato GUI Fase 1", 0 | 64);
+    el r1 = MessageBoxA(0, "Hola desde mejia!\n\nWin32 MessageBox nativo\nvia FFI directo a user32.dll", "mejia GUI Fase 1", 0 | 64);
 
     // Pregunta con Si/No
     el r2 = MessageBoxA(0, "Deseas ver otro mensaje?", "Pregunta", 4 | 32);
@@ -31,3 +31,4 @@ función principal() -> Entero32 {
 
     retornar 0;
 }
+

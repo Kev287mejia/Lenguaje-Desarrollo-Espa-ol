@@ -9,7 +9,7 @@ se repita. De eso trata este capítulo.
 
 Allá va el ejemplo más llano:
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     el x: Entero32 = 10;
     si x > 5 {
@@ -23,7 +23,7 @@ función principal() -> Entero32 {
 La condición ha de ser de tipo `Booleano`. Si no lo es, el
 compilador alza la voz:
 
-```falcato
+```mejia
 si x { ... }  // [T011] Error: requiere Booleano, encontrado Entero32
 ```
 
@@ -31,9 +31,9 @@ No hay término medio ni contemplaciones: o es verdadero, o es falso.
 
 ## Ser/Estar en condicionales
 
-Falcato, que bebe del español, distingue entre identidad y estado:
+mejia, que bebe del español, distingue entre identidad y estado:
 
-```falcato
+```mejia
 si x es 5 {       // "es" = identidad (comparación estructural)
     // ...
 }
@@ -52,7 +52,7 @@ Y éste es otro rasgo singular: el modo subjuntivo, que marca un
 camino como improbable —el «cold path» de los compiladores, dicho
 sea en romance:
 
-```falcato
+```mejia
 si x fuese > 1000 {    // Subjuntivo: branch improbable
     // Cold path — el compilador sabe que esto no ocurrirá a menudo
 }
@@ -67,7 +67,7 @@ procesador no se moleste en predecir este camino. Es como decirle
 Cuando los enums aparecen, el `si` con `es` hace las veces de
 `match`:
 
-```falcato
+```mejia
 enumeración Estado { Activo, Inactivo }
 
 función principal() -> Entero32 {
@@ -84,7 +84,7 @@ función principal() -> Entero32 {
 Mientras la condición sea verdadera, el cuerpo se repite. No hay
 vuelta de hoja:
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     el i: Entero32 = 0;
     mientras i < 10 {
@@ -96,10 +96,10 @@ función principal() -> Entero32 {
 
 ## Bucle `para`
 
-Para recorrer arrays, Falcato ofrece el bucle `para`, que itera
+Para recorrer arrays, mejia ofrece el bucle `para`, que itera
 sobre cada elemento:
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     los nums: [Entero32; 3] = [10, 20, 30];
     el suma: Entero32 = 0;
@@ -115,14 +115,15 @@ función principal() -> Entero32 {
 A las variables declaradas con `el` (que son de uno, como se ha dicho)
 se les puede cambiar el valor:
 
-```falcato
+```mejia
 el x: Entero32 = 10;
 x = 20;  // va y se pone
 ```
 
 Y a los elementos de un array también:
 
-```falcato
+```mejia
 el nums: [Entero32; 3] = [1, 2, 3];
 nums[1] = 99;  // → [1, 99, 3]
 ```
+

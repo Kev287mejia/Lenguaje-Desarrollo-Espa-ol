@@ -3,7 +3,7 @@ función principal() -> Entero32 {
     la ruta: Palabra = "test_output.txt";
 
     // Escribir un archivo
-    el contenido: Texto = texto_desde("Hola desde Falcato!\nSegunda linea.\n");
+    el contenido: Texto = texto_desde("Hola desde mejia!\nSegunda linea.\n");
     el resultado: Entero32 = archivo_escribir(ruta, contenido);
     imprimir_linea("escribir resultado: ");
     imprimir(resultado);
@@ -38,3 +38,4 @@ función principal() -> Entero32 {
 
     retornar 0;
 }
+

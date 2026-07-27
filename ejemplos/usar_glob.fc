@@ -15,3 +15,4 @@ función principal() -> Entero32 {
     el p: Entero32 = producto(s, 2);
     retornar p;
 }
+

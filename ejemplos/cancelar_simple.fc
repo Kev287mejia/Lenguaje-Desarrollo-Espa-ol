@@ -19,3 +19,4 @@ fut función principal() -> Entero32 {
     imprimir_linea("=== Executor cancelado y limpiado ===");
     retornar 0;
 }
+

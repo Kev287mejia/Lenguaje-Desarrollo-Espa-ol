@@ -1,4 +1,4 @@
-// Ejemplo de Ser/Estar y Subjuntivo en Falcato
+// Ejemplo de Ser/Estar y Subjuntivo en mejia
 // Pilar II del lenguaje: Ser/Estar = Const/Mut
 
 función principal() -> Entero32 {
@@ -24,3 +24,4 @@ función principal() -> Entero32 {
     
     retornar x;
 }
+

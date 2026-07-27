@@ -1,28 +1,28 @@
-// trampolin_win32.c — Funciones helper en C para Falcato GUI
+// trampolin_win32.c — Funciones helper en C para mejia GUI
 //
 // ================================================================
 // ARQUITECTURA: Patrón Trampolín C
 // ================================================================
-// Falcato compila a Cranelift IR -> código máquina x86_64 con C ABI.
+// mejia compila a Cranelift IR -> código máquina x86_64 con C ABI.
 // Llamar a funciones Win32 complejas (que requieren structs como
 // WNDCLASSEXA, MSG, WNDPROC callbacks) desde Cranelift IR es frágil
 // porque los structs grandes (>32 bytes) requieren manipulación
 // byte a byte en IR, propensa a errores de layout y alineación.
 //
 // SOLUCIÓN: Envolver la lógica Win32 compleja en funciones C
-// simples que Falcato llama via FFI directo (inseguro fn).
+// simples que mejia llama via FFI directo (inseguro fn).
 // El .obj se linkea automáticamente desde src/main.rs.
 //
 // Separación de responsabilidades:
 //   Trampolín (C)      → RegisterClassEx, CreateWindowEx, message loop
-//   Falcato (FFI)      → MessageBoxA, LoadCursorA, GetModuleHandleA,
+//   mejia (FFI)      → MessageBoxA, LoadCursorA, GetModuleHandleA,
 //                         SetLastError/GetLastError, lógica de app
 // ================================================================
 //
 // Compilar (una vez):
 //   cl /c /Fo:lib\trampolin_win32.obj lib\trampolin_win32.c
 //
-// Auto-linkeado por falcato build — no requiere flags manuales.
+// Auto-linkeado por mejia build — no requiere flags manuales.
 
 #include <windows.h>
 
@@ -39,7 +39,7 @@ LRESULT CALLBACK fc_WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 // Crea y muestra una ventana Windows nativa.
 // 1. Obtiene HINSTANCE (módulo actual)
-// 2. Registra clase "FalcatoVentana" con WNDPROC fc_WndProc
+// 2. Registra clase "mejiaVentana" con WNDPROC fc_WndProc
 // 3. Crea ventana WS_OVERLAPPEDWINDOW, 800x600
 // 4. Muestra con ShowWindow + UpdateWindow
 // Retorna: HWND (Entero64) o NULL si falla
@@ -53,14 +53,14 @@ HWND __stdcall fc_CrearVentana(void) {
     wc.hInstance = hInst;
     wc.hCursor = LoadCursorA(NULL, IDC_ARROW);
     wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wc.lpszClassName = "FalcatoVentana";
+    wc.lpszClassName = "mejiaVentana";
 
     if (!RegisterClassExA(&wc)) {
         return NULL;
     }
 
     HWND hwnd = CreateWindowExA(
-        0, "FalcatoVentana", "Falcato - Ventana Nativa",
+        0, "mejiaVentana", "mejia - Ventana Nativa",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
         NULL, NULL, hInst, NULL
@@ -83,3 +83,4 @@ void __stdcall fc_BucleMensajes(void) {
         DispatchMessageA(&msg);
     }
 }
+

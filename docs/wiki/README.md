@@ -1,7 +1,7 @@
-# Falcato Wiki
+# mejia Wiki
 
 En un lugar de la Mancha —o más bien, en esta memoria de ordenador—
-habremos de encontrar la documentación viva del lenguaje Falcato.
+habremos de encontrar la documentación viva del lenguaje mejia.
 Sepa vuesa merced que lo que aquí se describe no es sueño ni
 promesa de futuro, sino el **estado real** del proyecto: el fiero
 compilador, el lenguaje que parla, y las herramientas que lo asisten.
@@ -38,3 +38,5 @@ compilador hace lo que debe:
 - Nombres de funciones y tipos: español, con la mesura del `snake_case`
 - Código Rust del compilador: inglés (que en eso se entiende mejor con las herramientas)
 - Versión: SemVer hasta que llegue el 1.0
+
+

@@ -12,3 +12,4 @@ función principal() -> Entero32 {
     
     retornar y;
 }
+

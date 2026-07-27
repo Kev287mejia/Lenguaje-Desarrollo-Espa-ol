@@ -27,3 +27,4 @@ función principal() {
     imprimir_linea("baud_div: {b}");
     imprimir_linea("=== Bitfields OK ===");
 }
+

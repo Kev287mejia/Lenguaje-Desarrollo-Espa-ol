@@ -1,4 +1,4 @@
-# Compilador Falcato — Arquitectura Interna
+# Compilador mejia — Arquitectura Interna
 
 Ésta es la crónica del compilador contada desde las entrañas
 del código en `src/`. No hay aquí especulación, sino la verdad
@@ -71,3 +71,4 @@ es otro cantar:
 | IR intermedio | FAL IR propio | Directo a Cranelift |
 | Semántica | `semantic/` en varios módulos | `semantic.rs` único |
 | LSP | tower-lsp 0.20 | tower-lsp 0.20 ✅ (éste acertaron) |
+

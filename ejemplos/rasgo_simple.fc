@@ -20,3 +20,4 @@ implementar Sumador para Entero32 {
 función principal() -> Entero32 {
     retornar 42;
 }
+

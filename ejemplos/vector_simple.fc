@@ -7,3 +7,4 @@ función principal() -> Entero32 {
     vector_liberar<Entero32>(v);
     retornar x;
 }
+

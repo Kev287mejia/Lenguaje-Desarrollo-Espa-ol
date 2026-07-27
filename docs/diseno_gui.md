@@ -678,3 +678,4 @@ struct RecursoGDI {
 
 > "La interfaz gráfica no es azúcar — es la puerta de entrada a motores, herramientas y juegos."
 
+

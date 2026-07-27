@@ -18,3 +18,4 @@ función principal() -> Entero32 {
     el p: Entero32 = matematicas::producto(2, s);
     retornar p;
 }
+

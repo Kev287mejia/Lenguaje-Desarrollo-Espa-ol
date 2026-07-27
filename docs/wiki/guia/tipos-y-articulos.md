@@ -1,6 +1,6 @@
 # Tipos y Artículos
 
-Llegamos al corazón de Falcato. Pues habréis de saber que en este
+Llegamos al corazón de mejia. Pues habréis de saber que en este
 lenguaje los tipos no son meras etiquetas, sino esencia misma de
 lo que las cosas son; y los artículos, su régimen de pertenencia
 y mutabilidad. Cosas son éstas que harían las delicias de cualquier
@@ -30,7 +30,7 @@ todo se construye:
 
 ## Artículos (Ownership)
 
-Y es aquí donde Falcato se distingue, usando los artículos del
+Y es aquí donde mejia se distingue, usando los artículos del
 español para codificar quién posee qué y con qué poder.
 
 Sabed que los artículos tienen el siguiente régimen:
@@ -47,7 +47,7 @@ Sabed que los artículos tienen el siguiente régimen:
 
 Dígase con ejemplos, que valen más que mil preceptos:
 
-```falcato
+```mejia
 el x: Entero32 = 10;      // owned, mutable: cosa de uno
 la y: Entero32 = 20;      // prestada, inmutable: devuélvase tal cual
 un z: Booleano = verdadero; // optional: quién sabe si está
@@ -57,7 +57,7 @@ un z: Booleano = verdadero; // optional: quién sabe si está
 
 Mas ¡ay! si intentáis mudar lo que es inmutable:
 
-```falcato
+```mejia
 la x: Entero32 = 10;
 x = 20;  // [O001] Error: 'x' se declaró con 'la' (inmutable/prestada)
          // sugerencia: Usa 'el x' para hacerlo mutable (owned)
@@ -70,7 +70,7 @@ El compilador, cual severo preceptor, os recordará vuestro lugar.
 No es menester declarar siempre el tipo, que el compilador es astuto
 y lo adivina por sí solo:
 
-```falcato
+```mejia
 el x: Entero32 = 10;   // explícito: no hay duda
 el y = 10;             // inferido como Entero32: el compilador no es lerdo
 ```
@@ -82,7 +82,7 @@ como `Flotante64`. El string, como `Palabra`. Así de sencillo.
 
 Finalmente, los valores literales que podéis escribir:
 
-```falcato
+```mejia
 42                        // Entero32
 3.14                      // Flotante64
 "Hola mundo"              // Palabra (string)
@@ -93,3 +93,4 @@ falso                     // Booleano
 
 Y con esto, buena pieza, ya sabéis cómo declarar las variables
 y sus posesiones.
+

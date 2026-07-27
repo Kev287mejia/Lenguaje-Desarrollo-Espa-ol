@@ -73,3 +73,4 @@ solo, que para eso es listo.
 Aseguraos de que la función `principal` existe en vuestro programa.
 Es el punto de entrada, y sin ella el linker no sabe por dónde
 empezar.
+

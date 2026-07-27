@@ -9,3 +9,4 @@ función malo(el x: Entero32) -> Entero32 puro {
 función principal() -> Entero32 {
     retornar malo(41);
 }
+

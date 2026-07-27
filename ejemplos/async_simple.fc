@@ -11,3 +11,4 @@ fut función principal() -> Entero32 {
     esperar dormir(1200);
     retornar 0;
 }
+

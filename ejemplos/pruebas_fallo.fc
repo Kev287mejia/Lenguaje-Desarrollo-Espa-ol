@@ -13,3 +13,4 @@ prueba "suma incorrecta a proposito" {
 función principal() -> Entero32 {
     retornar 0;
 }
+

@@ -68,3 +68,4 @@ El español no es una capa de traducción sobre conceptos ingleses. Es la
   evolución lingüística como materia prima.
 - ✅ Un caballo de batalla para sistemas donde el control total importa.
 
+

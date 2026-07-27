@@ -61,10 +61,10 @@ seguir este patrón:
 ```rust
 #[test]
 fn test_feature_nueva() {
-    let fuente = r#"código falcato de prueba"#;
-    let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+    let fuente = r#"código mejia de prueba"#;
+    let lexer = Lexermejia::nuevo(fuente, "test.fc");
     let tokens = lexer.tokenizar();
-    let programa = ParserFalcato::parse(tokens).unwrap();
+    let programa = Parsermejia::parse(tokens).unwrap();
 
     let mut semantica = AnalizadorSemantico::nuevo();
     assert!(semantica.analizar(&programa).is_ok());
@@ -79,9 +79,9 @@ Y si lo que probáis es que un error aparezca cuando debe:
 #[test]
 fn test_error_esperado() {
     let fuente = r#"código con error"#;
-    let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+    let lexer = Lexermejia::nuevo(fuente, "test.fc");
     let tokens = lexer.tokenizar();
-    let programa = ParserFalcato::parse(tokens).unwrap();
+    let programa = Parsermejia::parse(tokens).unwrap();
 
     let mut semantica = AnalizadorSemantico::nuevo();
     let resultado = semantica.analizar(&programa);
@@ -106,3 +106,4 @@ probablemente desactualizados, pero ahí quedan como testimonio:
 | `mientras.exe` | Bucles mientras |
 | `ownership.exe` | Artículos de posesión |
 | `hola_mundo.exe` | El clásico de los clásicos |
+

@@ -73,9 +73,10 @@ pub struct IndiceSemantico {
 ## Uso
 
 ```bash
-falcato lsp
+mejia lsp
 ```
 
 El servidor escucha en stdio. Funciona con VS Code, Vim (con
 un plugin LSP), Emacs (eglot o lsp-mode), y Neovim (LSP
 integrado). Cada cual con sus armas.
+

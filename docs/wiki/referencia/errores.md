@@ -66,3 +66,4 @@ del compilador:
 | I032 | Acceso a campo en tipo que no es struct |
 | I040 | Bucle `para` sin array en el codegen |
 | I050 | Enum no registrado en el codegen |
+

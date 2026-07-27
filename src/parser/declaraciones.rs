@@ -808,3 +808,4 @@ fn parse_prueba(cursor: &mut ParserCursor) -> Result<Declaracion, ErrorSintaxis>
         span,
     }))
 }
+

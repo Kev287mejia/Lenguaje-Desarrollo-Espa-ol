@@ -30,3 +30,4 @@ fut función principal() -> Entero32 {
     canal_cerrar(canal);
     retornar 0;
 }
+

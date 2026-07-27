@@ -42,3 +42,4 @@ fut función principal() -> Entero32 {
     imprimir_linea("Select completo: 6 datos recibidos");
     retornar 0;
 }
+

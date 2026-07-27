@@ -66,7 +66,7 @@ let mut sig = Signature::new(CallConv::SystemV);
 
 ## Mapeo de tipos
 
-| Falcato | Cranelift |
+| mejia | Cranelift |
 |---------|-----------|
 | `Entero32` | `types::I32` |
 | `Entero64` | `types::I64` |
@@ -107,3 +107,4 @@ let data_id = module.declare_data("str_1_13", Linkage::Local, ...);
 Los errores del codegen —variables que no aparecen, tipos no
 registrados— se acumulan y se reportan al final. No hay drama
 prematuro.
+

@@ -1,6 +1,6 @@
 # Desarrollo
 
-Guías para quien quiera meter mano en el compilador Falcato:
+Guías para quien quiera meter mano en el compilador mejia:
 ya sea para corregir un error, añadir una función, o simplemente
 entender cómo funciona este artilugio.
 
@@ -26,3 +26,4 @@ Esto es lo que mueve el tinglado:
 | LSP | `tower-lsp` 0.20 |
 | Async runtime | `tokio` 1.x |
 | Target | x86_64 Windows (msvc) / Linux |
+

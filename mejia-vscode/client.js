@@ -12,8 +12,8 @@ let client = null;
  */
 function activate(context) {
     // Buscar el ejecutable mejia
-    const falcatoExe = findFalcato();
-    if (!falcatoExe) {
+    const mejiaExe = findmejia();
+    if (!mejiaExe) {
         vscode.window.showWarningMessage(
             'Mejia: No se encontró "mejia" en PATH. ' +
             'Instálalo desde https://github.com/mejia/mejia'
@@ -21,11 +21,11 @@ function activate(context) {
         return;
     }
 
-    console.log(`Mejia: LSP usando ${falcatoExe}`);
+    console.log(`Mejia: LSP usando ${mejiaExe}`);
 
     const serverOptions = {
-        run: { command: falcatoExe, args: ['lsp'] },
-        debug: { command: falcatoExe, args: ['lsp'] }
+        run: { command: mejiaExe, args: ['lsp'] },
+        debug: { command: mejiaExe, args: ['lsp'] }
     };
 
     const clientOptions = {
@@ -47,7 +47,7 @@ function activate(context) {
         vscode.commands.registerCommand('mejia.version', () => {
             const exec = require('child_process').execSync;
             try {
-                const output = exec(`${falcatoExe} version`).toString().trim();
+                const output = exec(`${mejiaExe} version`).toString().trim();
                 vscode.window.showInformationMessage(`Mejia ${output}`);
             } catch (e) {
                 vscode.window.showErrorMessage('Mejia: Error al obtener versión');
@@ -70,7 +70,7 @@ function deactivate() {
 /**
  * Buscar mejia en PATH o en rutas comunes
  */
-function findFalcato() {
+function findmejia() {
     // 1. Buscar en PATH
     const which = require('child_process').execSync;
     try {
@@ -117,3 +117,4 @@ function findFalcato() {
 }
 
 module.exports = { activate, deactivate };
+

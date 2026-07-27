@@ -66,3 +66,4 @@ tipo_esperado(span)                              // S006
 articulo_esperado(span)                          // S007
 token_invalido(span, texto)                      // S008
 ```
+

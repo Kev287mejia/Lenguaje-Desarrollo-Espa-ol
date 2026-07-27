@@ -7,7 +7,7 @@ de igual naturaleza.
 
 ## Declaración
 
-```falcato
+```mejia
 los nums: [Entero32; 5];  // array de cinco enteros
 ```
 
@@ -17,7 +17,7 @@ de la cantidad.
 
 ## Literales
 
-```falcato
+```mejia
 los nums: [Entero32; 3] = [1, 2, 3];
 ```
 
@@ -29,7 +29,7 @@ Todos los elementos han de ser del mismo tipo, so pena de disconformidad
 Cuando se desea llenar todo el array con un mismo valor, la palabra
 `todos` acude al quite:
 
-```falcato
+```mejia
 los nums: [Entero32; 5] = todos 0;  // [0, 0, 0, 0, 0]
 ```
 
@@ -38,7 +38,7 @@ por uno, como quien barre toda la casa de una vez.
 
 ## Acceso por índice
 
-```falcato
+```mejia
 el primero: Entero32 = nums[0];
 el i: Entero32 = 2;
 el valor: Entero32 = nums[i];  // acceso dinámico: cuando no se sabe
@@ -49,7 +49,7 @@ El índice ha de ser `Entero32` o `Entero64`. No valen otros números.
 
 ## Asignación a elementos
 
-```falcato
+```mejia
 nums[2] = 30;    // modifica el tercer elemento
 nums[i] = 99;    // con índice variable
 ```
@@ -58,7 +58,7 @@ nums[i] = 99;    // con índice variable
 
 Para reemplazar todos los elementos de golpe:
 
-```falcato
+```mejia
 los otros: [Entero32; 3] = [10, 20, 30];
 ```
 
@@ -67,8 +67,9 @@ los otros: [Entero32; 3] = [10, 20, 30];
 El bucle `para` permite recorrer los elementos sin tener que
 lidiar con índices:
 
-```falcato
+```mejia
 para num en nums {
     // num toma el valor de cada elemento, uno tras otro
 }
 ```
+

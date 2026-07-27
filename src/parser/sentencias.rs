@@ -526,3 +526,4 @@ fn parse_con_executor(cursor: &mut ParserCursor) -> Result<Sentencia, ErrorSinta
         span,
     })
 }
+

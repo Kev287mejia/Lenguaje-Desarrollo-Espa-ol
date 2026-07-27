@@ -80,3 +80,4 @@ Cinco tests velan por el lexer en `src/lexer.rs`:
 - `test_lexer_string`
 - `test_lexer_articulos`
 - `test_lexer_funcion_alias`
+

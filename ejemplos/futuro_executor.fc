@@ -19,3 +19,4 @@ función principal() {
     }
     imprimir_linea("=== Todas las tareas terminaron ===");
 }
+

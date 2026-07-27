@@ -1,6 +1,7 @@
 inseguro función puts(el mensaje: Palabra);
 
 función principal() -> Entero32 {
-    puts("¡Hola, Falcato!");
+    puts("¡Hola, mejia!");
     retornar 0;
 }
+

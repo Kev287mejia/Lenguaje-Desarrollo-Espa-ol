@@ -1,4 +1,4 @@
-// Ejemplo de bucle para (for-each) en Falcato
+// Ejemplo de bucle para (for-each) en mejia
 // Itera sobre arrays
 
 función principal() -> Entero32 {
@@ -11,3 +11,4 @@ función principal() -> Entero32 {
     
     retornar suma;
 }
+

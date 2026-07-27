@@ -26,3 +26,4 @@ función principal() -> Entero32 {
 
     retornar 0;
 }
+

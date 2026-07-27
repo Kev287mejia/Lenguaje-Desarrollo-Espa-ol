@@ -4,7 +4,7 @@
 
 Si el lexer separa y el parser ordena, el análisis semántico
 es quien juzga si lo ordenado tiene sentido. Aquí es donde
-Falcato muestra su vena lingüística.
+mejia muestra su vena lingüística.
 
 ## Concordancia Lingüística
 
@@ -109,3 +109,4 @@ Con el formato que ya conocéis:
 [T001] test.fc:4:8: Disconcordancia de tipo: 'a' es 'Entero32' pero se declara 'Booleano'
        │ sugerencia: Cambia el tipo a 'Entero32' o el valor
 ```
+

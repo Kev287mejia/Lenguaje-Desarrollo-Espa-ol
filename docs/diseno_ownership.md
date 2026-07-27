@@ -538,3 +538,4 @@ mejia supera a Rust cuando:
 3. Un kernel module se escribe en mejia con **menos líneas** que en Rust equivalente
 4. Los errores de ownership se entienden **sin leer documentación**
 
+

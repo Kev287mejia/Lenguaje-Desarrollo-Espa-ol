@@ -11,3 +11,4 @@ función principal() -> Entero32 {
     el valor: Entero32 = 21;
     retornar doble(valor);  // 42
 }
+

@@ -2926,8 +2926,8 @@ No puedes modificar algo que no es 'tuyo'.",
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::lexer::LexerMejia as LexerFalcato;
-    use crate::parser::ParserMejia as ParserFalcato;
+    use crate::lexer::LexerMejia as Lexermejia;
+    use crate::parser::ParserMejia as Parsermejia;
 
     #[test]
     fn test_semantica_correcta() {
@@ -2936,9 +2936,9 @@ mod tests {
     el b: Entero32 = 20;
     retornar a + b;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -2950,9 +2950,9 @@ mod tests {
     el a: Booleano = 10;
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -2967,9 +2967,9 @@ mod tests {
         let fuente = r#"función principal() -> Entero32 {
     retornar x + 1;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -2981,9 +2981,9 @@ mod tests {
         let fuente = r#"función principal() -> Booleano {
     retornar 42;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3000,9 +3000,9 @@ mod tests {
         retornar 0;
     }
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -3017,9 +3017,9 @@ mod tests {
     }
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3037,9 +3037,9 @@ mod tests {
     x = 20;
     retornar x;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -3053,9 +3053,9 @@ mod tests {
     x = 20;
     retornar x;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3074,9 +3074,9 @@ mod tests {
     }
     retornar i;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -3096,9 +3096,9 @@ función principal() -> Entero32 {
     }
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -3118,9 +3118,9 @@ función principal() -> Entero32 {
     }
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -3137,9 +3137,9 @@ función principal() -> Entero32 {
     el estado: Estado = Estado.Desconocido;
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3156,9 +3156,9 @@ función principal() -> Entero32 {
     los nums: [Entero32; 5] = [1, 2, 3, 4, 5];
     retornar longitud(nums);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         assert!(semantica.analizar(&programa).is_ok());
@@ -3177,9 +3177,9 @@ función principal() -> Entero32 {
 función principal() -> Entero32 {
     retornar máximo(5, 3);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
         
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3197,9 +3197,9 @@ función principal() -> Entero32 {
 función principal() -> Entero32 {
     retornar matematicas::suma(1, 2);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3217,9 +3217,9 @@ función principal() -> Entero32 {
 función principal() -> Entero32 {
     retornar matematicas::secreto(5);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3241,9 +3241,9 @@ usar matematicas::*;
 función principal() -> Entero32 {
     retornar suma(1, 2);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3269,9 +3269,9 @@ función principal() -> Entero32 {
 función principal() -> Entero32 {
     retornar secreto(1);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "principal.fc");
+        let lexer = Lexermejia::nuevo(fuente, "principal.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::con_simbolos_publicos(simbolos_publicos);
         let resultado = semantica.analizar(&programa);
@@ -3297,9 +3297,9 @@ función principal() -> Entero32 {
 función principal() -> Entero32 {
     retornar doble(21);
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "principal.fc");
+        let lexer = Lexermejia::nuevo(fuente, "principal.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::con_simbolos_publicos(simbolos_publicos);
         let resultado = semantica.analizar(&programa);
@@ -3315,9 +3315,9 @@ función principal() -> Entero32 {
     texto_liberar(t);
     retornar len;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3331,9 +3331,9 @@ función principal() -> Entero32 {
     el t: Texto = texto_desde(42);
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3350,9 +3350,9 @@ función principal() -> Entero32 {
     vector_liberar<Entero32>(v);
     retornar x;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
@@ -3367,12 +3367,13 @@ función principal() -> Entero32 {
     vector_agregar<Entero32>(v, verdadero);
     retornar 0;
 }"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = Lexermejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        let programa = ParserFalcato::parse(tokens).unwrap();
+        let programa = Parsermejia::parse(tokens).unwrap();
 
         let mut semantica = AnalizadorSemantico::nuevo();
         let resultado = semantica.analizar(&programa);
         assert!(resultado.is_err());
     }
 }
+

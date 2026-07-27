@@ -5,15 +5,15 @@ bastan para gobernar la máquina.
 
 ## Comandos
 
-### `falcato build <archivo>`
+### `mejia build <archivo>`
 
 Toma un archivo `.fc` y pare un `.exe`. Así, en seco:
 
 ```bash
-falcato build ejemplo.fc
+mejia build ejemplo.fc
 # → ejemplo.exe
 
-falcato build ejemplo.fc -o salida.exe
+mejia build ejemplo.fc -o salida.exe
 # → salida.exe
 ```
 
@@ -26,39 +26,39 @@ Banderas que se le pueden colgar:
 | `--release` | Optimizaciones de release |
 | `--emit-ir` | Mostrar LLVM IR (reservado, no hace nada aún) |
 
-### `falcato run <archivo>`
+### `mejia run <archivo>`
 
 Compila y ejecuta en un solo envite:
 
 ```bash
-falcato run ejemplo.fc
-falcato run ejemplo.fc -- arg1 arg2  # con argumentos para el programa
+mejia run ejemplo.fc
+mejia run ejemplo.fc -- arg1 arg2  # con argumentos para el programa
 ```
 
-### `falcato check <archivo>`
+### `mejia check <archivo>`
 
 Analiza sin generar binario. Útil para ver si el código está en
 orden sin tener que compilar del todo:
 
 ```bash
-falcato check ejemplo.fc
+mejia check ejemplo.fc
 ```
 
-### `falcato lsp`
+### `mejia lsp`
 
 Inicia el servidor LSP que habla por stdio:
 
 ```bash
-falcato lsp
+mejia lsp
 ```
 
-### `falcato version`
+### `mejia version`
 
 Muestra la versión del compilador, por si a alguien le importa:
 
 ```bash
-falcato version
-# → Falcato 0.1.0
+mejia version
+# → mejia 0.1.0
 ```
 
 ## Scripts de build
@@ -68,3 +68,4 @@ falcato version
 | `build.bat` | Build con cargo, a la antigua |
 | `build.ps1` | Build con PowerShell (detecta Visual Studio solo) |
 | `build_release.bat` | Build para soltar a producción |
+

@@ -1,6 +1,6 @@
 # Guía de Contribución
 
-Si queréis contribuir a Falcato —y es noble deseo—, haced lo siguiente.
+Si queréis contribuir a mejia —y es noble deseo—, haced lo siguiente.
 
 ## Primeros pasos
 
@@ -46,7 +46,7 @@ Todo código que enviéis ha de cumplir estas normas:
 - Tests para todo código nuevo
 - Span en cada nodo nuevo del AST (que si no, no hay error con ubicación)
 
-### Código Falcato
+### Código mejia
 
 - Español, con snake_case
 - Sin comentarios de documentación (los docs van en la wiki, no en el código)
@@ -65,3 +65,4 @@ Todo código que enviéis ha de cumplir estas normas:
 - `docs/wiki/` — La documentación viva del proyecto (ésta que leéis)
 - `docs/` — Papeles de diseño, especulativos pero inspiradores
 - `ESTADO.md` — Estado del proyecto, según quién lo mire
+

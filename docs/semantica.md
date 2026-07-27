@@ -315,3 +315,4 @@ ser función TAMAÑO_BUFFER(entradas: []Tipo): Entero32 {
 el buffer: [Byte; TAMAÑO_BUFFER([...])];
 ```
 
+

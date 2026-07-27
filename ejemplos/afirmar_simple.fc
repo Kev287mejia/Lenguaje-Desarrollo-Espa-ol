@@ -5,3 +5,4 @@ función principal() -> Entero32 {
     imprimir_linea("Todas las afirmaciones pasaron");
     retornar 0;
 }
+

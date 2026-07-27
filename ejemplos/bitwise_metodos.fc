@@ -31,3 +31,4 @@ función principal() {
 
     imprimir_linea("=== Bitwise OK ===");
 }
+

@@ -4,3 +4,4 @@ implementar NoExiste para Entero32 {
 }
 
 función principal() -> Entero32 { retornar 0; }
+

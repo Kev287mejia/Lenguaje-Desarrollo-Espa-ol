@@ -202,7 +202,7 @@ pub struct PruebaDecl {
 // PROPUESTA PARA FASE 3-4:
 // 
 // 1. INDICATIVO (default `si`): hecho verificable
-//    ```falcato
+//    ```mejia
 //    si x > 0 {
 //        // Branch normal, compilador optimiza con confianza
 //    }
@@ -210,7 +210,7 @@ pub struct PruebaDecl {
 //    Semántica: El compilador asume esta rama es probable (hot path).
 //    
 // 2. SUBJUNTIVO (`si fuese`): hipótesis / condición improbable
-//    ```falcato
+//    ```mejia
 //    si x fuese > 0 {
 //        // Branch especulativo, compilador genera [[unlikely]]
 //    }
@@ -219,14 +219,14 @@ pub struct PruebaDecl {
 //    El programador comunica INTENCIÓN de probabilidad al hardware.
 //    
 // 3. IMPERATIVO DE CORTESÍA (`sea`): contrato / assertion
-//    ```falcato
+//    ```mejia
 //    sea x > 0;  // Assertion: si falla, panic/UB
 //    ```
 //    Semántica: El programador DECLARA un invariante. El compilador puede
 //    optimizar asumiendo esta condición SIEMPRE verdadera (como `assume`).
 //    
 // 4. SER/ESTAR EN CONDICIONES (Pilar II extendido):
-//    ```falcato
+//    ```mejia
 //    si x es 5 {       // Comparación estructural/permanente (==)
 //        // Identidad de valor inmutable
 //    }
@@ -531,3 +531,4 @@ pub struct ImplDecl {
     pub metodos: Vec<FuncionDecl>,
     pub span: Span,
 }
+

@@ -12,3 +12,4 @@ función principal() -> Entero32 verificado {
     // OK: y es una copia independiente
     retornar y;
 }
+

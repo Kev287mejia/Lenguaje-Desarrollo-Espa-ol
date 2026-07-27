@@ -464,3 +464,4 @@ pub fn offset_var(analisis: &AnalisisFuturo, nombre: &str) -> Option<u32> {
     }
     None
 }
+

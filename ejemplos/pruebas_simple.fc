@@ -18,6 +18,7 @@ prueba "multiplicación" {
 }
 
 función principal() -> Entero32 {
-    imprimir_linea("Funciones definidas. Usa 'falcato test' para ejecutar pruebas.");
+    imprimir_linea("Funciones definidas. Usa 'mejia test' para ejecutar pruebas.");
     retornar 0;
 }
+

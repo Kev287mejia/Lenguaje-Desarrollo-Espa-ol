@@ -11,7 +11,7 @@ como los capítulos de una novela:
 
 | Archivo | Propósito |
 |---------|-----------|
-| `src/parser/mod.rs` | `ParserCursor`, `ParserFalcato::parse()`, y los tests |
+| `src/parser/mod.rs` | `ParserCursor`, `Parsermejia::parse()`, y los tests |
 | `src/parser/errores.rs` | `ErrorSintaxis` con códigos [S###] |
 | `src/parser/tipos.rs` | `parse_articulo()`, `parse_tipo()` |
 | `src/parser/expresiones.rs` | Pratt parser + postfix |
@@ -87,3 +87,4 @@ Expresion::Binaria(izq, op, der, span)
 13 tests vigilan al parser en `src/parser/mod.rs`, cubriendo
 funciones, expresiones, condicionales, bucles, FFI, asignación,
 enums, const generics y bounds.
+

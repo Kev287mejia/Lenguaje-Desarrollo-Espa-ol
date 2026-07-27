@@ -22,3 +22,4 @@ no siempre reflejen dónde estamos:
 - `docs/semantica.md` — Sistema de tipos en su versión ideal
 - `docs/hoja_de_ruta.md` — Decisiones de diseño (D-001 a D-007)
 - `docs/arquitectura.md` — Arquitectura con LLVM inkwell... que no fue
+

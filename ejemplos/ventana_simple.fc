@@ -2,7 +2,7 @@
 // Usa lib/trampolin_win32.obj (C precompilado) para sortear
 // limitaciones de Cranelift con llamadas Win32 complejas.
 //
-// Compilar: .\target\debug\falcato.exe build ejemplos\ventana_simple.fc
+// Compilar: .\target\debug\mejia.exe build ejemplos\ventana_simple.fc
 // Ejecutar: .\ventana_simple.exe
 
 // --- FFI al trampolin C ---
@@ -13,7 +13,7 @@ inseguro funcion fc_BucleMensajes();
 inseguro funcion puts(el mensaje: Palabra);
 
 funcion principal() -> Entero32 {
-    puts("Falcato GUI - Creando ventana nativa...");
+    puts("mejia GUI - Creando ventana nativa...");
 
     el hwnd: Entero64 = fc_CrearVentana();
     si hwnd == como_entero64(0) {
@@ -27,3 +27,4 @@ funcion principal() -> Entero32 {
     puts("Ventana cerrada. Adios!");
     retornar 0;
 }
+

@@ -80,3 +80,4 @@ impl From<ErrorSintaxis> for ErrorCompilador {
         e.error
     }
 }
+

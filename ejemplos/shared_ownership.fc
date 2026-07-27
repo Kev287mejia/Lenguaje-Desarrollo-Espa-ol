@@ -14,3 +14,4 @@ función principal() -> Entero32 {
     
     retornar contador;  // 42
 }
+

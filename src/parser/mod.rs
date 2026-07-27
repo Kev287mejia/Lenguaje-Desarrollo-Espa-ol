@@ -226,7 +226,7 @@ mod tests {
         let fuente = r#"inseguro función puts(el mensaje: Palabra);
 
 función principal() {
-    puts("¡Hola, Falcato!");
+    puts("¡Hola, mejia!");
     retornar 0;
 }"#;
         let resultado = parse_fuente(fuente);
@@ -330,3 +330,4 @@ función principal() -> Entero32 {
         }
     }
 }
+

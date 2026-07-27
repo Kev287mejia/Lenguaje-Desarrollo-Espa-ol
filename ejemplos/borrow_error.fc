@@ -11,3 +11,4 @@ función principal() -> Entero32 estricto {
     
     retornar *ref;
 }
+

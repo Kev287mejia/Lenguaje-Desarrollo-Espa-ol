@@ -17,3 +17,4 @@ fut función principal() -> Entero32 {
     imprimir_linea("=== Todas las tareas completadas ===");
     retornar 0;
 }
+

@@ -20,3 +20,4 @@ función principal() -> Entero32 {
     }
     // Todos los nodos se liberan juntos aquí (determinístico)
 }
+

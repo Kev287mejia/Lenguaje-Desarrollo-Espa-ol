@@ -597,7 +597,7 @@ pub struct DocumentoLsp {
     pub ast: Option<Programa>,
 }
 
-/// Backend del Language Server Protocol para Falcato
+/// Backend del Language Server Protocol para mejia
 pub struct Backend {
     client: Client,
     documentos: Arc<RwLock<HashMap<Url, DocumentoLsp>>>,
@@ -730,7 +730,7 @@ impl Backend {
             for (n, t) in &func.parametros_raw {
                 contenido.push_str(&format!("| `{}` | `{}` |\n", n, t));
             }
-            contenido.push_str(&format!("\n---\n*Función de Falcato*"));
+            contenido.push_str(&format!("\n---\n*Función de mejia*"));
 
             return Some(Hover {
                 contents: HoverContents::Markup(MarkupContent {
@@ -893,7 +893,7 @@ impl Backend {
         items
     }
 
-    /// Convierte un Span de Falcato a Range de LSP
+    /// Convierte un Span de mejia a Range de LSP
     fn span_a_rango(&self, span: &Span) -> Range {
         Range {
             start: Position {
@@ -1096,7 +1096,7 @@ impl Backend {
 
         SignatureInformation {
             label,
-            documentation: Some(Documentation::String(format!("Función `{}` de Falcato", nombre))),
+            documentation: Some(Documentation::String(format!("Función `{}` de mejia", nombre))),
             parameters: Some(param_info),
             active_parameter: Some(0),
         }
@@ -1162,7 +1162,7 @@ impl LanguageServer for Backend {
         _: InitializedParams,
     ) {
         self.client
-            .log_message(MessageType::INFO, "Servidor Falcato LSP iniciado")
+            .log_message(MessageType::INFO, "Servidor mejia LSP iniciado")
             .await;
     }
 
@@ -1316,7 +1316,7 @@ impl LanguageServer for Backend {
             return Ok(Some(SignatureHelp {
                 signatures: vec![SignatureInformation {
                     label,
-                    documentation: Some(Documentation::String(format!("Función `{}` de Falcato", func.nombre))),
+                    documentation: Some(Documentation::String(format!("Función `{}` de mejia", func.nombre))),
                     parameters: Some(params_info),
                     active_parameter: Some(0),
                 }],
@@ -1670,3 +1670,4 @@ pub async fn iniciar_lsp() {
     let (service, socket) = LspService::new(|client| Backend::nuevo(client));
     Server::new(stdin, stdout, socket).serve(service).await;
 }
+
