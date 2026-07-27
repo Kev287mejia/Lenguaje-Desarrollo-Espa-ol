@@ -38,6 +38,6 @@ jobs:
     - name: Upload release binary as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: falcato-windows-x64
-        path: target/release/falcato.exe
+        name: mejia-windows-x64
+        path: target/release/mejia.exe
         if-no-files-found: error
