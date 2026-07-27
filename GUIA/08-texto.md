@@ -4,11 +4,11 @@
 
 ---
 
-Falcato tiene **dos tipos** para texto. No es capricho: cada uno sirve para una cosa distinta.
+mejia tiene **dos tipos** para texto. No es capricho: cada uno sirve para una cosa distinta.
 
 ## Palabra — texto fijo (rápido, sin liberar)
 
-```falcato
+```mejia
 la saludo: Palabra = "Hola";
 ```
 
@@ -20,7 +20,7 @@ Usa `Palabra` para: mensajes fijos, constantes, nombres, configuraciones.
 
 ## Texto — texto que crece (flexible, hay que liberar)
 
-```falcato
+```mejia
 el t: Texto = texto_desde("Hola");
 t.agregar(", mundo");
 decir(t);           // "Hola, mundo"
@@ -36,7 +36,7 @@ t.liberar();        // ← ¡siempre!
 
 ## Caracter — una letra
 
-```falcato
+```mejia
 el letra: Caracter = 'A';
 // Las comillas simples distinguen: 'A' es Caracter, "A" es Palabra
 ```
@@ -56,7 +56,7 @@ Dentro de las comillas dobles `"..."` puedes poner caracteres especiales:
 | `\0` | Caracter nulo (fin de string C) |
 | `\xNN` | Byte en hexadecimal (ej: `\x48` = 'H') |
 
-```falcato
+```mejia
 el texto: Palabra = "Línea 1\nLínea 2\tTabulado";
 decir(texto);
 // → Línea 1
@@ -69,7 +69,7 @@ el binario: Palabra = "\x48\x6F\x6C\x61";  // "Hola" en hex
 
 ## Interpolación
 
-```falcato
+```mejia
 el nombre: Palabra = "Ana";
 el edad: Entero32 = 30;
 decir("{nombre} tiene {edad} años");
@@ -78,7 +78,7 @@ decir("{nombre} tiene {edad} años");
 
 Puedes meter cualquier expresión:
 
-```falcato
+```mejia
 decir("Suma: {2 + 3}");
 decir("Mayor: {max(10, 20)}");
 decir("{nombre}: {edad + 1} el año que viene");
@@ -86,7 +86,7 @@ decir("{nombre}: {edad + 1} el año que viene");
 
 ## Concatenación con +
 
-```falcato
+```mejia
 el a: Texto = texto_desde("Hola ");
 el b: Texto = texto_desde("mundo");
 el c: Texto = a + b;   // "Hola mundo" — nuevo Texto
@@ -100,7 +100,7 @@ c.liberar();
 
 ## Procesamiento real de strings
 
-```falcato
+```mejia
 fn contar_vocales(la texto: Palabra) -> Entero32 {
     // Convertir Palabra a Texto para poder acceder por índice
     el t: Texto = texto_desde(texto);
@@ -121,7 +121,7 @@ fn contar_vocales(la texto: Palabra) -> Entero32 {
 }
 ```
 
-```falcato
+```mejia
 fn primera_palabra(la texto: Palabra) -> Texto {
     el t: Texto = texto_desde(texto);
 
@@ -141,7 +141,7 @@ fn primera_palabra(la texto: Palabra) -> Texto {
 
 ## Comparar Palabra y Texto
 
-```falcato
+```mejia
 // Las Palabras se comparan con es
 si nombre es "Ana" { decir("Eres Ana"); }
 
@@ -181,3 +181,4 @@ t2.liberar();
 ---
 
 ← [07: Funciones](07-funciones.md) | [Indice](../GUIA.md) | [Siguiente: Colecciones →](09-colecciones.md)
+

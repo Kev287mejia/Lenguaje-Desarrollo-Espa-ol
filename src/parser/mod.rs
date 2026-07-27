@@ -101,10 +101,10 @@ impl ParserCursor {
     }
 }
 
-/// Parser público de Falcato
-pub struct ParserFalcato;
+/// Parser público de Mejia
+pub struct ParserMejia;
 
-impl ParserFalcato {
+impl ParserMejia {
     pub fn parse(tokens: Vec<TokenConSpan>) -> Result<Programa, Vec<ErrorSintaxis>> {
         let mut errores = Vec::new();
 
@@ -156,12 +156,12 @@ impl ParserFalcato {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::lexer::LexerFalcato;
+    use crate::lexer::LexerMejia;
 
     fn parse_fuente(fuente: &str) -> Result<Programa, Vec<ErrorSintaxis>> {
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = LexerMejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
-        ParserFalcato::parse(tokens)
+        ParserMejia::parse(tokens)
     }
 
     #[test]

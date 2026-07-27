@@ -15,7 +15,7 @@ Empieza por el [índice principal](../GUIA.md).
 
 | # | Archivo | Tema |
 |---|---------|------|
-| 01 | [01-que-es-falcato.md](01-que-es-falcato.md) | Filosofía del lenguaje |
+| 01 | [01-que-es-mejia.md](01-que-es-mejia.md) | Filosofía del lenguaje |
 | 02 | [02-tu-primer-programa.md](02-tu-primer-programa.md) | Hola mundo |
 | 03 | [03-variables.md](03-variables.md) | Variables y artículos |
 | 04 | [04-operaciones.md](04-operaciones.md) | Aritmética y lógica |
@@ -36,3 +36,4 @@ Empieza por el [índice principal](../GUIA.md).
 - [INSTALL.md](../INSTALL.md)
 - [REFERENCIA.md](../REFERENCIA.md)
 - [ERRORES.md](../ERRORES.md)
+

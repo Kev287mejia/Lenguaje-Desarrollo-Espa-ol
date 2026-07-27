@@ -6,7 +6,7 @@
 
 ## Aritméticas
 
-```falcato
+```mejia
 10 + 5    // suma           → 15
 10 - 5    // resta          → 5
 10 * 5    // multiplicación → 50
@@ -14,11 +14,11 @@
 10 % 3    // resto          → 1
 ```
 
-> `10 / 3` da `3`, no `3.333`. Falcato divide enteros como en C — el resultado trunca el decimal. Para divisiones exactas usa `Flotante64`: `10.0 / 3.0`.
+> `10 / 3` da `3`, no `3.333`. mejia divide enteros como en C — el resultado trunca el decimal. Para divisiones exactas usa `Flotante64`: `10.0 / 3.0`.
 
 ### División entera en la vida real
 
-```falcato
+```mejia
 // Repartir objetos entre personas
 el galletas: Entero32 = 10;
 el personas: Entero32 = 3;
@@ -40,7 +40,7 @@ el decenas = (numero / 10) % 10;  // 3
 
 Devuelven `Booleano` (`verdadero` o `falso`):
 
-```falcato
+```mejia
 10 == 10   // igual          → verdadero
 10 != 5    // distinto       → verdadero
 10 < 20    // menor          → verdadero
@@ -51,7 +51,7 @@ Devuelven `Booleano` (`verdadero` o `falso`):
 
 ## Lógicas
 
-```falcato
+```mejia
 verdadero && falso   // y (las dos)       → falso
 verdadero || falso    // o (al menos una) → verdadero
 !verdadero            // no (lo contrario) → falso
@@ -66,7 +66,7 @@ si edad >= 18 && tiene_licencia {
 
 Trabajan **bit por bit** sobre el número. Solo con enteros.
 
-```falcato
+```mejia
 // Suponiendo a = 6 (110 en binario), b = 3 (011)
 a & b    // AND:  110 & 011 = 010 → 2
 a | b    // OR:   110 | 011 = 111 → 7
@@ -79,7 +79,7 @@ a >>> 1  // shift lógico: 110 >>> 1 = 011 → 3 (ceros a la izquierda)
 
 ### Bitwise en la vida real (flags y máscaras)
 
-```falcato
+```mejia
 // Permisos de archivo (como Linux)
 el PERMISO_LECTURA:   Entero32 = 1 << 0;  // 001 = 1
 el PERMISO_ESCRITURA: Entero32 = 1 << 1;  // 010 = 2
@@ -101,7 +101,7 @@ permisos = permisos & ~PERMISO_EJECUTAR;  // quitar ejecución
 
 ### Extraer bits
 
-```falcato
+```mejia
 // Métodos built-in (más legibles que operadores)
 el x: Entero32 = 0b1101;
 
@@ -141,3 +141,4 @@ Si dudas, **usa paréntesis**. Siempre es más legible.
 ---
 
 ← [03: Variables](03-variables.md) | [Indice](../GUIA.md) | [Siguiente: Decisiones →](05-decisiones.md)
+

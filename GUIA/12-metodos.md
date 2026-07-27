@@ -4,7 +4,7 @@
 
 ---
 
-```falcato
+```mejia
 // Antes (funciona):
 texto_agregar(t, "hola");
 
@@ -54,7 +54,7 @@ t.agregar("hola");
 
 ## Ejemplo completo
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     el t: Texto = texto_desde("Hola");
     t.agregar(", mundo");
@@ -73,3 +73,4 @@ función principal() -> Entero32 {
 ---
 
 ← [11: Errores](11-errores.md) | [Indice](../GUIA.md) | [Siguiente: Async →](13-async.md)
+

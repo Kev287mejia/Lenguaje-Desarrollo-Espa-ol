@@ -1,18 +1,18 @@
 ---
-name: falcato-language
-description: Falcato (.fc) systems language in Spanish. Use when generating, reviewing, debugging, or compiling Falcato code. Covers grammar, types, ownership (el/la), FFI, memory management, hardware bitfields, async, and error patterns.
+name: mejia-language
+description: mejia (.fc) systems language in Spanish. Use when generating, reviewing, debugging, or compiling mejia code. Covers grammar, types, ownership (el/la), FFI, memory management, hardware bitfields, async, and error patterns.
 ---
 
-# Falcato Language
+# mejia Language
 
 Compiled systems language in Spanish. Backend: Cranelift. Target: x86_64 Windows. C ABI default.
 
 ## Workflow
 
 ```
-falcato check archivo.fc   # analyze only (fast)
-falcato build archivo.fc   # compile to .exe
-falcato run archivo.fc     # compile + run
+mejia check archivo.fc   # analyze only (fast)
+mejia build archivo.fc   # compile to .exe
+mejia run archivo.fc     # compile + run
 ```
 
 Built-in linked libraries: `kernel32.lib`, `ws2_32.lib`, `ucrt.lib`, `vcruntime.lib`
@@ -20,7 +20,7 @@ Built-in linked libraries: `kernel32.lib`, `ws2_32.lib`, `ucrt.lib`, `vcruntime.
 ## Grammar Quick Reference
 
 ### Declarations
-```falcato
+```mejia
 fn / función nombre<Gen>(params) -> Tipo { cuerpo }   // function
 inseguro fn nombre(params) -> Tipo;                     // FFI (no body)
 fut fn nombre(params) -> Tipo { cuerpo }                // async function
@@ -44,7 +44,7 @@ prueba "nombre" { afirmar(expr); }
 | `los` | Todos (ref-count) | Sí | Sí | Cachés, estado global entre hilos |
 | `las` | Todos (préstamo) | No | Sí (lectura) | Logs centralizados, config global |
 
-```falcato
+```mejia
 el x: Tipo = valor;     // owned, mutable — "mío, lo cambio"
 la x: Tipo = valor;     // borrowed, inmutable — "prestado, solo leo"
 un x: Tipo;             // optional — "quizás existe, quizás no"
@@ -73,7 +73,7 @@ copiar x;               // explicit clone
 | &nombre T | 8 bytes | lexical lifetime reference |
 
 ### Control Flow
-```falcato
+```mejia
 si cond { } sino { }
 si x es 5 { }           // ser = identidad (==)
 si x está 5 { }         // estar = estado temporal (==)
@@ -93,7 +93,7 @@ a >>> b     // logical shift right (zero-fill)
 ```
 
 ### Text-specific operators
-```falcato
+```mejia
 a + b       // concatenate two Textos
 t[0]        // byte at index (Entero8)
 t[0..5]     // slice as new Texto
@@ -101,14 +101,14 @@ v[0]        // element at index (Vector<T>)
 ```
 
 ### Method syntax (preferred over bare functions)
-```falcato
+```mejia
 t.agregar("x")   t.tam()   t.liberar()
 v.agregar(x)     v.tam()   v.liberar()
 x.poner_bit(n)   x.unos()  x.ceros_izquierda()
 ```
 
 ### Literals
-```falcato
+```mejia
 42           → Entero32
 3.14         → Flotante64
 "Hola"       → Palabra
@@ -121,7 +121,7 @@ todos 0      → array fill
 ```
 
 ### Interpolation
-```falcato
+```mejia
 decir("x = {x}, y = {y}");
 // Variables dentro de strings con {nombre}
 ```
@@ -129,7 +129,7 @@ decir("x = {x}, y = {y}");
 ## Systems / Kernel Patterns
 
 ### Memory: REGLA DE ORO — liberar!
-```falcato
+```mejia
 el t: Texto = texto_desde("x");
 t.liberar();  // SIEMPRE
 
@@ -140,7 +140,7 @@ v.liberar();  // SIEMPRE
 Objects needing `.liberar()`: Texto (nuevo/desde), Vector<T> (nuevo), return from archivo_leer(), texto_concatenar(), texto_subtexto().
 
 ### Bitfields — hardware registers
-```falcato
+```mejia
 estructural RegistroUART {
     bits {
         habilitado: Natural8,    // 1 bit
@@ -152,7 +152,7 @@ estructural RegistroUART {
 ```
 
 ### FFI to C
-```falcato
+```mejia
 inseguro función puts(la s: Palabra) -> Entero32;
 inseguro función malloc(tam: Natural64) -> Puntero<Vacio>;
 inseguro función free(ptr: Puntero<Vacio>) -> Vacio;
@@ -165,7 +165,7 @@ inseguro {
 ```
 
 ### Error handling pattern
-```falcato
+```mejia
 fn dividir(a: Entero32, b: Entero32) -> Resultado<Entero32, Entero32> {
     si b es 0 { retornar Resultado.Error(-1); }
     retornar Resultado.Exito(a / b);
@@ -179,13 +179,13 @@ fn procesar() -> Resultado<Entero32, Entero32> {
 ```
 
 ### Generics
-```falcato
+```mejia
 fn maximo<T que Comparable>(el a: T, el b: T) -> T
 fn longitud<N: Entero32>(nums: [Entero32; N]) -> Entero32
 ```
 
 ### Testing
-```falcato
+```mejia
 prueba "suma" {
     afirmar(sumar(2, 2) es 4);
 }
@@ -194,21 +194,21 @@ prueba "suma" {
 ## Built-in Functions (see reference/builtins.md for full signatures)
 
 ### I/O — polymorphic (int, string, float, bool)
-```falcato
+```mejia
 imprimir(x)          // print without newline
 imprimir_linea(x)    // print with newline
 decir(x)             // alias
 ```
 
 ### Key math
-```falcato
+```mejia
 abs(x)  max(a,b)  min(a,b)        // Entero32 only
 raiz(x)  potencia(base, exp)      // Flotante64 only
 tamaño_de::<T>()                  // sizeof (comptime)
 ```
 
 ### Async
-```falcato
+```mejia
 dormir(ms)                         // Sleep(ms)
 lanzar expr                        // spawn thread
 canal_nuevo(cap)                   // create channel
@@ -239,3 +239,4 @@ puro/muta/lee  yo
 fut/esperar/lanzar/bloquear  seleccionar/con_executor
 prueba/afirmar  verdadero/falso  todos  tipo
 ```
+

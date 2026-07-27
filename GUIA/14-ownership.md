@@ -10,7 +10,7 @@ En el [capítulo 3](03-variables.md) viste los 5 artículos. Este capítulo expl
 
 Cuando pasas un `el` a una función, **transfieres la propiedad**. El original ya no es válido.
 
-```falcato
+```mejia
 fn consumir(/*el*/ dato: Texto) {
     imprimir_linea(dato);
     dato.liberar();  // el que recibe libera
@@ -28,7 +28,7 @@ fn main() {
 
 **La alternativa explícita con `mover`:**
 
-```falcato
+```mejia
 // mover es opcional (es el comportamiento por defecto con el)
 mover mensaje a consumir;
 // Pero es útil para ser explícito en código complejo
@@ -38,7 +38,7 @@ mover mensaje a consumir;
 
 Con `copiar` le dices al compilador: "Crea una copia independiente de este dato."
 
-```falcato
+```mejia
 fn main() {
     el original: Texto = texto_desde("Hola");
     el clon: Texto = copiar original;
@@ -64,7 +64,7 @@ fn main() {
 
 Una referencia es un **préstamo temporal**. El dueño original conserva la propiedad.
 
-```falcato
+```mejia
 fn leer(la datos: &Texto) {
     imprimir_linea("Longitud: ");
     imprimir_linea(datos.tam());
@@ -84,7 +84,7 @@ fn main() {
 
 A veces necesitas que una función **modifique** tu dato sin tomar propiedad. Ahí usas `&mut`:
 
-```falcato
+```mejia
 fn decorar(mensaje: &mut Texto) {
     mensaje.agregar(" [PROCESADO]");
 }
@@ -99,7 +99,7 @@ fn main() {
 
 ### Las reglas de los préstamos (borrow checker)
 
-Falcato tiene **tres niveles** de rigor:
+mejia tiene **tres niveles** de rigor:
 
 | Nivel | Significado | Para quién |
 |-------|-------------|------------|
@@ -109,7 +109,7 @@ Falcato tiene **tres niveles** de rigor:
 
 **En nivel 2 (`estricto`)**:
 
-```falcato
+```mejia
 estricto;  // activa modo estricto
 
 fn main() {
@@ -133,7 +133,7 @@ fn main() {
 
 Prestar **campos distintos** del mismo struct al mismo tiempo funciona sin conflictos:
 
-```falcato
+```mejia
 estructural Persona {
     nombre: Texto,
     apellido: Texto,
@@ -154,13 +154,13 @@ fn main() {
 }
 ```
 
-**Esto resuelve un problema famoso de Rust** — en Rust, `&mut p.x` y `&mut p.y` no pueden coexistir, en Falcato sí.
+**Esto resuelve un problema famoso de Rust** — en Rust, `&mut p.x` y `&mut p.y` no pueden coexistir, en mejia sí.
 
 ## Lifetimes léxicos (`&nombre T`)
 
-En vez de `&'a T` como Rust, Falcato usa el **nombre de la variable** como lifetime:
+En vez de `&'a T` como Rust, mejia usa el **nombre de la variable** como lifetime:
 
-```falcato
+```mejia
 fn mas_larga(la a: &texto1 Texto, la b: &texto2 Texto) -> &texto1 Texto {
     si a.tam() > b.tam() { retornar a; }
     retornar a;  // retorna la que vive al menos tanto como texto1
@@ -173,7 +173,7 @@ El lifetime `texto1` significa "esta referencia vive al menos tanto como la vari
 
 Una `región` es un bloque donde **todas las variables se liberan juntas** al salir:
 
-```falcato
+```mejia
 fn procesar_lote() {
     región {
         el a: Texto = texto_desde("A");
@@ -195,7 +195,7 @@ fn procesar_lote() {
 
 Un struct que contiene una referencia a sí mismo (algo que en Rust es imposible sin trucos):
 
-```falcato
+```mejia
 estructural Nodo {
     dato: Entero32,
     siguiente: &yo Nodo,   // referencia al Nodo contenedor
@@ -229,3 +229,4 @@ fn main() {
 ---
 
 ← [13: Async](13-async.md) | [Indice](../GUIA.md) | [Siguiente: Glosario →](15-glosario.md)
+

@@ -2,10 +2,10 @@
 # Elimina .exe, .o, .pdb sueltos que el .gitignore ya ignora
 
 $dirs = @(
-    "D:\Falcato",
-    "D:\Falcato\ejemplos",
-    "D:\Falcato\stdlib",
-    "D:\Falcato\multi_modulo"
+    $PSScriptRoot,
+    (Join-Path $PSScriptRoot "ejemplos"),
+    (Join-Path $PSScriptRoot "stdlib"),
+    (Join-Path $PSScriptRoot "multi_modulo")
 )
 
 $total = 0

@@ -1,9 +1,9 @@
 <# 
 .SYNOPSIS
-    Instalador interactivo de Falcato - Lenguaje de sistemas iberohablante
+    Instalador interactivo de Mejia - Lenguaje de sistemas iberohablante
 .DESCRIPTION
-    Instala falcato.exe en PATH y opcionalmente configura:
-    - VS Code Extension (syntax + LSP + tema Falcato Dorado)
+    Instala mejia.exe en PATH y opcionalmente configura:
+    - VS Code Extension (syntax + LSP + tema Mejia Dorado)
     - OpenCode Agent + Skill
     - Claude Code Agent + Skill
     - Cursor (usa VS Code extension)
@@ -25,22 +25,22 @@ param(
 # Configuracion
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
-# Detectar si corre desde el ZIP (bin/falcato.exe) o desde source (target/release/falcato.exe)
-$FalcaoExe = Join-Path $ScriptDir "bin\falcato.exe"
-$VSIXPath = Join-Path $ScriptDir "bin\falcato-language-*.vsix"
-$SkillsDir = Join-Path $ScriptDir "skills\falcato-language"
-$AgentPath = Join-Path $ScriptDir "agents\falcato.md"
+# Detectar si corre desde el ZIP (bin/mejia.exe) o desde source (target/release/mejia.exe)
+$FalcaoExe = Join-Path $ScriptDir "bin\mejia.exe"
+$VSIXPath = Join-Path $ScriptDir "bin\mejia-language-*.vsix"
+$SkillsDir = Join-Path $ScriptDir "skills\mejia-language"
+$AgentPath = Join-Path $ScriptDir "agents\mejia.md"
 $ExamplesSrc = Join-Path $ScriptDir "ejemplos"
 
 if (-not (Test-Path $FalcaoExe)) {
-    $FalcaoExe = Join-Path $ScriptDir "target\release\falcato.exe"
-    $VSIXPath = Join-Path $ScriptDir "falcato-vscode\falcato-language-*.vsix"
+    $FalcaoExe = Join-Path $ScriptDir "target\release\mejia.exe"
+    $VSIXPath = Join-Path $ScriptDir "mejia-vscode\mejia-language-*.vsix"
 }
 if (-not (Test-Path $ExamplesSrc)) {
     $ExamplesSrc = $null  # No examples to copy
 }
 
-$InstallDir = "$env:USERPROFILE\.falcato"
+$InstallDir = "$env:USERPROFILE\.mejia"
 $BinDir = Join-Path $InstallDir "bin"
 $ExamplesDir = Join-Path $InstallDir "ejemplos"
 
@@ -94,7 +94,7 @@ function Remove-FromUserPath {
 
 # ===== UNINSTALL =====
 if ($Uninstall) {
-    Write-Header "DESINSTALANDO FALCATO"
+    Write-Header "DESINSTALANDO MEJIA"
     Remove-FromUserPath $BinDir
     if (Test-Path $InstallDir) {
         Remove-Item -Recurse -Force $InstallDir -ErrorAction SilentlyContinue
@@ -102,20 +102,20 @@ if ($Uninstall) {
     }
     # VS Code extension
     if (Get-Command code -ErrorAction SilentlyContinue) {
-        $ext = code --list-extensions | Where-Object { $_ -like "falcato*" }
+        $ext = code --list-extensions | Where-Object { $_ -like "mejia*" }
         if ($ext) {
             code --uninstall-extension $ext --force
             Write-OK "Extension VS Code desinstalada: $ext"
         }
     }
     # OpenCode
-    $ocAgent = "$env:APPDATA\opencode\agents\falcato.md"
-    $ocSkill = "$env:APPDATA\opencode\skills\falcato-language"
+    $ocAgent = "$env:APPDATA\opencode\agents\mejia.md"
+    $ocSkill = "$env:APPDATA\opencode\skills\mejia-language"
     if (Test-Path $ocAgent) { Remove-Item $ocAgent -Force; Write-OK "OpenCode agent removido" }
     if (Test-Path $ocSkill) { Remove-Item $ocSkill -Recurse -Force; Write-OK "OpenCode skill removida" }
     # Claude Code
-    $ccAgent = "$env:USERPROFILE\.claude\agents\falcato.md"
-    $ccSkill = "$env:USERPROFILE\.claude\skills\falcato-language"
+    $ccAgent = "$env:USERPROFILE\.claude\agents\mejia.md"
+    $ccSkill = "$env:USERPROFILE\.claude\skills\mejia-language"
     if (Test-Path $ccAgent) { Remove-Item $ccAgent -Force; Write-OK "Claude Code agent removido" }
     if (Test-Path $ccSkill) { Remove-Item $ccSkill -Recurse -Force; Write-OK "Claude Code skill removida" }
     Write-Host "`n[OK] Desinstalacion completa. Reinicia la terminal." -ForegroundColor $Green
@@ -123,11 +123,11 @@ if ($Uninstall) {
 }
 
 # ===== VERIFICACIONES INICIALES =====
-Write-Header "INSTALADOR FALCATO v0.2.0"
+Write-Header "INSTALADOR MEJIA v0.2.0"
 Write-Info "Directorio de instalacion: $InstallDir"
 
 if (-not (Test-Path $FalcaoExe)) {
-    Write-Err "No se encuentra falcato.exe en $FalcaoExe"
+    Write-Err "No se encuentra mejia.exe en $FalcaoExe"
     Write-Err "Ejecuta este script desde la carpeta extraida del ZIP (donde esta la carpeta 'bin')"
     exit 1
 }
@@ -143,8 +143,8 @@ if (-not $Quiet) {
 
     Write-Host "`nSelecciona que instalar (Enter = si por defecto):" -ForegroundColor $Cyan
     
-    $installPath = Confirm-Action "falcato.exe en PATH (REQUERIDO)" -Default $true
-    if (-not $installPath) { Write-Err "PATH es obligatorio para usar falcato"; exit 1 }
+    $installPath = Confirm-Action "mejia.exe en PATH (REQUERIDO)" -Default $true
+    if (-not $installPath) { Write-Err "PATH es obligatorio para usar mejia"; exit 1 }
     
     $installVSCode = Confirm-Action "Extension VS Code (syntax + LSP + tema)" -Default $true
     $installOpenCode = Confirm-Action "Agent + Skill para OpenCode" -Default $true
@@ -159,9 +159,9 @@ New-Item -ItemType Directory -Force -Path $ExamplesDir | Out-Null
 Write-OK "Directorios creados en $InstallDir"
 
 # ===== COPIAR BINARIO =====
-Write-Header "INSTALANDO FALCATO.EXE"
+Write-Header "INSTALANDO MEJIA.EXE"
 Copy-Item -Path $FalcaoExe -Destination $BinDir -Force
-Write-OK "falcato.exe -> $BinDir"
+Write-OK "mejia.exe -> $BinDir"
 
 # Copiar ejemplos
 if ($ExamplesSrc -and (Test-Path $ExamplesSrc)) {
@@ -183,7 +183,7 @@ if ($installVSCode) {
         try {
             code --install-extension $vsix.FullName --force
             Write-OK "Extension instalada: $($vsix.Name)"
-            Write-Info "Tema: Ctrl+K Ctrl+T -> 'Falcato Dorado'"
+            Write-Info "Tema: Ctrl+K Ctrl+T -> 'Mejia Dorado'"
         } catch {
             Write-Warn "No se pudo instalar automaticamente: $($_.Exception.Message)"
             Write-Info "Instala manualmente: code --install-extension $($vsix.FullName) --force"
@@ -205,12 +205,12 @@ if ($installOpenCode) {
     New-Item -ItemType Directory -Force -Path $ocSkillDir | Out-Null
     
     if (Test-Path $AgentPath) {
-        Copy-Item $AgentPath (Join-Path $ocAgentDir "falcato.md") -Force
+        Copy-Item $AgentPath (Join-Path $ocAgentDir "mejia.md") -Force
         Write-OK "Agent copiado a $ocAgentDir"
     } else { Write-Warn "Agent no encontrado en $AgentPath" }
     
     if (Test-Path $SkillsDir) {
-        $dest = Join-Path $ocSkillDir "falcato-language"
+        $dest = Join-Path $ocSkillDir "mejia-language"
         if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
         Copy-Item $SkillsDir $dest -Recurse -Force
         Write-OK "Skill copiada a $ocSkillDir"
@@ -226,12 +226,12 @@ if ($installClaude) {
     New-Item -ItemType Directory -Force -Path $ccSkillDir | Out-Null
     
     if (Test-Path $AgentPath) {
-        Copy-Item $AgentPath (Join-Path $ccAgentDir "falcato.md") -Force
+        Copy-Item $AgentPath (Join-Path $ccAgentDir "mejia.md") -Force
         Write-OK "Agent copiado a $ccAgentDir"
     } else { Write-Warn "Agent no encontrado en $AgentPath" }
     
     if (Test-Path $SkillsDir) {
-        $dest = Join-Path $ccSkillDir "falcato-language"
+        $dest = Join-Path $ccSkillDir "mejia-language"
         if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
         Copy-Item $SkillsDir $dest -Recurse -Force
         Write-OK "Skill copiada a $ccSkillDir"
@@ -251,7 +251,7 @@ if ($installCursor) {
 
 # ===== RESUMEN =====
 Write-Header "INSTALACION COMPLETA"
-Write-Host "`n[OK] falcato.exe instalado en: $BinDir" -ForegroundColor $Green
+Write-Host "`nmejia.exe instalado en: $BinDir" -ForegroundColor $Green
 Write-Host "[OK] Ejemplos en: $ExamplesDir" -ForegroundColor $Green
 if ($installPath) { Write-Host "[OK] PATH actualizado (reinicia terminal)" -ForegroundColor $Green }
 if ($installVSCode) { Write-Host "[OK] Extension VS Code instalada" -ForegroundColor $Green }
@@ -261,9 +261,9 @@ if ($installCursor) { Write-Host "[OK] Cursor listo (usa extension VS Code)" -Fo
 
 Write-Host "`nPROXIMOS PASOS:" -ForegroundColor $Cyan
 Write-Host "  1. Abre una terminal NUEVA" -ForegroundColor $Gray
-Write-Host "  2. Ejecuta: falcato version" -ForegroundColor $Gray
-Write-Host "  3. Prueba: falcato run ejemplos\hola_mundo.fc" -ForegroundColor $Gray
+Write-Host "  2. Ejecuta: mejia version" -ForegroundColor $Gray
+Write-Host "  3. Prueba: mejia run ejemplos\hola_mundo.fc" -ForegroundColor $Gray
 Write-Host "  4. Abre un .fc en VS Code -> LSP activo" -ForegroundColor $Gray
-Write-Host "  5. Tema: Ctrl+K Ctrl+T -> 'Falcato Dorado'" -ForegroundColor $Gray
+Write-Host "  5. Tema: Ctrl+K Ctrl+T -> 'Mejia Dorado'" -ForegroundColor $Gray
 
 Write-Host "`nPara desinstalar: .\install.ps1 -Uninstall" -ForegroundColor $Gray

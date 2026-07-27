@@ -1,10 +1,10 @@
-# Falcato — AGENTS.md
+# mejia — AGENTS.md
 
 ## Filosofía del proyecto
 
 Poder. Eficiencia. Iberofonía. Interlingua.
 
-Falcato NO es una traducción de Rust al español. Es un lenguaje de bajo nivel
+mejia NO es una traducción de Rust al español. Es un lenguaje de bajo nivel
 *construido desde cero* sobre **Cranelift** — apuesta estratégica, no temporal.
 
 El sistema de tipos y semántica están diseñados aprovechando las dimensiones
@@ -14,9 +14,9 @@ aglutinantes.
 
 ### Visión estratégica
 
-Falcato + Cranelift + WASM = **toolchain nativa para código generado por IA**.
+mejia + Cranelift + WASM = **toolchain nativa para código generado por IA**.
 
-- **Falcato**: lenguaje interlingua entre humanos (español), LLMs (lenguaje natural
+- **mejia**: lenguaje interlingua entre humanos (español), LLMs (lenguaje natural
   estructurado, baja ambigüedad), y máquinas (WASM/Cranelift)
 - **Cranelift**: compilación ultra-rápida (JIT + AOT), ideal para ciclos LLM →
   código → compilar → ejecutar → depurar
@@ -78,7 +78,7 @@ Extensión del Pilar I con **tipos afines** como base teórica:
 ## Innovación Implementada: Concordancia Lingüística
 
 Aprovechamos que en español los adjetivos **concuerdan** en género y número con
-el sustantivo. En Falcato, los valores deben "concordar" en tipo, ownership y estado.
+el sustantivo. En mejia, los valores deben "concordar" en tipo, ownership y estado.
 
 **Errores intuitivos para hispanohablantes:**
 ```
@@ -150,7 +150,7 @@ src/
 ├── error.rs             # Errores en español con códigos alfanuméricos
 ├── lexer.rs             # Lexer (logos) — tokens, keywords, artículos, operadores, arrays, ser/estar, subjuntivo, alias fn
 ├── parser/              # Parser modular manual
-│   ├── mod.rs           # ParserCursor (lookahead, spans, recovery, scope de type params), ParserFalcato, tests
+│   ├── mod.rs           # ParserCursor (lookahead, spans, recovery, scope de type params), Parsermejia, tests
 │   ├── errores.rs       # ErrorSintaxis con códigos [S###], sugerencias
 │   ├── tipos.rs         # parse_articulo(), parse_tipo() incluyendo [T; N], genéricos, bounds
 │   ├── expresiones.rs   # Pratt parser + arrays + structs + enums + postfix
@@ -291,7 +291,7 @@ src/
 - Visibilidad con artículos (`el función` = pública, `la función` = privada)
 - Default: top-level de archivo = público; dentro de módulo = privado
 - Namespaces y resolución de nombres con spans
-- Compilación multi-archivo desde CLI (`falcato build a.fc b.fc`)
+- Compilación multi-archivo desde CLI (`mejia build a.fc b.fc`)
 - Codegen unificado: todos los módulos en un solo ObjectModule
 - Type-checking cross-file real con mapa de símbolos públicos compartido
 
@@ -333,11 +333,11 @@ src/
 ## Comandos CLI
 
 ```bash
-falcato build <archivo.fc>    # Compila a binario nativo .exe
-falcato run <archivo.fc>      # Compila y ejecuta
-falcato check <archivo.fc>    # Solo análisis (lexer + parser + semántica)
-falcato lsp                   # Inicia servidor LSP (stdio)
-falcato version               # Muestra versión
+mejia build <archivo.fc>    # Compila a binario nativo .exe
+mejia run <archivo.fc>      # Compila y ejecuta
+mejia check <archivo.fc>    # Solo análisis (lexer + parser + semántica)
+mejia lsp                   # Inicia servidor LSP (stdio)
+mejia version               # Muestra versión
 ```
 
 ## Convenios
@@ -396,7 +396,7 @@ Backend Cranelift generando binarios nativos x86_64.
 
 **Documentación completa de usuario:** GUIA.md (hub) + 15 capítulos en GUIA/ (03-15),
 INSTALL.md, REFERENCIA.md (built-ins), ERRORES.md (códigos de error),
-más skill `falcato-language` para LLMs en OpenCode.
+más skill `mejia-language` para LLMs en OpenCode.
 
 **🖼️ GUI-1: Ventana nativa Win32 operativa.** MessageBox via FFI directo,
 ventana completa con RegisterClassExA + CreateWindowExA + message loop via
@@ -411,12 +411,12 @@ Diseño completo en [`docs/diseno_gui.md`](docs/diseno_gui.md).
 
 | Aspecto | Estado |
 |---------|--------|
-| Release build (6.4 MB, LTO) | ✅ `cargo build --release` produce `falcato.exe` |
+| Release build (6.4 MB, LTO) | ✅ `cargo build --release` produce `mejia.exe` |
 | Dependencias DLL | ⚠️ Requiere `VCRUNTIME140.dll` (local: bundle, CI: static) |
 | CRT estático | ⏳ Pendiente — funciona en GitHub Actions (VS completo), no en VS Insiders local |
-| GitHub repo | ✅ `CerebroCanibalus/falcato` (privado) |
+| GitHub repo | ✅ `mejia/mejia` (privado) |
 | GitHub Actions CI | ✅ build + test en push |
-| VS Code Extension | ✅ VSIX instalable, Falcato Dorado theme |
+| VS Code Extension | ✅ VSIX instalable, mejia Dorado theme |
 | LSP para agentes (OpenCode) | ✅ 6 features, integrado globalmente, verificado |
 | Falso positivo Defender | ⚠️ Riesgo alto sin firma digital |
 | Instalador script | ❌ Pendiente |
@@ -466,7 +466,7 @@ Diseño completo en [`docs/diseno_gui.md`](docs/diseno_gui.md).
 7. **Feedback educativo**: errores con múltiples opciones de fix, no solo "no compila"
 
 **Sintaxis de ownership (artículos extendidos):**
-```falcato
+```mejia
 el x: T = ...;           // owned, mutable (affine: usar 0 o 1 veces)
 la x: T = ...;           // borrowed, inmutable (no-lineal: usar N veces)
 los x: T = ...;          // shared ownership (reference-counted, como Arc)
@@ -507,7 +507,7 @@ errores con código+span+fix concreto (parseables), WASM sandbox para ejecución
 - AST: `RasgoDecl`, `FirmaMetodo`, `ImplDecl`
 
 ### Fase 14 — Sprint de Usabilidad
-> Objetivo: que un programador pueda abrir Falcato y hacer algo real sin FFI manual.
+> Objetivo: que un programador pueda abrir mejia y hacer algo real sin FFI manual.
 > Incluye bitwise operators (crítico para sistemas/kernels).
 
 - **14A**: ✅ Bitwise operators type-safe (`& | ^ << >> ~ >>>`) + Built-ins I/O (`imprimir`, `imprimir_linea`) + interpolación `{x}` + `tamaño_de::<T>()`
@@ -517,7 +517,7 @@ errores con código+span+fix concreto (parseables), WASM sandbox para ejecución
 - **14E**: ✅ Testing en el lenguaje (`prueba { afirmar(...) }`)
 
 **Bitwise — diseño concreto:**
-```falcato
+```mejia
 // Operadores tradicionales (type-safe: mismo ancho obligatorio, sin widening implícito)
 a & b      // AND    |  a | b   // OR     |  a ^ b   // XOR
 a << n     // shift left  |  a >> n  // shift right (arith signed, logical unsigned)
@@ -533,7 +533,7 @@ x.unos()             // popcount
 ```
 
 **Innovación clave (Fase 15B): Campos de bits como tipos:**
-```falcato
+```mejia
 estructural RegistroUART {
     bits {
         habilitado: Natural1,   // bit 0
@@ -594,7 +594,7 @@ estructural RegistroUART {
   - Colecciones (`Diccionario`, `Conjunto`) pendiente — requiere hash + heap + generics reales
 
 **Stdlib con efectos — ejemplo real:**
-```falcato
+```mejia
 puro función longitud(la t: Texto) -> Entero64;           // sin side effects
 muta(ptr, len, cap) función agregar(el t: Texto, la s: Palabra);  // muta exactamente estos campos
 lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<Entero32, Entero32>;
@@ -607,13 +607,13 @@ lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<En
 - Documentación de errores: cada código con explicación y fix
 
 ### Fase 17 — Package manager
-- Manifiesto `Falcato.toml`
+- Manifiesto `mejia.toml`
 - Dependencias locales y remotas (git / registry)
 - Comandos: `nuevo`, `agregar`, `construir`, `probar`, `publicar`
 
 ### Fase 18 — Async / futuro
 > Diseño completo: `docs/diseno_async.md`
-> Ventaja Falcato: `&yo` resuelve Pin, `región` da arena para tareas, `puro`/`muta` razona seguridad.
+> Ventaja mejia: `&yo` resuelve Pin, `región` da arena para tareas, `puro`/`muta` razona seguridad.
 
 - **18A**: ✅ MVP async con threads reales del OS
   - `fut función` = async fn, `esperar expr` = await, `lanzar expr` = spawn
@@ -681,7 +681,7 @@ lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<En
 ### Fase R1 — Distribución e instalación (RELEASE) ✅ COMPLETADA
 | # | Tarea | Archivos | Estado |
 |---|-------|----------|--------|
-| 1 | Repositorio GitHub creado | `CerebroCanibalus/falcato` | ✅ |
+| 1 | Repositorio GitHub creado | `mejia/mejia` | ✅ |
 | 2 | `.gitignore` mejorado | 1 | ✅ |
 | 3 | `clean.ps1` — limpiar basura compilada | 1 | ✅ |
 | 4 | `bundle_dlls.ps1` — bundle VCRUNTIME140 para releases locales | 1 | ✅ |
@@ -696,27 +696,27 @@ lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<En
 | # | Tarea | Archivos | Estado |
 |---|-------|----------|--------|
 | 1 | `package.json` (extension manifest) | 1 | ✅ |
-| 2 | `falcato.tmLanguage.json` (syntax highlighting) | 1 | ✅ |
+| 2 | `mejia.tmLanguage.json` (syntax highlighting) | 1 | ✅ |
 | 3 | `language-configuration.json` (brackets, comentarios) | 1 | ✅ |
-| 4 | `client.js` — LSP client (lanza `falcato lsp`) | 1 | ✅ |
-| 5 | `themes/falcato-color-theme.json` (tema "Falcato Dorado") | 1 | ✅ |
+| 4 | `client.js` — LSP client (lanza `mejia lsp`) | 1 | ✅ |
+| 5 | `themes/mejia-color-theme.json` (tema "mejia Dorado") | 1 | ✅ |
 | 6 | VSIX empaquetado | `npx vsce package` | ✅ |
 
-**Resultado:** Syntax highlighting + LSP + tema único "Falcato Dorado". Instalar vía VSIX.
+**Resultado:** Syntax highlighting + LSP + tema único "mejia Dorado". Instalar vía VSIX.
 
 ### Fase R3 — Documentación completa + Skills para IA ✅ COMPLETADA
 | # | Tarea | Archivos | Estado |
 |---|-------|----------|--------|
-| 1 | `INSTALL.md` — cómo instalar Falcato en 3 pasos | 1 | ✅ |
+| 1 | `INSTALL.md` — cómo instalar mejia en 3 pasos | 1 | ✅ |
 | 2 | `QUICKSTART.md` — tutorial rápido | 1 | ⏳ (cubierto por GUIA/02, pendiente archivo separado) |
 | 3 | `REFERENCIA.md` — catálogo completo de built-ins | 1 | ✅ |
 | 4 | `ERRORES.md` — cada código [T###] explicado con causa y fix | 1 | ✅ |
-| 5 | Skill `falcato-language` (OpenCode) + reference/builtins.md | 2 | ✅ |
+| 5 | Skill `mejia-language` (OpenCode) + reference/builtins.md | 2 | ✅ |
 | 6 | `AGENTS.md` como referencia de diseño del proyecto | 1 | ✅ |
 | 7 | Carpeta `GUIA/` con 15 capítulos + diagramas + ejemplos reales | 17 | ✅ |
 | 8 | i18n completa: "array" → "arreglo" en docs y errores del compilador | 7 | ✅ |
 
-**Resultado:** Documentación completa de usuario (GUIA.md hub + 15 capítulos), referencia (REFERENCIA.md + ERRORES.md), skill para IA (falcato-language con reference/builtins.md), e i18n de términos.
+**Resultado:** Documentación completa de usuario (GUIA.md hub + 15 capítulos), referencia (REFERENCIA.md + ERRORES.md), skill para IA (mejia-language con reference/builtins.md), e i18n de términos.
 
 ### Fase R4 — Colecciones (Diccionario + Conjunto) ✅ COMPLETADA
 | # | Tarea | Archivos | Estado |
@@ -740,7 +740,7 @@ lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<En
 - Elimina fugas en Texto, Vector, Diccionario, Conjunto, TCP sockets
 
 ### Fase R7 — Package manager (post-v1)
-- `Falcato.toml`, dependencias git, comandos `nuevo`/`construir`
+- `mejia.toml`, dependencias git, comandos `nuevo`/`construir`
 
 ## Checklist para release v0.2.0
 
@@ -750,10 +750,10 @@ lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<En
 - [x] GitHub repo creado con README y LICENSE
 - [x] GitHub Actions CI (build + test)
 - [ ] GitHub Actions Release (tag → ZIP) — probar con tag
-- [x] VS Code Extension (syntax + LSP + theme Falcato Dorado)
+- [x] VS Code Extension (syntax + LSP + theme mejia Dorado)
 - [x] Documentación básica (INSTALL + REFERENCIA + ERRORES)
 - [x] GUIA completa (15 capítulos, ownership, arreglos, funciones, errores)
-- [x] Skill `falcato-language` para LLMs (con reference/builtins.md)
+- [x] Skill `mejia-language` para LLMs (con reference/builtins.md)
 - [ ] AGENTS.md genérico para cualquier LLM
 - [x] Diccionario + Conjunto implementados
 - [ ] Proyecto ejemplo >500 líneas funcionando
@@ -762,7 +762,7 @@ lee(fd) función escribir(el fd: Entero32, la datos: &[Entero8]) -> Resultado<En
 
 ## Curva de aprendizaje (diseño vinculante)
 
-Falcato es un lenguaje de bajo nivel (kernel-capable como C/Rust) pero con curva
+mejia es un lenguaje de bajo nivel (kernel-capable como C/Rust) pero con curva
 gradual. El programador sube de nivel cuando está listo, no cuando el compiler lo exige.
 
 ```
@@ -785,7 +785,7 @@ Nivel 2 (estricto — como Rust completo):
 
 ## Criterio de "listo para usar"
 
-Falcato será un lenguaje que valga la pena usar cuando:
+mejia será un lenguaje que valga la pena usar cuando:
 1. Exista un proyecto de >500 líneas compilable en varios archivos.
 2. Tenga stdlib suficiente para I/O, strings y colecciones.
 3. Tenga manejo de errores sin caer en `retornar 1` manual.
@@ -795,10 +795,10 @@ Falcato será un lenguaje que valga la pena usar cuando:
 
 ## Criterio de "superar a Rust"
 
-Falcato supera a Rust cuando:
+mejia supera a Rust cuando:
 1. Un programador hispanohablante escribe un linked list **sin pelear con el compiler**.
 2. Un LLM genera código que compila en Nivel 0 y pasa a Nivel 2 con <3 iteraciones.
-3. Un kernel module se escribe en Falcato con **menos líneas** que en Rust equivalente.
+3. Un kernel module se escribe en mejia con **menos líneas** que en Rust equivalente.
 4. Los errores de ownership se entienden **sin leer documentación**.
 5. Self-referential structs funcionan sin workarounds vergonzosos.
 6. Un LLM genera código de bit manipulation **sin alucinar máscaras** (campos de bits como tipos).
@@ -810,4 +810,5 @@ Hasta entonces, sigue siendo un demostrador técnicamente sólido y una platafor
 
 Este archivo es la referencia de diseño del proyecto. Para la versión ultra-compacta usada por el agente experto de OpenCode, ver:
 
-`C:\Users\Lord Gatito\.config\opencode\agents\falcato.md`
+`C:\Users\Lord Gatito\.config\opencode\agents\mejia.md`
+

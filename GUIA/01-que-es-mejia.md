@@ -1,12 +1,12 @@
-# 01 — ¿Qué es Falcato?
+# 01 — ¿Qué es mejia?
 
-![Falcato Title](../../assets/images/falcato_title.png)
+![mejia Title](../../assets/images/mejia_title.png)
 
 ← [Índice](../GUIA.md) | [Siguiente: Tu primer programa →](02-tu-primer-programa.md)
 
 ---
 
-Falcato es un **lenguaje de programación de bajo nivel** —como C o Rust— pero con una idea diferente: está diseñado **en español**, aprovechando cosas del idioma que el inglés no tiene.
+mejia es un **lenguaje de programación de bajo nivel** —como C o Rust— pero con una idea diferente: está diseñado **en español**, aprovechando cosas del idioma que el inglés no tiene.
 
 ## ¿Para qué sirve?
 
@@ -19,13 +19,13 @@ Falcato es un **lenguaje de programación de bajo nivel** —como C o Rust— pe
 
 ### Español, no inglés traducido
 
-Todos los lenguajes están en inglés. Tu cerebro hace: **idea → inglés → código**. Con Falcato es: **idea → español → código**. Un paso menos.
+Todos los lenguajes están en inglés. Tu cerebro hace: **idea → inglés → código**. Con mejia es: **idea → español → código**. Un paso menos.
 
 ### Artículos (el, la, un)
 
-En español decimos "**el** carro" y "**la** casa". Falcato usa la misma idea:
+En español decimos "**el** carro" y "**la** casa". mejia usa la misma idea:
 
-```falcato
+```mejia
 el x: Entero32 = 5;    // este es mio, puedo cambiarlo
 la y: Entero32 = 10;   // este es prestado, solo lectura
 ```
@@ -34,24 +34,24 @@ Un vistazo y sabes quién controla qué.
 
 ### Ser y Estar
 
-"**Es** de noche" es permanente. "**Está** nublado" es temporal. Falcato entiende eso:
+"**Es** de noche" es permanente. "**Está** nublado" es temporal. mejia entiende eso:
 
-```falcato
+```mejia
 si x es 5 { }     // "x es 5" — identidad
 si x esta 5 { }   // "x esta en 5" — estado pasajero
 ```
 
 ### Compilación instantánea
 
-Falcato usa **Cranelift**, un compilador que traduce código a máquina en **milisegundos**, no minutos.
+mejia usa **Cranelift**, un compilador que traduce código a máquina en **milisegundos**, no minutos.
 
 ## ¿Para quién es?
 
 - **Si sabes C o Rust** — te sentirás en casa, pero con sintaxis más natural
 - **Si sabes Python o JavaScript** — aprenderás conceptos de bajo nivel sin la barrera del inglés
-- **Si programas con IA** — Falcato está diseñado para que una IA genere código correcto sin alucinar
+- **Si programas con IA** — mejia está diseñado para que una IA genere código correcto sin alucinar
 
-## ¿Qué no es Falcato?
+## ¿Qué no es mejia?
 
 - No es una traducción de Rust al español
 - No tiene recolector de basura (tú controlas la memoria)
@@ -60,3 +60,4 @@ Falcato usa **Cranelift**, un compilador que traduce código a máquina en **mil
 ---
 
 ← [Índice](../GUIA.md) | [Siguiente: Tu primer programa →](02-tu-primer-programa.md)
+

@@ -4,11 +4,11 @@
 
 ---
 
-Tu programa necesita decidir. Falcato tiene dos formas: `si` (el clásico) y `coincidir` (el elegante). Y dentro de `si`, tres modos: `es`, `está`, `fuese`. No es capricho — cada uno le dice al compilador algo distinto.
+Tu programa necesita decidir. mejia tiene dos formas: `si` (el clásico) y `coincidir` (el elegante). Y dentro de `si`, tres modos: `es`, `está`, `fuese`. No es capricho — cada uno le dice al compilador algo distinto.
 
 ## si / sino — el básico
 
-```falcato
+```mejia
 el temperatura: Entero32 = 30;
 
 si temperatura > 25 {
@@ -22,7 +22,7 @@ Se lee solo: "si pasa esto, haz esto; sino, haz esto otro".
 
 ### Varios caminos con sino si
 
-```falcato
+```mejia
 el nota: Entero32 = 85;
 
 si nota >= 90 {
@@ -40,7 +40,7 @@ Puedes encadenar tantos `sino si` como quieras. El primero que se cumple gana.
 
 ### Condiciones dentro de condiciones
 
-```falcato
+```mejia
 // Validación de formulario real
 el edad: Entero32 = 25;
 el tiene_licencia: Booleano = verdadero;
@@ -64,9 +64,9 @@ si edad >= 18 {
 
 Cada `si` abre una caja. Las cajas pueden tener más `si` dentro. El compilador las ordena solo.
 
-## es vs está — la joya de Falcato
+## es vs está — la joya de mejia
 
-En español decimos "**es** de noche" y "**está** nublado". Falcato entiende esa diferencia.
+En español decimos "**es** de noche" y "**está** nublado". mejia entiende esa diferencia.
 
 Ambos comparan con `==`... pero el **significado** es distinto. Y el compilador lo usa para entender tu intención.
 
@@ -74,7 +74,7 @@ Ambos comparan con `==`... pero el **significado** es distinto. Y el compilador 
 
 Usa `es` cuando compares algo que **es** así por naturaleza.
 
-```falcato
+```mejia
 si animal es "perro" { ladrar(); }    // es un perro, siempre lo será
 si hoy es sabado { decir("Finde"); }  // el día es sábado
 si pais es "japon" { decir("Saluda"); } // su identidad
@@ -85,7 +85,7 @@ si usuario es "admin" { panel(); }    // su rol
 
 Usa `está` para cosas que **cambian** — lecturas de sensores, estados temporales.
 
-```falcato
+```mejia
 si sensor está 25 {
     decir("Temperatura normal");  // ahora está en 25, pero puede subir
 }
@@ -93,9 +93,9 @@ si bateria está baja { cargar(); }   // ahora está baja, luego no
 si modo está noche { oscurecer(); }  // modo noche se puede desactivar
 ```
 
-### `está` desnudo — truthiness (único en Falcato)
+### `está` desnudo — truthiness (único en mejia)
 
-```falcato
+```mejia
 el x: Entero32 = 42;
 si está {         // sin comparar con nada
     decir("x NO es cero");
@@ -116,7 +116,7 @@ si y está {
 | Puntero | ≠ null | puntero válido → verdad, nulo → falso |
 | `Flotante64` | ❌ **No funciona** | error del compilador |
 
-```falcato
+```mejia
 fn comprobar_ptr(la ptr: &Entero32) {
     si ptr está {
         decir("El puntero apunta a {*ptr}");
@@ -131,11 +131,11 @@ mientras está {   // mientras esté conectado
 }
 ```
 
-> **¿Por qué no funciona con floats?** Porque con decimales, "es cero" es ambiguo. ¿0.0001 es cero o no? Falcato no adivina — te obliga a comparar.
+> **¿Por qué no funciona con floats?** Porque con decimales, "es cero" es ambiguo. ¿0.0001 es cero o no? mejia no adivina — te obliga a comparar.
 
 ### Tabla rápida: es vs está vs fuese
 
-```falcato
+```mejia
 si x es 10      // identidad: "eres ese valor"
 si x está 10    // estado: "ahora vales 10"
 si x está       // truthiness: "existes y no eres cero"
@@ -144,7 +144,7 @@ si x fuese es 10 // improbable: "si acaso fueras 10"
 
 ## fuese — modo subjuntivo
 
-```falcato
+```mejia
 si x fuese es 1000 {
     decir("Esto casi nunca se ejecuta");
 }
@@ -154,7 +154,7 @@ si x fuese es 1000 {
 
 Es como decirle al compilador: "esto rara vez pasa, no molestes al procesador con esto".
 
-```falcato
+```mejia
 // Ejemplo real: archivo de configuración
 // El 99% de las veces el archivo existe
 el datos: Texto;
@@ -211,7 +211,7 @@ si archivo_existe("config.cfg") fuese {
 
 Cuando tienes **muchas opciones** sobre el **mismo valor**, `coincidir` es más limpio que un montón de `si`:
 
-```falcato
+```mejia
 coincidir x {
     0 => { decir("cero"); }
     1 => { decir("uno"); }
@@ -224,7 +224,7 @@ Cada `=>` es una ruta. `_` es el **comodín** — atrapa cualquier valor que no 
 
 ### Match con enums (el pan de cada día)
 
-```falcato
+```mejia
 enumeración ResultadoHttp {
     Ok(datos: Texto),
     NoEncontrado,
@@ -248,7 +248,7 @@ fn manejar_respuesta(la res: ResultadoHttp) {
 
 ### Match con binding directo: es...como
 
-```falcato
+```mejia
 // Cuando solo te interesa UNA variante
 si res es ResultadoHttp.Ok como datos {
     procesar(datos);  // 'datos' ya es el Texto de dentro
@@ -258,7 +258,7 @@ si res es ResultadoHttp.Ok como datos {
 
 ### Match con rangos
 
-```falcato
+```mejia
 coincidir nota {
     0..=49 => { decir("Suspenso"); }
     50..=69 => { decir("Aprobado"); }
@@ -270,7 +270,7 @@ coincidir nota {
 
 ## Errores típicos
 
-```falcato
+```mejia
 // Error: comparar booleanos con ==
 si activo es verdadero { }      // funciona pero repetitivo
 si activo está { }              // mejor: truthiness directo
@@ -308,3 +308,4 @@ si x es 5 { } // Correcto: comparación
 ---
 
 ← [04: Operaciones](04-operaciones.md) | [Indice](../GUIA.md) | [Siguiente: Bucles →](06-bucles.md)
+

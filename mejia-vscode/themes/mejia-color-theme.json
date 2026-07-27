@@ -1,5 +1,5 @@
 {
-    "name": "Falcato Dorado",
+    "name": "mejia Dorado",
     "type": "dark",
     "colors": {
         "editor.background": "#0D0D1A",
@@ -95,113 +95,114 @@
     },
     "tokenColors": [
         {
-            "scope": "comment.line.double-slash.falcato",
+            "scope": "comment.line.double-slash.mejia",
             "settings": { "foreground": "#6272A4", "fontStyle": "italic" }
         },
         {
-            "scope": "comment.block.falcato",
+            "scope": "comment.block.mejia",
             "settings": { "foreground": "#6272A4", "fontStyle": "italic" }
         },
         {
-            "scope": "string.quoted.double.falcato",
+            "scope": "string.quoted.double.mejia",
             "settings": { "foreground": "#A6E22E" }
         },
         {
-            "scope": "constant.character.escape.falcato",
+            "scope": "constant.character.escape.mejia",
             "settings": { "foreground": "#FF79C6" }
         },
         {
-            "scope": "variable.parameter.falcato",
+            "scope": "variable.parameter.mejia",
             "settings": { "foreground": "#FFD866", "fontStyle": "italic" }
         },
         {
-            "scope": "constant.numeric.float.falcato",
+            "scope": "constant.numeric.float.mejia",
             "settings": { "foreground": "#FF79C6" }
         },
         {
-            "scope": "constant.numeric.integer.falcato",
+            "scope": "constant.numeric.integer.mejia",
             "settings": { "foreground": "#FF79C6" }
         },
         {
-            "scope": "keyword.control.falcato",
+            "scope": "keyword.control.mejia",
             "settings": { "foreground": "#FF9D00" }
         },
         {
-            "scope": "keyword.declaration.falcato",
+            "scope": "keyword.declaration.mejia",
             "settings": { "foreground": "#FF5555", "fontStyle": "bold" }
         },
         {
-            "scope": "keyword.other.falcato",
+            "scope": "keyword.other.mejia",
             "settings": { "foreground": "#FF9D00" }
         },
         {
-            "scope": "keyword.modifier.falcato",
+            "scope": "keyword.modifier.mejia",
             "settings": { "foreground": "#FF5555", "fontStyle": "italic" }
         },
         {
-            "scope": "constant.language.boolean.falcato",
+            "scope": "constant.language.boolean.mejia",
             "settings": { "foreground": "#FF79C6", "fontStyle": "bold" }
         },
         {
-            "scope": "storage.type.primitive.falcato",
+            "scope": "storage.type.primitive.mejia",
             "settings": { "foreground": "#00E5FF" }
         },
         {
-            "scope": "storage.type.generic.falcato",
+            "scope": "storage.type.generic.mejia",
             "settings": { "foreground": "#00E5FF", "fontStyle": "bold" }
         },
         {
-            "scope": "storage.type.any.falcato",
+            "scope": "storage.type.any.mejia",
             "settings": { "foreground": "#6272A4", "fontStyle": "italic" }
         },
         {
-            "scope": "entity.name.function.falcato",
+            "scope": "entity.name.function.mejia",
             "settings": { "foreground": "#FFD866" }
         },
         {
-            "scope": "keyword.article.falcato",
+            "scope": "keyword.article.mejia",
             "settings": { "foreground": "#FFB800", "fontStyle": "bold" }
         },
         {
-            "scope": "keyword.operator.directive.falcato",
+            "scope": "keyword.operator.directive.mejia",
             "settings": { "foreground": "#FF79C6" }
         },
         {
-            "scope": "keyword.operator.propagation.falcato",
+            "scope": "keyword.operator.propagation.mejia",
             "settings": { "foreground": "#FF79C6", "fontStyle": "bold" }
         },
         {
-            "scope": "keyword.operator.logical.falcato",
+            "scope": "keyword.operator.logical.mejia",
             "settings": { "foreground": "#FF9D00" }
         },
         {
-            "scope": "keyword.operator.comparison.falcato",
+            "scope": "keyword.operator.comparison.mejia",
             "settings": { "foreground": "#FF9D00" }
         },
         {
-            "scope": "keyword.operator.bitwise.falcato",
+            "scope": "keyword.operator.bitwise.mejia",
             "settings": { "foreground": "#FF9D00" }
         },
         {
-            "scope": "keyword.operator.arithmetic.falcato",
+            "scope": "keyword.operator.arithmetic.mejia",
             "settings": { "foreground": "#FF9D00" }
         },
         {
-            "scope": "keyword.operator.reference.falcato",
+            "scope": "keyword.operator.reference.mejia",
             "settings": { "foreground": "#00E5FF", "fontStyle": "bold" }
         },
         {
-            "scope": "keyword.operator.dereference.falcato",
+            "scope": "keyword.operator.dereference.mejia",
             "settings": { "foreground": "#00E5FF", "fontStyle": "bold" }
         },
         {
-            "scope": "support.class.falcato",
+            "scope": "support.class.mejia",
             "settings": { "foreground": "#00E5FF" }
         },
         {
-            "scope": "variable.other.falcato",
+            "scope": "variable.other.mejia",
             "settings": { "foreground": "#E6E6FA" }
         }
     ],
     "semanticHighlighting": true
 }
+

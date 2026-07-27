@@ -1,12 +1,12 @@
 # 02 — Tu primer programa
 
-← [01: Que es Falcato?](01-que-es-falcato.md) | [Indice](../GUIA.md) | [Siguiente: Variables →](03-variables.md)
+← [01: Que es mejia?](01-que-es-mejia.md) | [Indice](../GUIA.md) | [Siguiente: Variables →](03-variables.md)
 
 ---
 
 Crea un archivo `hola.fc`:
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     decir("¡Hola, mundo!");
     retornar 0;
@@ -16,7 +16,7 @@ función principal() -> Entero32 {
 Ejecuta:
 
 ```bash
-falcato run hola.fc
+mejia run hola.fc
 ```
 
 Verás:
@@ -35,10 +35,11 @@ Verás:
 
 ## ¿No funciona?
 
-- **"falcato no se reconoce"** → [INSTALL.md](../INSTALL.md)
+- **"mejia no se reconoce"** → [INSTALL.md](../INSTALL.md)
 - **Error `[S001]`** → falta un `;` en algún lado
 - **Error `[T001]`** → los tipos no coinciden
 
 ---
 
-← [01: Que es Falcato?](01-que-es-falcato.md) | [Indice](../GUIA.md) | [Siguiente: Variables →](03-variables.md)
+← [01: Que es mejia?](01-que-es-mejia.md) | [Indice](../GUIA.md) | [Siguiente: Variables →](03-variables.md)
+

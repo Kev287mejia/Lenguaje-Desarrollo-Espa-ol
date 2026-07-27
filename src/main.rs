@@ -17,16 +17,16 @@ mod span;
 
 use crate::ast::Programa;
 use crate::codegen::Codegen;
-use crate::lexer::LexerFalcato;
-use crate::parser::ParserFalcato;
+use crate::lexer::LexerMejia;
+use crate::parser::ParserMejia;
 use crate::resolver::Resolver;
 use crate::semantic::AnalizadorSemantico;
 // Cranelift - puro Rust, sin dependencias del sistema
 
-/// CLI de Falcato
+/// CLI de Mejia
 #[derive(Parser)]
-#[command(name = "falcato")]
-#[command(about = "Compilador del lenguaje Falcato")]
+#[command(name = "mejia")]
+#[command(about = "Compilador del lenguaje Mejia")]
 #[command(version = "0.1.0")]
 struct Cli {
     #[command(subcommand)]
@@ -192,16 +192,16 @@ fn compilar_individual(
     target: Option<&str>,
     _release: bool,
 ) -> Result<(), String> {
-    println!("[Falcato] Compilando '{}'...", archivo);
+    println!("[Mejia] Compilando '{}'...", archivo);
 
     let fuente = fs::read_to_string(archivo)
         .map_err(|e| format!("No se pudo leer '{}': {}", archivo, e))?;
 
-    let lexer = LexerFalcato::nuevo(&fuente, archivo);
+    let lexer = LexerMejia::nuevo(&fuente, archivo);
     let tokens = lexer.tokenizar();
-    println!("[Falcato] {} tokens generados", tokens.len());
+    println!("[Mejia] {} tokens generados", tokens.len());
 
-    let programa = ParserFalcato::parse(tokens)
+    let programa = ParserMejia::parse(tokens)
         .map_err(|errores| {
             let msgs: Vec<String> = errores.iter()
                 .map(|e| e.error.to_string())
@@ -270,15 +270,15 @@ fn verificar(archivos: &[String]) -> Result<(), String> {
     }
 
     for archivo in archivos {
-        println!("[Falcato] Verificando '{}'...", archivo);
+        println!("[Mejia] Verificando '{}'...", archivo);
 
         let fuente = fs::read_to_string(archivo)
             .map_err(|e| format!("No se pudo leer '{}': {}", archivo, e))?;
 
-        let lexer = LexerFalcato::nuevo(&fuente, archivo);
+        let lexer = LexerMejia::nuevo(&fuente, archivo);
         let tokens = lexer.tokenizar();
 
-        let programa = ParserFalcato::parse(tokens)
+        let programa = ParserMejia::parse(tokens)
             .map_err(|errores| {
                 let msgs: Vec<String> = errores.iter()
                     .map(|e| e.error.to_string())
@@ -290,7 +290,7 @@ fn verificar(archivos: &[String]) -> Result<(), String> {
         semantica.analizar(&programa)
             .map_err(|e| format!("Errores semánticos en '{}':\n{}", archivo, e))?;
 
-        println!("[Falcato] '{}' verificado: sin errores", archivo);
+        println!("[Mejia] '{}' verificado: sin errores", archivo);
     }
 
     Ok(())
@@ -303,15 +303,15 @@ fn ejecutar_pruebas(archivos: &[String]) -> Result<(), String> {
     }
 
     let archivo = &archivos[0];
-    println!("[Falcato] Ejecutando pruebas de '{}'...", archivo);
+    println!("[Mejia] Ejecutando pruebas de '{}'...", archivo);
 
     let fuente = fs::read_to_string(archivo)
         .map_err(|e| format!("No se pudo leer '{}': {}", archivo, e))?;
 
-    let lexer = LexerFalcato::nuevo(&fuente, archivo);
+    let lexer = LexerMejia::nuevo(&fuente, archivo);
     let tokens = lexer.tokenizar();
 
-    let mut programa = ParserFalcato::parse(tokens)
+    let mut programa = ParserMejia::parse(tokens)
         .map_err(|errores| {
             let msgs: Vec<String> = errores.iter()
                 .map(|e| e.error.to_string())

@@ -1,4 +1,4 @@
-# 🚨 Falcato — Códigos de error
+# 🚨 mejia — Códigos de error
 
 > Todos los errores del compilador tienen un código como `[T001]` y una sugerencia
 > de cómo arreglarlos. Esta guía explica cada categoría.
@@ -175,12 +175,12 @@ Ocurren cuando violas las reglas de quién es dueño de un dato.
 
 ### 1. Lee el error completo
 
-Los errores de Falcato incluyen **línea, columna y sugerencia**. No solo mires
+Los errores de mejia incluyen **línea, columna y sugerencia**. No solo mires
 el código — lee el mensaje completo.
 
 ### 2. Error de tipo más común: olvidar el tipo
 
-```falcato
+```mejia
 // ❌ Error: ¿qué tipo es 'x'?
 el x = 10;
 
@@ -190,7 +190,7 @@ el x: Entero32 = 10;
 
 ### 3. Error de ownership más común: mutable vs inmutable
 
-```falcato
+```mejia
 // ❌ Error: 'nombre' es inmutable
 la nombre: Palabra = "Ana";
 nombre = "Luis";
@@ -202,7 +202,7 @@ nombre = "Luis";
 
 ### 4. Error de sintaxis más común: olvidar punto y coma
 
-```falcato
+```mejia
 // ❌ Error: falta ;
 si x > 5 { decir("hola") }
 
@@ -212,7 +212,7 @@ si x > 5 { decir("hola"); }
 
 ### 5. Error de memoria más común: no liberar
 
-```falcato
+```mejia
 // ❌ Fuga de memoria
 el t: Texto = texto_desde("Hola");
 decir(t);
@@ -226,7 +226,7 @@ t.liberar();
 
 ### 6. Si ves T004 con una sugerencia "quizás quisiste decir"
 
-```falcato
+```mejia
 // ❌ Error: typo en nombre de variable
 el temperatura: Entero32 = 25;
 imprimir_linea(tenperatura);  // T004: 'tenperatura' no declarado
@@ -244,4 +244,5 @@ imprimir_linea(tenperatura);  // T004: 'tenperatura' no declarado
 2. Revisa [GUIA.md](GUIA.md) — el capítulo relevante explica el concepto
 3. Revisa [REFERENCIA.md](REFERENCIA.md) — las firmas de las funciones
 4. Si crees que es un error del compilador, reporta el código `[I###]`
-   en [github.com/CerebroCanibalus/falcato/issues](https://github.com/CerebroCanibalus/falcato/issues)
+   en [github.com/mejia/mejia/issues](https://github.com/mejia/mejia/issues)
+

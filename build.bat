@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 > nul
 echo ==========================================
-echo Falcato - Compilador
+echo Mejia - Compilador
 echo ==========================================
 echo.
 
@@ -16,7 +16,7 @@ if not exist "Cargo.toml" (
     exit /b 1
 )
 
-echo [1/4] Compilando compilador Falcato...
+echo [1/4] Compilando compilador Mejia...
 cargo build --release
 
 if errorlevel 1 (
@@ -33,7 +33,7 @@ if errorlevel 1 (
 )
 
 echo [3/4] Compilando ejemplo hola_mundo.fc...
-target\release\falcato.exe build ejemplos\hola_mundo.fc -o hola_mundo.exe
+target\release\mejia.exe build ejemplos\hola_mundo.fc -o hola_mundo.exe
 
 if errorlevel 1 (
     echo [ERROR] Falló la compilación del ejemplo

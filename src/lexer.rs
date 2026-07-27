@@ -414,13 +414,13 @@ pub struct TokenConSpan {
     pub span: Span,
 }
 
-/// Lexer de Falcato
-pub struct LexerFalcato {
+/// Lexer de Mejia
+pub struct LexerMejia {
     fuente: String,
     archivo: String,
 }
 
-impl LexerFalcato {
+impl LexerMejia {
     pub fn nuevo(fuente: impl Into<String>, archivo: impl Into<String>) -> Self {
         Self {
             fuente: fuente.into(),
@@ -481,7 +481,7 @@ mod tests {
     retornar 0;
 }"#;
         
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = LexerMejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
         
         assert!(tokens.len() > 0);
@@ -492,7 +492,7 @@ mod tests {
     fn test_lexer_aritmetica() {
         let fuente = r#"el a: Entero32 = 10;
 el c: Entero32 = a + b * 2;"#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = LexerMejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
         
         for (i, t) in tokens.iter().enumerate() {
@@ -510,7 +510,7 @@ el c: Entero32 = a + b * 2;"#;
     #[test]
     fn test_lexer_string() {
         let fuente = r#""Hola, mundo""#;
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = LexerMejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
         
         assert_eq!(tokens.len(), 1);
@@ -526,7 +526,7 @@ el c: Entero32 = a + b * 2;"#;
         let fuente = "\"".to_string()
             + "a\\nb\\tc\\\"d\\\\e\\x41"
             + "\"";
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = LexerMejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
         
         let esperado = "a\nb\tc\"d\\eA";
@@ -543,7 +543,7 @@ el c: Entero32 = a + b * 2;"#;
             let fuente = format!("{} principal() {{
     retornar 0;
 }}", kw);
-            let lexer = LexerFalcato::nuevo(&fuente, "test.fc");
+            let lexer = LexerMejia::nuevo(&fuente, "test.fc");
             let tokens = lexer.tokenizar();
             assert!(matches!(tokens[0].token, Token::Funcion), "'{}' debería lexear como Funcion", kw);
         }
@@ -552,7 +552,7 @@ el c: Entero32 = a + b * 2;"#;
     #[test]
     fn test_lexer_articulos() {
         let fuente = "el la un los las";
-        let lexer = LexerFalcato::nuevo(fuente, "test.fc");
+        let lexer = LexerMejia::nuevo(fuente, "test.fc");
         let tokens = lexer.tokenizar();
         
         assert_eq!(tokens.len(), 5);

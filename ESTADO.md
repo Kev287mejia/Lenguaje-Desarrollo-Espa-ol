@@ -1,4 +1,4 @@
-# Falcato - Estado Actual del Proyecto
+# mejia - Estado Actual del Proyecto
 
 ## Fecha: Junio 2026
 ## Fase: FASE 2 (Semántica Básica) - COMPLETADA
@@ -67,7 +67,7 @@ archivo.fc → Lexer → Parser → Análisis Semántico → Codegen (Cranelift)
 ### 4. Análisis Semántico (`src/semantic.rs`)
 
 #### Innovación: Concordancia Lingüística
-Aprovechamos que en español los adjetivos **concuerdan** en género/número con el sustantivo. En Falcato, los valores deben "concordar" en tipo, ownership y estado.
+Aprovechamos que en español los adjetivos **concuerdan** en género/número con el sustantivo. En mejia, los valores deben "concordar" en tipo, ownership y estado.
 
 #### Verificaciones implementadas:
 - **Disconcordancia de tipo** [T001]: Variable declarada con tipo A pero valor es tipo B
@@ -104,10 +104,10 @@ Aprovechamos que en español los adjetivos **concuerdan** en género/número con
 
 ### 6. CLI (`src/main.rs`)
 - **Comandos**:
-  - `falcato build <archivo>`: Compila a binario
-  - `falcato run <archivo>`: Compila y ejecuta
-  - `falcato check <archivo>`: Solo análisis (lexer + parser + semántica)
-  - `falcato version`: Muestra versión
+  - `mejia build <archivo>`: Compila a binario
+  - `mejia run <archivo>`: Compila y ejecuta
+  - `mejia check <archivo>`: Solo análisis (lexer + parser + semántica)
+  - `mejia version`: Muestra versión
 - **Linker automático**: Busca `link.exe` de Visual Studio en ubicaciones comunes
 - **Flags**: `--output`, `--target`, `--release`
 
@@ -121,14 +121,14 @@ Aprovechamos que en español los adjetivos **concuerdan** en género/número con
 ## Ejemplos Funcionales
 
 ### 1. Hola Mundo (retorna 42)
-```falcato
+```mejia
 función principal() -> Entero32 {
     retornar 42;
 }
 ```
 
 ### 2. Operaciones Aritméticas
-```falcato
+```mejia
 función principal() -> Entero32 {
     el a: Entero32 = 10;
     el b: Entero32 = 20;
@@ -138,7 +138,7 @@ función principal() -> Entero32 {
 ```
 
 ### 3. Condicional
-```falcato
+```mejia
 función principal() -> Entero32 {
     el x: Entero32 = 10;
     si x > 5 {
@@ -150,7 +150,7 @@ función principal() -> Entero32 {
 ```
 
 ### 4. Error Semántico (tipo mismatch)
-```falcato
+```mejia
 función principal() -> Entero32 {
     el a: Booleano = 10;  // [T001] Disconcordancia de tipo
     retornar 0;
@@ -217,7 +217,7 @@ target-lexicon = "0.12"
 - **Codegen**: Generación de bloques Cranelift con `brif`, manejo de terminación (retorno vs jump)
 
 #### Ejemplo funcional:
-```falcato
+```mejia
 función principal() -> Entero32 {
     el x: Entero32 = 10;
     si x > 5 {
@@ -241,3 +241,4 @@ función principal() -> Entero32 {
 - **C ABI**: Layout C por defecto, calling convention C, mangling desactivado
 - **Span**: Cada nodo AST tiene Span (inicio, fin, archivo) para errores con ubicación
 - **Errores**: En español con códigos alfanuméricos (T001, S042, etc.)
+

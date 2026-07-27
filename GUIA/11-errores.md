@@ -4,7 +4,7 @@
 
 ---
 
-Los programas fallan. Archivos que no existen, redes que se caen, divisiones por cero. Falcato maneja estos casos con `Resultado<T, E>`.
+Los programas fallan. Archivos que no existen, redes que se caen, divisiones por cero. mejia maneja estos casos con `Resultado<T, E>`.
 
 ## Resultado — éxito o error
 
@@ -13,7 +13,7 @@ Los programas fallan. Archivos que no existen, redes que se caen, divisiones por
 - `Resultado.Exito(valor)` — todo bien, aquí está el dato
 - `Resultado.Error(codigo)` — algo falló, aquí está la razón
 
-```falcato
+```mejia
 function dividir(el a: Entero32, el b: Entero32) -> Resultado<Entero32, Entero32> {
     si b es 0 {
         retornar Resultado.Error(-1);  // no se puede dividir por cero
@@ -26,7 +26,7 @@ function dividir(el a: Entero32, el b: Entero32) -> Resultado<Entero32, Entero32
 
 ## Usar el resultado
 
-```falcato
+```mejia
 el res = dividir(10, 2);
 
 coincidir res {
@@ -41,7 +41,7 @@ coincidir res {
 
 O con `si ... como` si solo te importa una rama:
 
-```falcato
+```mejia
 si res es Resultado.Exito como valor {
     decir("Todo bien: {valor}");
 }
@@ -51,7 +51,7 @@ si res es Resultado.Exito como valor {
 
 Puedes usar tu propio enum para los errores, mucho más descriptivo que un número:
 
-```falcato
+```mejia
 enumeración ErrorMatematico {
     DivisionPorCero,
     RaizNegativa,
@@ -84,7 +84,7 @@ fn manejar() {
 
 ## El operador `?` — "y si falla, que vuele"
 
-```falcato
+```mejia
 fn procesar() -> Resultado<Entero32, Entero32> {
     el valor = dividir(10, 0)?;  // si falla, retorna el error automáticamente
     retornar Resultado.Exito(valor * 2);
@@ -99,7 +99,7 @@ Es como decir "intenta esto, y si falla, nos vamos". Ahorra un montón de `coinc
 
 ### Cadena de `?` — varias operaciones que pueden fallar
 
-```falcato
+```mejia
 fn proceso_complejo() -> Resultado<Entero32, Entero32> {
     el a = dividir(100, 2)?;   // 50
     el b = dividir(a, 5)?;      // 10
@@ -112,7 +112,7 @@ Si cualquiera falla, toda la función se corta y devuelve el error. Como una tub
 
 ## Programa completo con errores
 
-```falcato
+```mejia
 enumeración ErrorArchivo {
     NoExiste,
     PermisoDenegado,
@@ -120,7 +120,7 @@ enumeración ErrorArchivo {
 }
 
 fn leer_numero(la ruta: Palabra) -> Resultado<Entero32, ErrorArchivo> {
-    // Falcato no tiene archivo_leer implementado con Resultado,
+    // mejia no tiene archivo_leer implementado con Resultado,
     // pero ilustra el patrón conceptual
     si !archivo_existe(ruta) {
         retornar Resultado.Error(ErrorArchivo.NoExiste);
@@ -181,7 +181,7 @@ Para la lista completa: [ERRORES.md](../ERRORES.md)
 
 ## Errores típicos con Resultado
 
-```falcato
+```mejia
 // Error: olvidar manejar el resultado
 el res = dividir(10, 2);
 // olvidaste comprobar si es Exito o Error
@@ -205,7 +205,7 @@ fn mezclar() -> Resultado<Entero32, ErrorMatematico> {
 
 Este programa une todo lo visto: `Resultado<T,E>`, operador `?`, `coincidir`, arrays, bucles `para`, pattern matching con `es...como`, e interpolación de strings.
 
-```falcato
+```mejia
 // calculadora.fc — Calculadora de 4 operaciones con manejo de errores
 
 enumeración ErrorMatematico {
@@ -231,7 +231,7 @@ fn operar(la op: Entero32, la a: Entero32, la b: Entero32) -> Resultado<Entero32
 }
 
 fn main() -> Entero32 {
-    imprimir_linea("=== CALCULADORA FALCATO ===");
+    imprimir_linea("=== CALCULADORA mejia ===");
     imprimir_linea("1) Sumar");
     imprimir_linea("2) Restar");
     imprimir_linea("3) Multiplicar");
@@ -244,7 +244,7 @@ fn main() -> Entero32 {
 
     mientras verdadero {
         imprimir("Elige opcion: ");
-        // En Falcato real usarías entrada de usuario; aquí simulamos:
+        // En mejia real usarías entrada de usuario; aquí simulamos:
         el opcion: Entero32 = 4;  // Cambia esto para probar
 
         si opcion es 0 {
@@ -309,7 +309,7 @@ fn main() -> Entero32 {
 
 **Compilar y ejecutar:**
 ```bash
-falcato run calculadora.fc
+mejia run calculadora.fc
 ```
 
 ---
@@ -326,3 +326,4 @@ falcato run calculadora.fc
 ---
 
 ← [10: Datos compuestos](10-datos.md) | [Indice](../GUIA.md) | [Siguiente: Métodos →](12-metodos.md)
+

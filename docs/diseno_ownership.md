@@ -1,8 +1,8 @@
-# Falcato — Diseño de Ownership y Borrow Checking
+# mejia — Diseño de Ownership y Borrow Checking
 ## "Concordancia de Posesión" — Superando a Rust con gramática española
 
 > **Tesis central**: El borrow checker de Rust es *overly restrictive*, causa frustración
-> desproporcionada, y rechaza programas perfectamente válidos. Falcato puede hacerlo mejor
+> desproporcionada, y rechaza programas perfectamente válidos. mejia puede hacerlo mejor
 > aprovechando: (1) tipos lineales/afines como base teórica, (2) gramática española como
 > sintaxis de ownership, (3) análisis gradual que no pelea con el programador.
 
@@ -10,7 +10,7 @@
 
 ## 1. Problemas de Rust que resolvemos
 
-| # | Problema de Rust | Solución Falcato |
+| # | Problema de Rust | Solución mejia |
 |---|-----------------|------------------|
 | 1 | Lifetimes crípticos (`'a`, `'b`, `'static`) | Lifetimes léxicos: nombres de variables |
 | 2 | False positive: campos distintos del mismo struct | Field-level borrowing |
@@ -28,13 +28,13 @@
 **Linear types** (Girard, 1987): cada recurso se usa *exactamente* una vez.
 **Affine types** (relajación): cada recurso se usa *a lo más* una vez (permite drop sin usar).
 
-Falcato usa **tipos afines** como base:
+mejia usa **tipos afines** como base:
 - Owned values (`el x`) son afines: pueden usarse 0 o 1 veces
 - Borrowed values (`la x`) son no-lineales: pueden usarse N veces
 - Shared values (`los x`) son reference-counted: uso libre
 
 **Ventaja sobre Rust**: Rust implementa ownership como *reglas ad-hoc* sobre tipos normales.
-Falcato lo implementa como *propiedad del sistema de tipos*, lo que permite:
+mejia lo implementa como *propiedad del sistema de tipos*, lo que permite:
 - Inferencia más precisa
 - Errores más claros
 - Extensibilidad (nuevos artículos = nuevos modos de ownership)
@@ -45,7 +45,7 @@ Falcato lo implementa como *propiedad del sistema de tipos*, lo que permite:
 
 ### 3.1 Artículos existentes (Fase 1-3)
 
-```falcato
+```mejia
 el x: Entero32 = 5;       // owned, mutable (affine: usar 0 o 1 veces)
 la x: Entero32 = 5;       // borrowed, inmutable (no-lineal: usar N veces)
 un x: Entero32 = 5;       // optional (puede ser nulo)
@@ -53,14 +53,14 @@ un x: Entero32 = 5;       // optional (puede ser nulo)
 
 ### 3.2 Artículos nuevos (Fase 12)
 
-```falcato
+```mejia
 los x: Texto = ...;       // shared ownership (reference-counted, como Arc)
 las x: &Texto = ...;      // shared borrowed (referencia a shared)
 ```
 
 ### 3.3 Referencias explícitas
 
-```falcato
+```mejia
 el dato: Texto = texto_nuevo();
 la ref: &dato Texto = &dato;    // Borrow inmutable, lifetime = scope de 'dato'
 el ref_mut: &mut dato Texto = &mut dato;  // Borrow mutable, exclusivo
@@ -71,7 +71,7 @@ donde el lifetime se infiere del scope de la variable nombrada.
 
 ### 3.4 Transferencia de ownership explícita
 
-```falcato
+```mejia
 el x = crear_dato();
 mover x a procesar;     // Transferencia explícita (no implícita como Rust)
 // x ya no es válido
@@ -98,10 +98,10 @@ El programador siempre sabe cuándo pierde ownership.
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 ```
 
-### 4.2 Solución Falcato
+### 4.2 Solución mejia
 
-```falcato
-// Falcato: el lifetime ES el nombre de la variable
+```mejia
+// mejia: el lifetime ES el nombre de la variable
 función más_larga(la x: &x Texto, la y: &y Texto) -> &x Texto {
     // '&x' = "referencia que vive mientras 'x' exista"
     // El retorno vive mientras 'x' viva
@@ -121,7 +121,7 @@ función más_larga(la x: &x Texto, la y: &y Texto) -> &x Texto {
 
 ### 4.4 Elisión (como Rust pero más intuitivo)
 
-```falcato
+```mejia
 // Estas dos son equivalentes:
 función primero(la x: &x Texto) -> &x Texto { retornar x; }
 función primero(la x: &Texto) -> &Texto { retornar x; }
@@ -138,7 +138,7 @@ función primero(la x: &Texto) -> &Texto { retornar x; }
 
 ### 5.2 Niveles de verificación
 
-```falcato
+```mejia
 // NIVEL 0 (default): Sin verificación de ownership
 // Como C: rápido, flexible, pero inseguro
 función rápido() {
@@ -193,10 +193,10 @@ let x_ref = point.x_mut();
 let y_ref = point.y_mut();  // ERROR: two mutable borrows
 ```
 
-### 6.2 Solución Falcato
+### 6.2 Solución mejia
 
-```falcato
-// Falcato ACEPTA esto (field-level analysis):
+```mejia
+// mejia ACEPTA esto (field-level analysis):
 estructural Punto { x: Flotante64, y: Flotante64 }
 
 función principal() verificado {
@@ -232,10 +232,10 @@ match map.get_mut(&key) {
 }
 ```
 
-### 7.2 Solución Falcato
+### 7.2 Solución mejia
 
-```falcato
-// Falcato ACEPTA esto (branch-aware):
+```mejia
+// mejia ACEPTA esto (branch-aware):
 función obtener_o_crear(el mapa: &mut mapa Diccionario, la clave: Texto) verificado {
     coincidir mapa.obtener_mut(clave) {
         Alguno(valor) => retornar valor,
@@ -269,10 +269,10 @@ struct Node {
 }
 ```
 
-### 8.2 Solución Falcato
+### 8.2 Solución mejia
 
-```falcato
-// Falcato SÍ PUEDE (lifetime anclado a self):
+```mejia
+// mejia SÍ PUEDE (lifetime anclado a self):
 estructural Nodo {
     valor: Entero32,
     siguiente: &yo Nodo,  // '&yo' = "vive mientras este struct viva"
@@ -290,7 +290,7 @@ función principal() verificado {
 
 ### 8.3 Regiones de memoria
 
-```falcato
+```mejia
 región transacción {
     el cliente = obtener_cliente();
     el pedido = crear_pedido(&cliente);
@@ -318,9 +318,9 @@ fn count_items(&mut self) {
 }
 ```
 
-### 9.2 Solución Falcato
+### 9.2 Solución mejia
 
-```falcato
+```mejia
 estructural Colección {
     contador: Entero32,
     elementos: Vector<Entero32>
@@ -384,7 +384,7 @@ función contar_elementos(el self: &mut self Colección) verificado {
 
 ### 11.1 Sin heap obligatorio
 
-```falcato
+```mejia
 // Stack-only: sin malloc, sin free, sin GC
 función kernel_init() verificado {
     el buffer: [Entero8; 4096] = todos 0;  // Stack allocation
@@ -394,7 +394,7 @@ función kernel_init() verificado {
 
 ### 11.2 Regiones como arena allocation
 
-```falcato
+```mejia
 // Arena: allocation en bloque, liberación en bloque
 región frame {
     el entidades: [Entidad; 1024] = todos Entidad::vacío();
@@ -405,7 +405,7 @@ región frame {
 
 ### 11.3 `inseguro` para hardware
 
-```falcato
+```mejia
 inseguro función escribir_registro(el puerto: Natural16, el valor: Natural8) {
     // Sin verificación de ownership (acceso directo a hardware)
     // El programador asume responsabilidad
@@ -415,7 +415,7 @@ inseguro función escribir_registro(el puerto: Natural16, el valor: Natural8) {
 
 ### 11.4 `pre-` para comptime (Pilar V)
 
-```falcato
+```mejia
 // Evaluación en tiempo de compilación
 pre-función tamaño_buffer() -> Natural32 {
     retornar 4096 * 16;  // Calculado en compilación
@@ -500,9 +500,9 @@ Código generado por IA → Compilar a WASM → Ejecutar en sandbox
 
 ---
 
-## 14. Comparación final: Falcato vs Rust
+## 14. Comparación final: mejia vs Rust
 
-| Aspecto | Rust | Falcato |
+| Aspecto | Rust | mejia |
 |---------|------|---------|
 | Sintaxis de ownership | `&`, `&mut`, `Box`, `Arc`, `Rc` | `el`, `la`, `los`, `las`, `un` |
 | Lifetimes | `'a`, `'b`, `'static` | `&nombre_variable`, `&yo`, `&'estático` |
@@ -532,8 +532,9 @@ Código generado por IA → Compilar a WASM → Ejecutar en sandbox
 
 ## 16. Criterio de éxito
 
-Falcato supera a Rust cuando:
+mejia supera a Rust cuando:
 1. Un programador hispanohablante escribe un linked list **sin fight con el compiler**
 2. Un LLM genera código que compila en Nivel 0 y pasa a Nivel 2 con <3 iteraciones
-3. Un kernel module se escribe en Falcato con **menos líneas** que en Rust equivalente
+3. Un kernel module se escribe en mejia con **menos líneas** que en Rust equivalente
 4. Los errores de ownership se entienden **sin leer documentación**
+

@@ -1,4 +1,4 @@
-# release.ps1 — Script de release para Falcato
+# release.ps1 — Script de release para Mejia
 #
 # Uso:
 #   .\release.ps1                           # release completo
@@ -6,7 +6,7 @@
 #   .\release.ps1 -Version "0.3.0"          # versión custom
 #   .\release.ps1 -SkipVsix                 # salta build VSIX
 #
-# Produce: falcato-<version>.zip en release/
+# Produce: mejia-<version>.zip en release/
 # Incluye: binario, ejemplos, docs, skills, install.ps1 y VSIX (si hay npm)
 
 param(
@@ -21,7 +21,7 @@ if (-not $ProjectRoot) { $ProjectRoot = $PSScriptRoot }
 $ReleaseDir = "$ProjectRoot\release"
 $DistDir = "$ReleaseDir\dist"
 
-Write-Host "=== Falcato Release Script ===" -ForegroundColor Cyan
+Write-Host "=== Mejia Release Script ===" -ForegroundColor Cyan
 Write-Host ""
 
 # 1. Detectar versión
@@ -42,7 +42,7 @@ if (-not $Version) {
 
 # 2. Build binario
 if (-not $SkipBuild) {
-    Write-Host "[2/6] Compilando falcato.exe (release)..." -ForegroundColor Green
+    Write-Host "[2/6] Compilando mejia.exe (release)..." -ForegroundColor Green
     Push-Location $ProjectRoot
     try {
         $result = cargo build --release 2>&1
@@ -54,7 +54,7 @@ if (-not $SkipBuild) {
     } finally {
         Pop-Location
     }
-    Write-Host "      OK: target\release\falcato.exe" -ForegroundColor Green
+    Write-Host "      OK: target\release\mejia.exe" -ForegroundColor Green
 } else {
     Write-Host "[2/6] Build saltado (-SkipBuild)" -ForegroundColor Yellow
 }
@@ -63,7 +63,7 @@ if (-not $SkipBuild) {
 $vsixIncluido = $false
 if (-not $SkipVsix) {
     Write-Host "[3/6] Extensión VS Code..." -ForegroundColor Green
-    $vsixDir = "$ProjectRoot\falcato-vscode"
+    $vsixDir = "$ProjectRoot\mejia-vscode"
     if (Test-Path "$vsixDir\package.json") {
         $npmPath = (Get-Command "npm" -ErrorAction SilentlyContinue).Source
         if ($npmPath) {
@@ -93,10 +93,10 @@ if (-not $SkipVsix) {
         } else {
             Write-Host "      ⚠ npm no encontrado. VSIX no se incluirá." -ForegroundColor Yellow
             Write-Host "        Para generar el VSIX manualmente:" -ForegroundColor Yellow
-            Write-Host "        cd falcato-vscode && npm install && npx vsce package" -ForegroundColor Yellow
+            Write-Host "        cd mejia-vscode && npm install && npx vsce package" -ForegroundColor Yellow
         }
     } else {
-        Write-Host "      ⚠ Directorio 'falcato-vscode/' no encontrado" -ForegroundColor Yellow
+        Write-Host "      ⚠ Directorio 'mejia-vscode/' no encontrado" -ForegroundColor Yellow
     }
 } else {
     Write-Host "[3/6] VSIX saltado (-SkipVsix)" -ForegroundColor Yellow
@@ -112,16 +112,16 @@ New-Item -ItemType Directory -Force -Path "$DistDir\skills" | Out-Null
 New-Item -ItemType Directory -Force -Path "$DistDir\agents" | Out-Null
 
 # Binario
-if (Test-Path "$ProjectRoot\target\release\falcato.exe") {
-    Copy-Item "$ProjectRoot\target\release\falcato.exe" "$DistDir\bin\"
+if (Test-Path "$ProjectRoot\target\release\mejia.exe") {
+    Copy-Item "$ProjectRoot\target\release\mejia.exe" "$DistDir\bin\"
 } else {
-    Write-Host "ERROR: No se encuentra target\release\falcato.exe" -ForegroundColor Red
+    Write-Host "ERROR: No se encuentra target\release\mejia.exe" -ForegroundColor Red
     exit 1
 }
 
 # VSIX (si se generó)
 if ($vsixIncluido) {
-    $vsixFile = Get-Item "$ProjectRoot\falcato-vscode\*.vsix" | Select-Object -First 1
+    $vsixFile = Get-Item "$ProjectRoot\mejia-vscode\*.vsix" | Select-Object -First 1
     if ($vsixFile) {
         Copy-Item $vsixFile.FullName "$DistDir\bin\"
         Write-Host "      VSIX incluido en bin/" -ForegroundColor Green
@@ -166,7 +166,7 @@ Write-Host "      Archivos copiados a $DistDir" -ForegroundColor Green
 
 # 5. Empaquetar ZIP
 Write-Host "[5/6] Empaquetando ZIP..." -ForegroundColor Green
-$zipName = "falcato-$Version.zip"
+$zipName = "mejia-$Version.zip"
 $zipPath = "$ReleaseDir\$zipName"
 Remove-Item -Path $zipPath -Force -ErrorAction SilentlyContinue
 Compress-Archive -Path "$DistDir\*" -DestinationPath $zipPath
@@ -175,9 +175,9 @@ Write-Host "      ZIP creado: $zipPath" -ForegroundColor Green
 # 6. Limpiar
 Write-Host "[6/6] Limpiando temporales..." -ForegroundColor Green
 Remove-Item -Path $DistDir -Recurse -Force -ErrorAction SilentlyContinue
-# Limpiar VSIX temporal del directorio falcato-vscode
+# Limpiar VSIX temporal del directorio mejia-vscode
 if ($vsixIncluido) {
-    Remove-Item "$ProjectRoot\falcato-vscode\*.vsix" -Force -ErrorAction SilentlyContinue
+    Remove-Item "$ProjectRoot\mejia-vscode\*.vsix" -Force -ErrorAction SilentlyContinue
 }
 
 Write-Host ""
@@ -185,9 +185,9 @@ Write-Host "=== Release listo: $zipName ===" -ForegroundColor Cyan
 Write-Host "Tamaño: $([math]::Round((Get-Item $zipPath).Length / 1MB, 2)) MB" -ForegroundColor Cyan
 Write-Host "Contenido:" -ForegroundColor Cyan
 if ($vsixIncluido) {
-    Write-Host "  ✅ falcato.exe + VSIX + ejemplos + docs + install.ps1" -ForegroundColor Cyan
+    Write-Host "  ✅ mejia.exe + VSIX + ejemplos + docs + install.ps1" -ForegroundColor Cyan
 } else {
-    Write-Host "  ✅ falcato.exe + ejemplos + docs + install.ps1" -ForegroundColor Cyan
+    Write-Host "  ✅ mejia.exe + ejemplos + docs + install.ps1" -ForegroundColor Cyan
     Write-Host "  ⚠ VSIX no incluido (npm no disponible)" -ForegroundColor Yellow
 }
 Write-Host ""

@@ -1,4 +1,4 @@
-# Falcato — Plan Central
+# mejia — Plan Central
 
 > *"El mayor poder a la mayor rapidez y siendo baratos."*
 
@@ -6,7 +6,7 @@
 
 ## Manifiesto Técnico
 
-Falcato es un lenguaje de programación de sistemas construido desde cero sobre LLVM.
+mejia es un lenguaje de programación de sistemas construido desde cero sobre LLVM.
 No es una traducción de Rust al español. Es un diseño original donde las dimensiones
 semánticas del español (género, ser/estar, tiempos verbales, prefijos) se convierten
 en *garantías de compilación*: ownership, const/mut, modos de ejecución, y semántica
@@ -22,7 +22,7 @@ de operaciones.
    sistemas habla C. Cualquier barrera FFI es una barrera de adopción.
 
 3. **Ultra-rápido no es solo velocidad de CPU.** Es control de memoria, de layout,
-   de SIMD, de allocators, y de GPU. Falcato ataca todos estos frentes desde el
+   de SIMD, de allocators, y de GPU. mejia ataca todos estos frentes desde el
    diseño del lenguaje, no desde bibliotecas externas.
 
 4. **Lo que no se usa, no se paga.** Cero abstracciones gratuitas. Cada feature
@@ -39,10 +39,10 @@ Calling convention = C. Name mangling = desactivado.
 
 **Por qué:** El análisis externo identificó "Interoperabilidad C/FFI" como desafío crítico
 que decide éxito o fracaso. Rust requiere `#[repr(C)]` y `extern "C"` como opt-in, lo que
-crea fricción. Falcato nace con esto como default para que cualquier `.o` sea directamente
+crea fricción. mejia nace con esto como default para que cualquier `.o` sea directamente
 usable desde C, y cualquier biblioteca C sea llamable sin wrappers.
 
-**Evidencia:** "Todo ecosistema de sistemas habla C. Si Falcato no puede consumir headers C
+**Evidencia:** "Todo ecosistema de sistemas habla C. Si mejia no puede consumir headers C
 fácilmente, es una isla inútil." — Análisis estratégico, 2026.
 
 **Alternativas descartadas:**
@@ -164,7 +164,7 @@ el régimen de ownership y préstamo de memoria.
 
 **Por qué es óptimo sobre Rust:**
 - Rust requiere aprender 3 conceptos nuevos (ownership, borrowing, lifetimes)
-- Falcato explota 1 concepto preexistente (género gramatical)
+- mejia explota 1 concepto preexistente (género gramatical)
 - La curva de aprendizaje se aplana dramáticamente para hispanohablantes
 
 **Por qué es óptimo sobre C:**
@@ -220,7 +220,7 @@ subjuntivo (incertidumbre) vs presente (certeza).
 ### Pilar IV: C ABI por defecto
 
 **Tesis:** La ABI de C es el estándar universal de interoperabilidad entre lenguajes.
-Falcato no lo trata como opt-in, sino como default.
+mejia no lo trata como opt-in, sino como default.
 
 **Decisiones concretas:**
 - Layout de structs: mismo padding y alignment que C (repr(C) por defecto)
@@ -231,11 +231,11 @@ Falcato no lo trata como opt-in, sino como default.
 
 **Por qué es óptimo sobre Rust:**
 - Rust requiere `#[repr(C)]` en cada struct y `extern "C"` en cada función
-- En Falcato, simplemente declaras e importas — funciona
+- En mejia, simplemente declaras e importas — funciona
 
 **Por qué es óptimo sobre Zig:**
 - Zig también es C-compatible, pero requiere `extern struct` para layout explícito
-- Falcato es más simple porque C es el default, no una opción
+- mejia es más simple porque C es el default, no una opción
 
 ### Pilar V: Prefijos semánticos como primitivas
 
@@ -253,7 +253,7 @@ que el compilador puede entender y optimizar, no solo el programador.
 
 **Por qué es óptimo:**
 - En Rust/C++, `retry` es una función de biblioteca que el compilador no entiende
-- En Falcato, `re-intentar` es una primitiva que el compilador expande y optimiza
+- En mejia, `re-intentar` es una primitiva que el compilador expande y optimiza
 - APIs auto-documentadas: `des-cargar(archivo)` no necesita comentario
 
 ---
@@ -335,7 +335,7 @@ el_persistente cache: Mapa<K, V>;     // memoria persistente
 **Problema:** El rendering diferenciable (neural graphics, inverse rendering) requiere
 implementar forward + backward pass manualmente o usar Slang (NVIDIA).
 
-**Solución:** Falcato incorpora auto-diferenciación como feature del lenguaje:
+**Solución:** mejia incorpora auto-diferenciación como feature del lenguaje:
 
 ```falcat
 diferenciable función renderizar(escena: &Escena, params: &mut Parametros): Imagen {
@@ -416,7 +416,7 @@ diferenciable función renderizar(escena: &Escena, params: &mut Parametros): Ima
    el LSP puede parsear código incompleto (el parser de chumsky es recuperable)
    y obtener los mismos AST nodes que el compilador.
 
-3. **FAL IR como capa de innovación:** Las optimizaciones específicas de Falcato
+3. **FAL IR como capa de innovación:** Las optimizaciones específicas de mejia
    (SoA lowering, inlining de prefijos, niveles de tiempo verbal) se aplican en
    IR propio antes de bajar a LLVM, sin depender de que LLVM las entienda.
 
@@ -425,13 +425,13 @@ diferenciable función renderizar(escena: &Escena, params: &mut Parametros): Ima
    un ecosistema maduro de tooling.
 
 5. **C ABI en la salida:** Al generar código C-compatible desde el primer día,
-   cualquier `.o` de Falcato se integra en proyectos C/C++/Zig/Rust sin fricción.
+   cualquier `.o` de mejia se integra en proyectos C/C++/Zig/Rust sin fricción.
 
 ### Estructura del proyecto Rust
 
 ```
 src/
-├── main.rs           # CLI con clap — falcato build/run/check/lsp
+├── main.rs           # CLI con clap — mejia build/run/check/lsp
 ├── span.rs           # Span, Posicion — localización en código fuente
 ├── error.rs          # Errores en español con códigos
 ├── lexer.rs          # Tokenizer con logos
@@ -471,7 +471,7 @@ src/
 
 **Infraestructura base:**
 - [ ] Proyecto Rust con logos + chumsky + inkwell + clap
-- [ ] CLI: `falcato build`, `falcato run`, `falcato check`
+- [ ] CLI: `mejia build`, `mejia run`, `mejia check`
 - [ ] Span/SourceLocation desde el lexer
 - [ ] Sistema de errores en español con códigos
 - [ ] Salida `.o` compatible con gcc/clang/link.exe
@@ -487,9 +487,9 @@ src/
 
 **Métrica de éxito:**
 ```bash
-falcato build ejemplos/hola_mundo.fc -o hola.exe
+mejia build ejemplos/hola_mundo.fc -o hola.exe
 ./hola.exe
-# → "¡Falcato forja poder!"
+# → "¡mejia forja poder!"
 ```
 
 ### Fase 2: Sistema de tipos + inicio LSP
@@ -531,13 +531,13 @@ falcato build ejemplos/hola_mundo.fc -o hola.exe
 - [ ] Macros / metaprogramación
 - [ ] Forja (package manager)
 - [ ] Playground WASM online
-- [ ] Auto-hospedaje (compilador escrito en Falcato)
+- [ ] Auto-hospedaje (compilador escrito en mejia)
 
 ---
 
-## Comparativa: Falcato vs otros lenguajes
+## Comparativa: mejia vs otros lenguajes
 
-| Dimensión | Falcato | Rust | Zig | C | Go |
+| Dimensión | mejia | Rust | Zig | C | Go |
 |-----------|---------|------|-----|---|----|
 | Ownership | Género gramatical | Borrow checker | Manual | Ninguno | GC |
 | Const/Mut | Ser/Estar (comptime/runtime) | let/let mut/const | const/var | const | var |
@@ -552,4 +552,5 @@ falcato build ejemplos/hola_mundo.fc -o hola.exe
 
 ---
 
-> *"Forjamos Falcato porque el poder sin control no es poder. Es caos."*
+> *"Forjamos mejia porque el poder sin control no es poder. Es caos."*
+

@@ -1,14 +1,14 @@
-# Filosofía de Falcato
+# Filosofía de mejia
 
 ## Los 5 pilares
 
-Falcato se define por 5 pilares que le dan ventaja concreta sobre
+mejia se define por 5 pilares que le dan ventaja concreta sobre
 Rust, Zig, C y Carbon. Ver `docs/hoja_de_ruta.md` para la definición
 completa de cada pilar.
 
 ### ⚔️ Poder (trasversal a los 5 pilares)
 
-Falcato da **control total del hardware**. Esto significa:
+mejia da **control total del hardware**. Esto significa:
 
 - Sin runtime oculto. Sin recolector de basura. Sin VM.
 - Gestión de memoria explícita pero *asistida semánticamente* por el idioma.
@@ -53,17 +53,18 @@ El español no es una capa de traducción sobre conceptos ingleses. Es la
 - **Poderoso** no significa complejo. Significa que las herramientas del
   lenguaje crecen con la madurez del programador, no al revés.
 
-## Lo que Falcato NO es
+## Lo que mejia NO es
 
 - ❌ No es Rust con keywords en español.
 - ❌ No es un lenguaje educativo / para niños.
 - ❌ No es un reemplazo de C para embedded.
 - ❌ No es un lenguaje con runtime pesado.
 
-## Lo que Falcato QUIERE ser
+## Lo que mejia QUIERE ser
 
 - ✅ Un lenguaje de sistemas donde el español *aporta* nuevas formas de
   expresar restricciones de memoria y concurrencia.
 - ✅ Un experimento serio de ingeniería de lenguajes con 500+ años de
   evolución lingüística como materia prima.
 - ✅ Un caballo de batalla para sistemas donde el control total importa.
+

@@ -1,4 +1,4 @@
-# Sistema de Semántica y Tipos de Falcato (borrador)
+# Sistema de Semántica y Tipos de mejia (borrador)
 
 ## 1. Sistema de Tipos
 
@@ -54,7 +54,7 @@ donde T: Comparable<T> {
 
 ### Heap y Stack
 
-Falcato distingue tres regiones de memoria:
+mejia distingue tres regiones de memoria:
 
 ```falcat
 // Stack — tamaño conocido en compile-time
@@ -155,13 +155,13 @@ función dividir(a: Entero32, b: Entero32): Result<Entero32> {
 
 ### Principio: C ABI por defecto
 
-Falcato usa **ABI de C como comportamiento base** en toda la salida del
+mejia usa **ABI de C como comportamiento base** en toda la salida del
 compilador. No es un opt-in como `extern "C"` en Rust. Esto significa:
 
 - Layout de structs sigue las reglas de C (mismo padding y alineación)
 - Calling convention por defecto es `C`
 - Name mangling desactivado (símbolos se exportan con su nombre literal)
-- Cualquier `.o` generado por Falcato se linkea directamente con `gcc`/`clang`/`link.exe`
+- Cualquier `.o` generado por mejia se linkea directamente con `gcc`/`clang`/`link.exe`
 
 ### Declaración de funciones externas
 
@@ -175,9 +175,9 @@ inseguro función free(ptr: *Vacio): Vacio;
 inseguro función printf(formato: *const Caracter, ...): Entero32;
 ```
 
-### Mapeo de tipos C → Falcato
+### Mapeo de tipos C → mejia
 
-| Tipo C | Tipo Falcato | Notas |
+| Tipo C | Tipo mejia | Notas |
 |--------|-------------|-------|
 | `char` | `Byte` | 8 bits, sin signo |
 | `signed char` | `Entero8` | |
@@ -283,7 +283,7 @@ inseguro módulo libc {
 usar libc::*;
 
 función principal(): Entero32 {
-    puts("Falcato forja poder");
+    puts("mejia forja poder");
     retornar 0;
 }
 ```
@@ -300,7 +300,7 @@ inseguro módulo sdl;
 
 - Llamar a funciones FFI fuera de bloques `inseguro`
 - Dereferenciar punteros crudos sin marca de seguridad
-- Convertir tipos entre C y Falcato sin `como` explícito
+- Convertir tipos entre C y mejia sin `como` explícito
 
 ## 7. Metaprogramación
 
@@ -314,3 +314,4 @@ ser función TAMAÑO_BUFFER(entradas: []Tipo): Entero32 {
 // Se ejecuta en compile-time
 el buffer: [Byte; TAMAÑO_BUFFER([...])];
 ```
+

@@ -7,8 +7,8 @@ use tokio::sync::RwLock;
 
 use crate::ast::*;
 use crate::error::ErrorCompilador;
-use crate::lexer::LexerFalcato;
-use crate::parser::ParserFalcato;
+use crate::lexer::LexerMejia;
+use crate::parser::ParserMejia;
 use crate::semantic::AnalizadorSemantico;
 use crate::span::Span;
 
@@ -620,11 +620,11 @@ impl Backend {
         let mut diagnosticos = Vec::new();
 
         // 1. Lexer
-        let lexer = LexerFalcato::nuevo(contenido, uri.path());
+        let lexer = LexerMejia::nuevo(contenido, uri.path());
         let tokens = lexer.tokenizar();
 
         // 2. Parser
-        let programa = match ParserFalcato::parse(tokens) {
+        let programa = match ParserMejia::parse(tokens) {
             Ok(p) => p,
             Err(errores) => {
                 for e in errores {
@@ -679,7 +679,7 @@ impl Backend {
             },
             severity: Some(severity),
             code: Some(NumberOrString::String(error.codigo_str())),
-            source: Some("falcato".to_string()),
+            source: Some("mejia".to_string()),
             message,
             ..Default::default()
         }
@@ -1143,7 +1143,7 @@ impl LanguageServer for Backend {
                 code_action_provider: Some(CodeActionProviderCapability::Simple(true)),
                 diagnostic_provider: Some(
                     DiagnosticServerCapabilities::Options(DiagnosticOptions {
-                        identifier: Some("falcato".to_string()),
+                        identifier: Some("mejia".to_string()),
                         inter_file_dependencies: false,
                         workspace_diagnostics: false,
                         work_done_progress_options: WorkDoneProgressOptions {

@@ -3,8 +3,8 @@ use std::path::{Path, PathBuf};
 use std::fs;
 
 use crate::ast::Programa;
-use crate::lexer::LexerFalcato;
-use crate::parser::ParserFalcato;
+use crate::lexer::LexerMejia;
+use crate::parser::ParserMejia;
 use crate::semantic::{AnalizadorSemantico, FirmaFuncion};
 
 /// Representa una unidad de compilación: archivo fuente → AST → código objeto.
@@ -108,7 +108,7 @@ impl Resolver {
     /// Extrae los nombres de módulos importados de un fuente usando el lexer (rápido, sin parse completo).
     fn extraer_imports(&self, fuente: &str, ruta: &Path) -> Result<Vec<String>, String> {
         let ruta_str = ruta.to_string_lossy().to_string();
-        let lexer = LexerFalcato::nuevo(fuente, &ruta_str);
+        let lexer = LexerMejia::nuevo(fuente, &ruta_str);
         let tokens = lexer.tokenizar();
 
         let mut imports = Vec::new();
@@ -204,10 +204,10 @@ impl Resolver {
                 .ok_or_else(|| format!("Módulo '{}' no encontrado", nombre_modulo))?;
 
             let ruta_str = unidad.ruta.to_string_lossy().to_string();
-            let lexer = LexerFalcato::nuevo(&unidad.fuente, &ruta_str);
+            let lexer = LexerMejia::nuevo(&unidad.fuente, &ruta_str);
             let tokens = lexer.tokenizar();
 
-            let programa = ParserFalcato::parse(tokens)
+            let programa = ParserMejia::parse(tokens)
                 .map_err(|errores| {
                     let msgs: Vec<String> = errores.iter()
                         .map(|e| e.error.to_string())
@@ -234,16 +234,16 @@ impl Resolver {
         }
 
         // 4. Codegen unificado
-        let mut codegen = crate::codegen::Codegen::nuevo("falcato_programa")?;
+        let mut codegen = crate::codegen::Codegen::nuevo("mejia_programa")?;
         for (_, programa) in &programas {
             codegen.compilar_programa(programa)
                 .map_err(|e| format!("Errores de compilación:\n{:?}", e))?;
         }
 
         // 5. Escribir un solo objeto con todo
-        let obj_ruta = "falcato_programa.o".to_string();
+        let obj_ruta = "mejia_programa.o".to_string();
         codegen.escribir_objeto(&obj_ruta)?;
-        objetos.push(("falcato_programa".to_string(), obj_ruta));
+        objetos.push(("mejia_programa".to_string(), obj_ruta));
 
         Ok(objetos)
     }

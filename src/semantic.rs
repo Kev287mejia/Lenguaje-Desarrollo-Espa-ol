@@ -40,7 +40,7 @@ use codigos::*;
 ///
 /// El español requiere que adjetivos, artículos y sustantivos "concuerden"
 /// en género y número. Esta innovación aplica el mismo principio al análisis
-/// semántico de Falcato:
+/// semántico de Mejia:
 ///
 /// 1. **Concordancia de Género (Ownership)**: Los valores deben concordar
 ///    en su artículo (el/la/un) con el contexto. No puedes pasar 'el valor'
@@ -2926,8 +2926,8 @@ No puedes modificar algo que no es 'tuyo'.",
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::lexer::LexerFalcato;
-    use crate::parser::ParserFalcato;
+    use crate::lexer::LexerMejia as LexerFalcato;
+    use crate::parser::ParserMejia as ParserFalcato;
 
     #[test]
     fn test_semantica_correcta() {

@@ -1,4 +1,4 @@
-# 🖼️ Ventana — Sistema Gráfico Nativo de Falcato
+# 🖼️ Ventana — Sistema Gráfico Nativo de mejia
 
 > **Fase:** GUI-1  
 > **Estado:** Diseño  
@@ -9,9 +9,9 @@
 
 ## 1. Filosofía de diseño
 
-Ventana no es "otro binding a Win32". Explota las dimensiones únicas de Falcato:
+Ventana no es "otro binding a Win32". Explota las dimensiones únicas de mejia:
 
-| Dimensión Falcato | Aplicación en GUI |
+| Dimensión mejia | Aplicación en GUI |
 |-------------------|-------------------|
 | **`el`/`la`/`los`/`las`** | Recursos GDI con lifetime automático. `el` = owned (DeleteObject al drop), `la` = borrowed, `los` = refcounted |
 | **Ser/Estar** | `es` = atributo permanente (clase ventana), `está` = estado temporal (visible, maximizada) |
@@ -60,7 +60,7 @@ se envuelven en español semántico (`dc.rellenar_rect()` en vez de `FillRect()`
 
 ### 2.1 Núcleo — Bindings directos a Win32
 
-```falcato
+```mejia
 // núcleo.fc — Tipos fundamentales
 estructural Punto { x: Entero32, y: Entero32 }
 estructural Rect { izquierda: Entero32, superior: Entero32, derecha: Entero32, inferior: Entero32 }
@@ -100,7 +100,7 @@ enumeración Mensaje {
 
 ### 2.2 Gráfico — Device Context + GDI
 
-```falcato
+```mejia
 // dc.fc — Device Context wrapper con ownership
 estructural DC {
     hdc: *mut Entero32,
@@ -121,7 +121,7 @@ función linea(el self: &DC, x1: Entero32, y1: Entero32, x2: Entero32, y2: Enter
 
 ### 2.3 Controles (owner-draw + Common Controls)
 
-```falcato
+```mejia
 estructural Boton {
     hwnd: *mut Entero32,
     texto: Texto,
@@ -138,7 +138,7 @@ función Boton.texto(el self: &Boton) -> Palabra  // GetWindowText
 
 ### 2.4 Diseño — Layout declarativo
 
-```falcato
+```mejia
 // anchors — constraint simple
 estructural Anclaje {
     izquierda: Entero32, derecha: Entero32,
@@ -157,7 +157,7 @@ función Contenedor.recalcular(el self: &mut Contenedor, la rect: &Rect)
 
 ### 2.5 Aplicación — Ciclo de vida
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     el clase = ClaseVentana.nueva("MiApp", al_proc_ventana)
     clase.registrar()  // RegisterClassEx
@@ -185,13 +185,13 @@ función al_proc_ventana(la ventana: Ventana, msg: Mensaje, w: Entero64, l: Ente
 
 ---
 
-## 3. Innovaciones únicas de Falcato en GUI
+## 3. Innovaciones únicas de mejia en GUI
 
 ### 3.1 Ownership de recursos GDI
 
 El problema #1 en Win32: olvidar `DeleteObject` en brushes, pens, bitmaps.
 
-```falcato
+```mejia
 región dibujo {
     el lapiz_rojo = Lapiz.nuevo(PS_SOLID, 2, Color.ROJO)    // CreatePen → owned
     el brocha_azul = Brocha.nuevo(Color.AZUL)                 // CreateSolidBrush → owned
@@ -212,7 +212,7 @@ región dibujo {
 
 ### 3.2 Subjuntivo = paint cold path
 
-```falcato
+```mejia
 función al_pintar(el dc: &DC, el self: &MiControl) {
     // Hot path — siempre se ejecuta
     dc.rellenar_rect(self.rect, self.color_fondo)
@@ -235,7 +235,7 @@ el render loop principal debe ser rápido.
 
 ### 3.3 Bitfields para estilos
 
-```falcato
+```mejia
 // Estilos de ventana como bits — verificación compile-time
 estructural EstiloVentana { bits {
     redimensionable: Natural1,   // WS_SIZEBOX  = 0x00040000L
@@ -262,7 +262,7 @@ el estilo = EstiloVentana {
 
 ### 3.4 Layout declarativo con `=`
 
-```falcato
+```mejia
 // El operador `=` en contexto de layout NO es asignación — es enlace de constraint
 el boton = Boton.nuevo("Click")
 boton.izquierda = formulario.izquierda + 20   // constraint: boton.left = form.left + 20
@@ -273,7 +273,7 @@ boton.ancho = 120                              // constraint: boton.width = 120
 
 ### 3.5 Region-based frame rendering
 
-```falcato
+```mejia
 función al_pintar(el self: &MiApp, el dc: &DC) {
     región fotograma {
         // Todos los recursos creados aquí se liberan al final del fotograma
@@ -318,19 +318,19 @@ función al_pintar(el self: &MiApp, el dc: &DC) {
 
 ### ¿Por qué un trampolín?
 
-El codegen de Cranelift en Falcato soporta llamadas FFI a funciones C individuales,
+El codegen de Cranelift en mejia soporta llamadas FFI a funciones C individuales,
 pero tiene limitaciones prácticas con **structs complejos** como `WNDCLASSEXA` (72 bytes,
 múltiples campos de diferentes tipos y alineaciones). Inicializar un struct de este
 tamaño byte a byte en Cranelift IR es frágil, verboso y propenso a errores de layout.
 
 La solución: **un trampolín C precompilado** (`lib/trampolin_win32.c` → `.obj`) que
-envuelve la lógica Win32 compleja en funciones simples que Falcato puede llamar.
+envuelve la lógica Win32 compleja en funciones simples que mejia puede llamar.
 
 ### Arquitectura del patrón
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Falcato (.fc)                                              │
+│  mejia (.fc)                                              │
 │  ventana_simple.fc — 4 declaraciones, 77 tokens             │
 │                                                             │
 │  inseguro fn fc_CrearVentana() -> Entero64;                 │
@@ -354,14 +354,14 @@ envuelve la lógica Win32 compleja en funciones simples que Falcato puede llamar
 │  }                                                          │
 ├─────────────────────────────────────────────────────────────┤
 │  Linker (link.exe)                                          │
-│  falcato.exe build → .o + trampolin_win32.obj → .exe       │
+│  mejia.exe build → .o + trampolin_win32.obj → .exe       │
 │  → src/main.rs auto-incluye lib/trampolin_win32.obj         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### ¿Qué va en el trampolín y qué en Falcato?
+### ¿Qué va en el trampolín y qué en mejia?
 
-| En el trampolín (C) | En Falcato (FFI directa) |
+| En el trampolín (C) | En mejia (FFI directa) |
 |---------------------|--------------------------|
 | RegisterClassExA | MessageBoxA |
 | CreateWindowExA | GetModuleHandleA |
@@ -372,7 +372,7 @@ envuelve la lógica Win32 compleja en funciones simples que Falcato puede llamar
 
 **Regla de decisión:** Si la función Win32 necesita un struct > 32 bytes o tiene
 más de 6 parámetros → trampolín C. Si es una llamada simple con tipos escalares
-→ FFI directa desde Falcato.
+→ FFI directa desde mejia.
 
 ### Auto-link del trampolín
 
@@ -395,7 +395,7 @@ Si usas GUI, el compilador lo incluye sin configuración extra.
 2. **Structs en C, no en IR** — evitamos bugs de layout en Cranelift
 3. **Familiar para desarrolladores Win32** — el C se ve igual que la documentación de MSDN
 4. **Evolución gradual** — a medida que Cranelift madure, podemos migrar funciones del trampolín
-   a Falcato puro sin cambiar la API
+   a mejia puro sin cambiar la API
 5. **Múltiples archivos .c** — se pueden añadir más trampolines para Direct2D, D3D11, etc.
 
 ---
@@ -464,13 +464,13 @@ Si usas GUI, el compilador lo incluye sin configuración extra.
 
 ## 5. API de alto nivel (visión final)
 
-```falcato
+```mejia
 // app.fc — Aplicación completa con GUI
 función principal() -> Entero32 {
     el app = App.nueva("Mi App Gráfica")
     
     // Ventana principal
-    el ventana = app.ventana(800, 600, "Motor Falcato")
+    el ventana = app.ventana(800, 600, "Motor mejia")
     ventana.estilo = EstiloVentana {
         redimensionable: 1, minimizable: 1,
         maximizable: 1, cerrar: 1, titulo: 1,
@@ -554,7 +554,7 @@ A futuro (Fase GUI-5+), se añadirán también:
 
 Las funciones de Win32 se declaran como `inseguro` en la stdlib:
 
-```falcato
+```mejia
 // núcleo.fc — bindings inseguros
 inseguro función RegisterClassExW(la clase: *mut Entero32) -> Entero16
 inseguro función CreateWindowExW(ex_estilo: Entero32, clase: Palabra, titulo: Palabra,
@@ -595,7 +595,7 @@ struct RecursoGDI {
 
 ### 7.1 Ventana (user32)
 
-| Falcato | Win32 | Descripción |
+| mejia | Win32 | Descripción |
 |---------|-------|-------------|
 | `ClaseVentana.nueva(nombre, proc)` | `WNDCLASS` init | Crea descripción de clase |
 | `ventana.registrar()` | `RegisterClassEx` | Registra la clase |
@@ -607,7 +607,7 @@ struct RecursoGDI {
 
 ### 7.2 Mensajes (user32)
 
-| Falcato | Win32 | Cuándo ocurre |
+| mejia | Win32 | Cuándo ocurre |
 |---------|-------|---------------|
 | `Mensaje.Crear` | WM_CREATE | Tras crear ventana |
 | `Mensaje.Pintar` | WM_PAINT | Necesita repintar |
@@ -621,7 +621,7 @@ struct RecursoGDI {
 
 ### 7.3 Dibujo (gdi32)
 
-| Falcato | Win32 | Descripción |
+| mejia | Win32 | Descripción |
 |---------|-------|-------------|
 | `dc.nueva_ventana(v)` | `GetDC` | Obtiene DC de ventana |
 | `dc.nueva_pintura(v)` | `BeginPaint` | DC para WM_PAINT |
@@ -637,7 +637,7 @@ struct RecursoGDI {
 
 ### 7.4 Recursos GDI (gdi32)
 
-| Falcato | Win32 | Descripción |
+| mejia | Win32 | Descripción |
 |---------|-------|-------------|
 | `Lapiz.nuevo(estilo, ancho, color)` | `CreatePen` | Nuevo lápiz |
 | `Brocha.nuevo(color)` | `CreateSolidBrush` | Nueva brocha |
@@ -650,7 +650,7 @@ struct RecursoGDI {
 
 ## 8. Anti-patrones y bugs comunes
 
-| # | Anti-patrón | Problema | Alternativa Falcato |
+| # | Anti-patrón | Problema | Alternativa mejia |
 |---|-------------|----------|---------------------|
 | 1 | Olvidar `DeleteObject` de brush/pen | Fuga de GDI (10k límite = pantallazo) | Usar `el` (auto-liberación) |
 | 2 | Olvidar `ReleaseDC` | Fuga de DC (solo 5 por proceso) | Usar `región fotograma { ... }` |
@@ -671,9 +671,10 @@ struct RecursoGDI {
 - [x] Documento de diseño (`docs/diseno_gui.md`)
 - [x] MessageBox FFI funcional (`ejemplos/messagebox.fc`)
 - [x] Ventana nativa + message loop (`ejemplos/ventana_simple.fc`)
-- [x] Verificado: `falcato check` + `falcato build` + ejecución
+- [x] Verificado: `mejia check` + `mejia build` + ejecución
 - [x] Commiteado y pusheado
 
 ---
 
 > "La interfaz gráfica no es azúcar — es la puerta de entrada a motores, herramientas y juegos."
+

@@ -10,7 +10,7 @@ Los bucles repiten código. Hay dos formas: `mientras` (no sabes cuántas veces)
 
 Útil cuando **no sabes cuántas iteraciones** vas a necesitar.
 
-```falcato
+```mejia
 // Buscar el primer número divisible por 7
 el i: Entero32 = 1;
 mientras i % 7 != 0 {
@@ -20,7 +20,7 @@ decir("El primer multiplo de 7 es {i}");
 // → "El primer multiplo de 7 es 7"
 ```
 
-```falcato
+```mejia
 // Leer datos hasta que llegue un centinela
 el entrada: Entero32 = leer_sensor();
 mientras entrada != -1 {          // -1 = "no hay más datos"
@@ -31,7 +31,7 @@ mientras entrada != -1 {          // -1 = "no hay más datos"
 
 ### while true
 
-```falcato
+```mejia
 mientras verdadero {
     el dato = recibir_dato();
     si dato es 0 { interrumpir; }  // sale del bucle
@@ -41,7 +41,7 @@ mientras verdadero {
 
 ### Romper el bucle
 
-```falcato
+```mejia
 // interrumpir — sale del bucle
 mientras verdadero {
     decir("Trabajando...");
@@ -60,7 +60,7 @@ para i en 0..10 {
 
 Cuando **sabes exactamente** qué recorrer. Es más corto y seguro que `mientras` porque no puedes olvidar incrementar.
 
-```falcato
+```mejia
 // Sobre rangos
 para i en 0..5 {            // 0, 1, 2, 3, 4
     decir("Vuelta {i}");
@@ -90,7 +90,7 @@ datos.liberar();
 
 ## Bucles anidados — ejemplos reales
 
-```falcato
+```mejia
 // Tabla de multiplicar
 para i en 1..=10 {
     para j en 1..=10 {
@@ -119,7 +119,7 @@ para fila en 0..3 {
 
 ## Rangos
 
-```falcato
+```mejia
 0..5        // 0, 1, 2, 3, 4      (exclusivo: el 5 no entra)
 0..=5       // 0, 1, 2, 3, 4, 5  (inclusivo: el 5 sí entra)
 
@@ -131,7 +131,7 @@ para i en 0..5 {
 
 ## Errores típicos
 
-```falcato
+```mejia
 // Error: bucle infinito (falta incrementar)
 el x: Entero32 = 0;
 mientras x < 10 {
@@ -163,3 +163,4 @@ para i en 0..=5 {
 ---
 
 ← [05: Decisiones](05-decisiones.md) | [Indice](../GUIA.md) | [Siguiente: Funciones →](07-funciones.md)
+

@@ -1,14 +1,14 @@
 [package]
-name = "falcato"
+name = "mejia"
 version = "0.1.0"
 edition = "2021"
 authors = ["Falcato Team"]
 description = "Lenguaje de programación de sistemas iberohablante sobre Cranelift"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/CerebroCanibalus/falcato"
+repository = "https://github.com/mejia/mejia"
 
 [[bin]]
-name = "falcato"
+name = "mejia"
 path = "src/main.rs"
 
 [dependencies]

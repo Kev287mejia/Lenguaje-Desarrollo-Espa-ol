@@ -1,13 +1,13 @@
 {
-    "name": "falcato-language",
-    "displayName": "Falcato Language",
-    "description": "Soporte para el lenguaje Falcato - sistema de tipos iberohablante sobre Cranelift",
+    "name": "mejia-language",
+    "displayName": "Mejia Language",
+    "description": "Soporte para el lenguaje Mejia - sistema de tipos iberohablante sobre Cranelift",
     "version": "0.2.0",
-    "publisher": "CerebroCanibalus",
+    "publisher": "mejia",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/CerebroCanibalus/falcato"
+        "url": "https://github.com/mejia/mejia"
     },
     "engines": {
         "vscode": "^1.90.0"
@@ -21,36 +21,36 @@
         }
     },
     "activationEvents": [
-        "onLanguage:falcato"
+        "onLanguage:mejia"
     ],
     "main": "./client.js",
     "contributes": {
         "languages": [
             {
-                "id": "falcato",
-                "aliases": ["Falcato", "falcato"],
+                "id": "mejia",
+                "aliases": ["Mejia", "mejia"],
                 "extensions": [".fc"],
                 "configuration": "./language-configuration.json"
             }
         ],
         "grammars": [
             {
-                "language": "falcato",
-                "scopeName": "source.falcato",
-                "path": "./syntaxes/falcato.tmLanguage.json"
+                "language": "mejia",
+                "scopeName": "source.mejia",
+                "path": "./syntaxes/mejia.tmLanguage.json"
             }
         ],
         "themes": [
             {
-                "label": "Falcato Dorado",
+                "label": "Mejia Dorado",
                 "uiTheme": "vs-dark",
-                "path": "./themes/falcato-color-theme.json"
+                "path": "./themes/mejia-color-theme.json"
             }
         ],
         "commands": [
             {
-                "command": "falcato.version",
-                "title": "Falcato: Mostrar versión"
+                "command": "mejia.version",
+                "title": "Mejia: Mostrar versión"
             }
         ]
     },

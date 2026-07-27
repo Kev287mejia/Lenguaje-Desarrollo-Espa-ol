@@ -1,10 +1,10 @@
-![Falcato Title](assets/images/falcato_title.png)
+![mejia Title](assets/images/mejia_title.png)
 
 **Archivo de presentación unificado — Todo lo que necesitas saber.**
 
 ---
 
-## ¿Qué es Falcato?
+## ¿Qué es mejia?
 
 Un **lenguaje de programación de bajo nivel** construido **desde cero sobre Cranelift**,
 cuya sintaxis y sistema de tipos explotan las **dimensiones semánticas del español**
@@ -15,7 +15,7 @@ prefijos productivos, voz pasiva, compuestos aglutinantes).
 > donde el español ES el sistema de tipos.**
 
 ```
-D:\Falcato\          → Proyecto raíz
+D:\mejia\          → Proyecto raíz
 ├── AGENTS.md         → Reglas para IA
 ├── PRESENTACION.md   ← ESTE ARCHIVO
 ├── README.md         → Intro breve
@@ -52,7 +52,7 @@ Sin borrow checker que aprender — ya lo sabes si hablas español.
 
 ### II. Ser/Estar = Const/Mut
 `ser` para valores eternos (compile-time). `estar` para lo transitorio (runtime).
-Distinción que solo el español tiene y Falcato explota.
+Distinción que solo el español tiene y mejia explota.
 
 ### III. Tiempos = Modos de ejecución
 Presente es síncrono. Futuro es async. Subjuntivo es fallible.
@@ -223,7 +223,7 @@ sin_bloqueo             // lock-free
 
 ### Primitivos
 
-| Falcato | Descripción |
+| mejia | Descripción |
 |---------|-------------|
 | `Entero{8,16,32,64}` | Enteros con signo |
 | `Natural{8,16,32,64}` | Enteros sin signo |
@@ -252,7 +252,7 @@ estructural Caja<T> donde T: Comparable<T> { el valor: T }
 
 ## Memoria y Concurrencia
 
-| Concepto | Falcato |
+| Concepto | mejia |
 |----------|---------|
 | Stack | Variables por defecto |
 | Heap único | `el caja = Caja::nuevo(valor)` |
@@ -276,7 +276,7 @@ Fase 5: Maduración (macros, auto-hospedaje, forja)
 ```
 
 > **Day-0:** C ABI por defecto, errores en español con códigos,
-> Span en cada nodo AST, CLI `falcato build/run`, linkeo con libc.
+> Span en cada nodo AST, CLI `mejia build/run`, linkeo con libc.
 
 ---
 
@@ -302,7 +302,7 @@ Fase 5: Maduración (macros, auto-hospedaje, forja)
 inseguro función puts(mensaje: *const Caracter): Entero32;
 
 función principal(): Entero32 {
-    puts("¡Falcato forja poder!");
+    puts("¡mejia forja poder!");
     retornar 0;
 }
 ```
@@ -317,13 +317,14 @@ función principal(): Entero32 {
 | **EsJS** | JavaScript con keywords español | ❌ | ❌ (traducción) |
 | **Rustico** | Proc-macro Rust español | 🟡 (sobre Rust) | ❌ (traducción) |
 | **Qriollo** | Funcional, rioplatense, compila a C | 🟡 | 🟡 (joda, no formal) |
-| **Falcato** | **Compilador propio sobre Cranelift** | ✅ | ✅ **Explota género, tiempos, ser/estar, prefijos...** |
+| **mejia** | **Compilador propio sobre Cranelift** | ✅ | ✅ **Explota género, tiempos, ser/estar, prefijos...** |
 
-Falcato es **el único** que no traduce keywords, sino que **diseña el sistema
+mejia es **el único** que no traduce keywords, sino que **diseña el sistema
 de tipos y ejecución desde las propiedades del español**.
 
 ---
 
-> *Falcato no es un experimento de traducción. Es un experimento de ingeniería
+> *mejia no es un experimento de traducción. Es un experimento de ingeniería
 > de lenguajes donde 500+ años de evolución del español se convierten en
 > garantías de compilación.*
+

@@ -1,4 +1,4 @@
-![Falcato Title](assets/images/falcato_title.png)
+![mejia Title](assets/images/mejia_title.png)
 
 > **Nivel:** Principiante  
 > **Tiempo:** 5-10 minutos  
@@ -28,16 +28,16 @@
 
 ### Paso 1: Descargar
 
-1. Ve a [github.com/CerebroCanibalus/falcato/releases](https://github.com/CerebroCanibalus/falcato/releases)
-2. Descarga el archivo `falcato-v0.2.0-x86_64-windows.zip`
-3. Extrae en alguna carpeta, por ejemplo `C:\Falcato`
+1. Ve a [github.com/mejia/mejia/releases](https://github.com/mejia/mejia/releases)
+2. Descarga el archivo `mejia-v0.2.0-x86_64-windows.zip`
+3. Extrae en alguna carpeta, por ejemplo `C:\mejia`
 
 ### Paso 2: DLLs necesarias
 
 Ejecuta el script que copia las DLLs:
 
 ```powershell
-cd C:\Falcato
+cd C:\mejia
 .\bundle_dlls.ps1
 ```
 
@@ -46,17 +46,17 @@ Esto copia `VCRUNTIME140.dll` (necesaria para ejecutar el compilador).
 ### Paso 3: Probar
 
 ```powershell
-.\falcato.exe version
-# → Falcato v0.1.0
+.\mejia.exe version
+# → mejia v0.1.0
 ```
 
 ### Paso 4: (Opcional) Agregar al PATH
 
-Para poder escribir `falcato` desde cualquier carpeta:
+Para poder escribir `mejia` desde cualquier carpeta:
 
 ```powershell
 # PowerShell (como administrador)
-[Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Falcato", "User")
+[Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\mejia", "User")
 ```
 
 ---
@@ -76,24 +76,24 @@ Necesitas el linker de Microsoft. Descarga [Visual Studio Build Tools](https://v
 ### Paso 3: Clonar y compilar
 
 ```powershell
-git clone https://github.com/CerebroCanibalus/falcato.git
-cd falcato
+git clone https://github.com/mejia/mejia.git
+cd mejia
 cargo build --release
 ```
 
 ### Paso 4: Probar
 
 ```powershell
-.\target\release\falcato.exe version
+.\target\release\mejia.exe version
 ```
 
-El binario compilado está en `target\release\falcato.exe`.
+El binario compilado está en `target\release\mejia.exe`.
 
 ---
 
 ## 🧠 LSP — La Pieza Clave para Agentes e IA
 
-El servidor LSP de Falcato es lo que permite que **editores** (VS Code) y **agentes** (OpenCode) entiendan tu código en tiempo real. Sin el LSP, el compilador solo te dice los errores cuando ejecutas; con el LSP, los errores aparecen **mientras escribes**.
+El servidor LSP de mejia es lo que permite que **editores** (VS Code) y **agentes** (OpenCode) entiendan tu código en tiempo real. Sin el LSP, el compilador solo te dice los errores cuando ejecutas; con el LSP, los errores aparecen **mientras escribes**.
 
 ### Lo que hace el LSP
 
@@ -109,23 +109,23 @@ El servidor LSP de Falcato es lo que permite que **editores** (VS Code) y **agen
 
 ### Cómo se conecta
 
-- **VS Code**: via la extensión (`client.js`), que lanza `falcato lsp` como child process
-- **OpenCode**: configurado en `opencode.jsonc` global, lanza `D:\Falcato\target\release\falcato.exe lsp`
+- **VS Code**: via la extensión (`client.js`), que lanza `mejia lsp` como child process
+- **OpenCode**: configurado en `opencode.jsonc` global, lanza `D:\mejia\target\release\mejia.exe lsp`
 
-Sin el LSP instalado, el compilador sigue funcionando, pero **pierdes toda la retroalimentación en tiempo real** que hace que Falcato sea usable como herramienta de enseñanza para IA.
+Sin el LSP instalado, el compilador sigue funcionando, pero **pierdes toda la retroalimentación en tiempo real** que hace que mejia sea usable como herramienta de enseñanza para IA.
 
 ---
 
 ## Opción 3: VS Code Extension
 
-Para tener resaltado de sintaxis, LSP y tema "Falcato Dorado":
+Para tener resaltado de sintaxis, LSP y tema "mejia Dorado":
 
 ### Desde el ZIP
 
 El archivo `.vsix` viene incluido en el ZIP de release. Instálalo:
 
 ```powershell
-code --install-extension falcato-vscode\falcato-language-*.vsix
+code --install-extension mejia-vscode\mejia-language-*.vsix
 ```
 
 ### O desde VS Code
@@ -138,16 +138,16 @@ code --install-extension falcato-vscode\falcato-language-*.vsix
 ### Probar el tema
 
 1. `Ctrl+K Ctrl+T`
-2. Busca "Falcato Dorado"
+2. Busca "mejia Dorado"
 3. Selecciónalo
 
 ### Para desarrolladores: construir el VSIX
 
 ```powershell
-cd D:\Falcato\falcato-vscode
+cd D:\mejia\mejia-vscode
 npm install                        # solo la primera vez
 npx vsce package                   # genera .vsix
-code --install-extension falcato-language-*.vsix --force
+code --install-extension mejia-language-*.vsix --force
 ```
 
 ---
@@ -156,7 +156,7 @@ code --install-extension falcato-language-*.vsix --force
 
 Crea un archivo `hola.fc`:
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     decir("¡Hola, mundo!");
     retornar 0;
@@ -166,7 +166,7 @@ función principal() -> Entero32 {
 Compila y ejecuta:
 
 ```powershell
-falcato run hola.fc
+mejia run hola.fc
 # → ¡Hola, mundo!
 ```
 
@@ -178,5 +178,6 @@ falcato run hola.fc
 |----------|-------|----------|
 | `VCRUNTIME140.dll` no encontrada | Faltan DLLs | Ejecuta `bundle_dlls.ps1` |
 | `link.exe` no encontrado | Faltan Build Tools | Instala Visual Studio Build Tools |
-| `falcato no se reconoce` | No está en PATH | Usa ruta completa o agrega al PATH |
+| `mejia no se reconoce` | No está en PATH | Usa ruta completa o agrega al PATH |
 | El tema no aparece en VS Code | Extensión no instalada | Instala desde VSIX o reinicia VS Code |
+

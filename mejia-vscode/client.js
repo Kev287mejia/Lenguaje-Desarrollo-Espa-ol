@@ -1,5 +1,5 @@
-// Falcato LSP Client — Conecta VS Code con el servidor LSP de Falcato
-// Se ejecuta como child process via stdio (falcato lsp)
+// Mejia LSP Client — Conecta VS Code con el servidor LSP de Mejia
+// Se ejecuta como child process via stdio (mejia lsp)
 
 const vscode = require('vscode');
 const path = require('path');
@@ -11,17 +11,17 @@ let client = null;
  * Activar la extensión — inicia el cliente LSP
  */
 function activate(context) {
-    // Buscar el ejecutable falcato
+    // Buscar el ejecutable mejia
     const falcatoExe = findFalcato();
     if (!falcatoExe) {
         vscode.window.showWarningMessage(
-            'Falcato: No se encontró "falcato" en PATH. ' +
-            'Instálalo desde https://github.com/CerebroCanibalus/falcato'
+            'Mejia: No se encontró "mejia" en PATH. ' +
+            'Instálalo desde https://github.com/mejia/mejia'
         );
         return;
     }
 
-    console.log(`Falcato: LSP usando ${falcatoExe}`);
+    console.log(`Mejia: LSP usando ${falcatoExe}`);
 
     const serverOptions = {
         run: { command: falcatoExe, args: ['lsp'] },
@@ -29,28 +29,28 @@ function activate(context) {
     };
 
     const clientOptions = {
-        documentSelector: [{ scheme: 'file', language: 'falcato' }],
+        documentSelector: [{ scheme: 'file', language: 'mejia' }],
         synchronize: {
             fileEvents: vscode.workspace.createFileSystemWatcher('**/*.fc')
         },
-        diagnosticCollectionName: 'falcato'
+        diagnosticCollectionName: 'mejia'
     };
 
     client = new LanguageClient(
-        'falcato',
-        'Falcato Language Server',
+        'mejia',
+        'Mejia Language Server',
         serverOptions,
         clientOptions
     );
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('falcato.version', () => {
+        vscode.commands.registerCommand('mejia.version', () => {
             const exec = require('child_process').execSync;
             try {
                 const output = exec(`${falcatoExe} version`).toString().trim();
-                vscode.window.showInformationMessage(`Falcato ${output}`);
+                vscode.window.showInformationMessage(`Mejia ${output}`);
             } catch (e) {
-                vscode.window.showErrorMessage('Falcato: Error al obtener versión');
+                vscode.window.showErrorMessage('Mejia: Error al obtener versión');
             }
         })
     );
@@ -68,13 +68,13 @@ function deactivate() {
 }
 
 /**
- * Buscar falcato en PATH o en rutas comunes
+ * Buscar mejia en PATH o en rutas comunes
  */
 function findFalcato() {
     // 1. Buscar en PATH
     const which = require('child_process').execSync;
     try {
-        const result = which('where falcato', { encoding: 'utf8', timeout: 3000 });
+        const result = which('where mejia', { encoding: 'utf8', timeout: 3000 });
         const paths = result.trim().split('\n');
         if (paths.length > 0 && paths[0].trim()) {
             return paths[0].trim();
@@ -83,10 +83,10 @@ function findFalcato() {
         // No está en PATH
     }
 
-    // 2. Buscar en %USERPROFILE%\.falcato\bin
+    // 2. Buscar en %USERPROFILE%\.mejia\bin
     const homePath = process.env.USERPROFILE || process.env.HOME;
     if (homePath) {
-        const localPath = path.join(homePath, '.falcato', 'bin', 'falcato.exe');
+        const localPath = path.join(homePath, '.mejia', 'bin', 'mejia.exe');
         const fs = require('fs');
         if (fs.existsSync(localPath)) {
             return localPath;
@@ -95,17 +95,17 @@ function findFalcato() {
 
     // 3. Buscar al lado de la extensión
     try {
-        const extPath = path.join(__dirname, '..', 'falcato.exe');
+        const extPath = path.join(__dirname, '..', 'mejia.exe');
         if (require('fs').existsSync(extPath)) {
             return extPath;
         }
     } catch (e) {}
 
-    // 4. Buscar en directorio de desarrollo (D:\Falcato)
+    // 4. Buscar en directorio de desarrollo
     try {
         const devPaths = [
-            'D:\\Falcato\\target\\release\\falcato.exe',
-            'D:\\Falcato\\target\\debug\\falcato.exe',
+            path.join(__dirname, '..', 'target', 'release', 'mejia.exe'),
+            path.join(__dirname, '..', 'target', 'debug', 'mejia.exe'),
         ];
         const fs = require('fs');
         for (const p of devPaths) {

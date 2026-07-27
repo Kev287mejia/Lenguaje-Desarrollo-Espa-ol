@@ -4,11 +4,11 @@
 
 ---
 
-Falcato puede hacer varias cosas **al mismo tiempo** con threads reales.
+mejia puede hacer varias cosas **al mismo tiempo** con threads reales.
 
 ## fut funcion
 
-```falcato
+```mejia
 fut función trabajador(la id: Entero32) -> Entero32 {
     esperar dormir(1000);   // espera 1 segundo
     retornar id * 2;
@@ -17,7 +17,7 @@ fut función trabajador(la id: Entero32) -> Entero32 {
 
 ## lanzar
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     lanzar trabajador(1);   // otro hilo
     lanzar trabajador(2);   // otro hilo
@@ -29,7 +29,7 @@ función principal() -> Entero32 {
 
 ## Canales
 
-```falcato
+```mejia
 la canal: Entero64 = canal_nuevo(16);
 canal_enviar(canal, 42);
 el valor = canal_recibir(canal);
@@ -45,7 +45,7 @@ canal_cerrar(canal);
 
 ## seleccionar
 
-```falcato
+```mejia
 seleccionar {
     canal_a como valor => { decir("Llego del A: {valor}"); }
     canal_b como valor => { decir("Llego del B: {valor}"); }
@@ -55,7 +55,7 @@ seleccionar {
 
 ## con_executor
 
-```falcato
+```mejia
 con_executor(4) {          // 4 hilos en pool
     lanzar tarea(1);
     lanzar tarea(2);
@@ -67,3 +67,4 @@ con_executor(4) {          // 4 hilos en pool
 ---
 
 ← [12: Metodos](12-metodos.md) | [Indice](../GUIA.md) | [Siguiente: Ownership →](14-ownership.md)
+

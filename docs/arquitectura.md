@@ -1,4 +1,4 @@
-# Arquitectura del Compilador Falcato
+# Arquitectura del Compilador mejia
 
 ---
 
@@ -230,7 +230,7 @@ Infere el ancho SIMD según:
 ## 5. FAL IR (Intermedio Propio)
 
 IR optimizable independientemente de LLVM. Permite aplicar transformaciones
-específicas de Falcato que LLVM no entendería.
+específicas de mejia que LLVM no entendería.
 
 ### Formato
 
@@ -342,7 +342,7 @@ solo que el parser tolera errores (chumsky tiene soporte nativo para esto).
 
 ```rust
 #[LspService]
-struct ServidorFalcato {
+struct Servidormejia {
     documentos: HashMap<Url, DocumentoState>,
 }
 
@@ -417,10 +417,10 @@ Ejemplos:
 
 ```bash
 # Subcomandos
-falcato build [archivo]     # compila a binario
-falcato run   [archivo]     # compila y ejecuta
-falcato check [archivo]     # solo análisis
-falcato lsp                  # modo servidor LSP
+mejia build [archivo]     # compila a binario
+mejia run   [archivo]     # compila y ejecuta
+mejia check [archivo]     # solo análisis
+mejia lsp                  # modo servidor LSP
 
 # Flags
 -o <ruta>          # salida del binario
@@ -440,7 +440,7 @@ falcato lsp                  # modo servidor LSP
 | Tipo | Herramienta | Qué prueba |
 |------|-------------|------------|
 | Snapshot unit | `insta` | Salida FAL IR y LLVM IR de fragmentos de código |
-| Integration | `assert_cmd` | CLI: `falcato build`, `falcato run` |
+| Integration | `assert_cmd` | CLI: `mejia build`, `mejia run` |
 | End-to-end | Scripts | Compilar .fc, ejecutar, verificar stdout |
 | LSP | `tower-lsp` test utils | Diagnósticos, completions, hover |
 
@@ -457,3 +457,4 @@ tests/
 └── e2e/             # End-to-end (compila y ejecuta)
     └── build_run.bat
 ```
+

@@ -1,4 +1,4 @@
-# Script de build para Falcato en Windows
+# Script de build para Mejia en Windows
 # Configura automáticamente el entorno de Visual Studio y ejecuta comandos cargo
 
 param(
@@ -27,7 +27,7 @@ function Escribir-Color {
 # ============================================
 # 1. Buscar Visual Studio Build Tools
 # ============================================
-Escribir-Color "[Falcato Build] Buscando Visual Studio Build Tools..." $Cyan
+Escribir-Color "[Mejia Build] Buscando Visual Studio Build Tools..." $Cyan
 
 $PosiblesPaths = @(
     "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC",
@@ -62,7 +62,7 @@ $env:LIB = $VSEncontrado
 # ============================================
 # 3. Ejecutar comando
 # ============================================
-Escribir-Color "[Falcato Build] Ejecutando: $Comando $(if($Release){'(release)'})" $Cyan
+Escribir-Color "[Mejia Build] Ejecutando: $Comando $(if($Release){'(release)'})" $Cyan
 
 switch ($Comando) {
     "build" {
@@ -74,7 +74,7 @@ switch ($Comando) {
         Escribir-Color "[OK] Build completado" $Verde
         
         # Mostrar tamaño del binario
-        $Binario = if ($Release) { "target\release\falcato.exe" } else { "target\debug\falcato.exe" }
+        $Binario = if ($Release) { "target\release\mejia.exe" } else { "target\debug\mejia.exe" }
         if (Test-Path $Binario) {
             $Tam = (Get-Item $Binario).Length / 1KB
             Escribir-Color "[INFO] Binario: $Binario ($([math]::Round($Tam, 2)) KB)" $Cyan
@@ -98,7 +98,7 @@ switch ($Comando) {
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         
         # Ejecutar
-        $Binario = "target\release\falcato.exe"
+        $Binario = "target\release\mejia.exe"
         & $Binario run $Archivo
     }
     
@@ -113,7 +113,7 @@ switch ($Comando) {
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         
         # Ejecutar check
-        $Binario = "target\release\falcato.exe"
+        $Binario = "target\release\mejia.exe"
         & $Binario check $Archivo
     }
     
@@ -131,7 +131,7 @@ switch ($Comando) {
         
         foreach ($Ejemplo in $Ejemplos) {
             Escribir-Color "`n[Ejecutando] $Ejemplo.fc..." $Amarillo
-            & "target\release\falcato.exe" build "ejemplos\$Ejemplo.fc"
+            & "target\release\mejia.exe" build "ejemplos\$Ejemplo.fc"
             if ($LASTEXITCODE -eq 0) {
                 $Exe = ".\$Ejemplo.exe"
                 if (Test-Path $Exe) {

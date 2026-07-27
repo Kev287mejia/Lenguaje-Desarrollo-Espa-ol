@@ -2,10 +2,10 @@
 # GitHub Actions CI usa +crt-static (no necesita esta DLL)
 
 param(
-    [string]$ReleaseDir = "D:\Falcato\target\release"
+    [string]$ReleaseDir = "$PSScriptRoot\target\release"
 )
 
-$exe = Join-Path $ReleaseDir "falcato.exe"
+$exe = Join-Path $ReleaseDir "mejia.exe"
 if (-not (Test-Path $exe)) {
     Write-Host "❌ No se encuentra $exe. Ejecuta 'cargo build --release' primero."
     exit 1
@@ -34,7 +34,7 @@ if (-not $found) {
 
 # Verificar que el .exe funciona
 Write-Host "🔍 Verificando binario..."
-$output = & "$ReleaseDir\falcato.exe" --version 2>&1
+$output = & "$ReleaseDir\mejia.exe" --version 2>&1
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ $output"
 } else {
@@ -44,4 +44,4 @@ if ($LASTEXITCODE -eq 0) {
 
 Write-Host ""
 Write-Host "📦 Release lista en: $ReleaseDir"
-Write-Host "   Incluye: falcato.exe + vcruntime140.dll"
+Write-Host "   Incluye: mejia.exe + vcruntime140.dll"

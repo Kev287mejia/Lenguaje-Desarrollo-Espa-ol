@@ -8,7 +8,7 @@ Las funciones son la herramienta más básica para organizar código. Código si
 
 ## Anatomía de una función
 
-```falcato
+```mejia
 función sumar(el a: Entero32, el b: Entero32) -> Entero32 {
     retornar a + b;
 }
@@ -24,7 +24,7 @@ función sumar(el a: Entero32, el b: Entero32) -> Entero32 {
 
 El artículo del parámetro dice qué puede hacer la función con él:
 
-```falcato
+```mejia
 // 'la' → solo lectura (prestado)
 fn saludar(la nombre: Palabra) -> Vacio {
     decir("Hola, {nombre}");
@@ -44,7 +44,7 @@ fn consumir_texto(el msg: Texto) -> Vacio {
 
 ### Pasar por referencia (&T / &mut T)
 
-```falcato
+```mejia
 // Referencia inmutable — puedes leer pero no cambiar
 fn mostrar(la datos: &Texto) {
     decir("El texto dice: ");
@@ -62,7 +62,7 @@ fn añadir_exclamacion(el msg: &mut Texto) {
 
 ## Retornar valores
 
-```falcato
+```mejia
 // Un valor
 fn cuadrado(x: Entero32) -> Entero32 {
     retornar x * x;
@@ -90,7 +90,7 @@ fn main() {
 
 ### Múltiples puntos de retorno
 
-```falcato
+```mejia
 fn clasificar_edad(edad: Entero32) -> Palabra {
     si edad < 0 { retornar "inválida"; }    // salida temprana
     si edad < 12 { retornar "niño"; }
@@ -104,7 +104,7 @@ Los retornos tempranos son útiles para casos borde: verificas y te vas rápido.
 
 ## Llamar una función
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     el resultado = sumar(3, 4);       // 7
     saludar("Ana");                   // "Hola, Ana"
@@ -119,7 +119,7 @@ función principal() -> Entero32 {
 
 El truco para que las funciones sean útiles es **componerlas**:
 
-```falcato
+```mejia
 fn calcular_precio(la precio_base: Entero32) -> Entero32 {
     retornar sumar(precio_base, calcular_iva(precio_base));
 }
@@ -146,7 +146,7 @@ fn main() -> Entero32 {
 
 ## Recursión (una función que se llama a sí misma)
 
-```falcato
+```mejia
 fn factorial(n: Entero32) -> Entero32 {
     si n <= 1 { retornar 1; }
     retornar n * factorial(n - 1);  // se llama a sí misma
@@ -159,7 +159,7 @@ La recursión es útil para árboles, laberintos, y problemas que se dividen en 
 
 ## Formas de escribir "función"
 
-```falcato
+```mejia
 función suma(...) { }   // con tilde (recomendada)
 funcion suma(...) { }   // sin tilde (si tu teclado no tiene)
 fn suma(...) { }        // corta (como Rust)
@@ -167,7 +167,7 @@ fn suma(...) { }        // corta (como Rust)
 
 ## devolver y retornar
 
-```falcato
+```mejia
 función suma(a: Entero32, b: Entero32) -> Entero32 {
     devolver a + b;     // alias de retornar
 }
@@ -177,7 +177,7 @@ Ambos hacen lo mismo. Usa el que te sea más natural.
 
 ## Genéricos
 
-```falcato
+```mejia
 función maximo<T que Comparable>(el a: T, el b: T) -> T {
     si a > b { retornar a; } sino { retornar b; }
 }
@@ -191,7 +191,7 @@ maximo("gato", "perro"); // T = Palabra → "perro"
 
 También genéricos numéricos:
 
-```falcato
+```mejia
 fn longitud<N: Entero32>(la nums: [Entero32; N]) -> Entero32 {
     retornar N;  // N es el tamaño del arreglo, conocido en compilación
 }
@@ -199,7 +199,7 @@ fn longitud<N: Entero32>(la nums: [Entero32; N]) -> Entero32 {
 
 ## Errores típicos
 
-```falcato
+```mejia
 // Error: tipo de retorno incorrecto
 fn sumar(a: Entero32, b: Entero32) -> Palabra {
     retornar a + b;  // a + b es Entero32, no Palabra
@@ -236,10 +236,10 @@ fn rara(x: Entero32) -> Entero32 {
 
 | | Devuelve algo | Solo ejecuta |
 |---|---------------|--------------|
-| En Falcato | `fn x() -> Tipo` | `fn x() -> Vacio` (o sin `->`) |
+| En mejia | `fn x() -> Tipo` | `fn x() -> Vacio` (o sin `->`) |
 | Se usa para | Calcular un valor | Hacer algo (imprimir, guardar) |
 
-```falcato
+```mejia
 // Función (devuelve un valor)
 fn cuadrado(x: Entero32) -> Entero32 { retornar x * x; }
 
@@ -252,3 +252,4 @@ fn mostrar_error(la msg: Palabra) {
 ---
 
 ← [06: Bucles](06-bucles.md) | [Indice](../GUIA.md) | [Siguiente: Texto y Palabra →](08-texto.md)
+

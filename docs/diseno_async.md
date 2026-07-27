@@ -1,14 +1,14 @@
-# Diseño de Async en Falcato — Fase 18
+# Diseño de Async en mejia — Fase 18
 
 > Estado: **FINAL** — listo para implementación
 > Fecha: 2026-07-23
-> Autor: General Beria + Falcato Agent
+> Autor: General Beria + mejia Agent
 
 ---
 
 ## 1. Motivación
 
-Falcato es un lenguaje de sistemas. Los sistemas modernos necesitan concurrencia:
+mejia es un lenguaje de sistemas. Los sistemas modernos necesitan concurrencia:
 servidores, pipelines de datos, I/O multiplexado. Pero el async en lenguajes
 existentes (Rust, C++) es notoriamente complejo.
 
@@ -20,13 +20,13 @@ existentes (Rust, C++) es notoriamente complejo.
 - No hay cancelación estructurada — tareas huérfanas por diseño
 - Recursión async requiere `Box::pin` manual
 
-**Ventaja Falcato (ya implementada):**
+**Ventaja mejia (ya implementada):**
 - `&yo T` (self-referential) → resuelve `Pin` sin ceremony
 - `región { }` (arena allocation) → memoria determinística para tareas
 - `puro`/`muta(campo)`/`lee(campo)` → el compiler razona seguridad entre tasks
 - Borrow checker gradual → Nivel 0 para prototipos, Nivel 2 para producción
 
-**Tesis:** Falcato puede ofrecer async con la ergonomía de Go y la seguridad
+**Tesis:** mejia puede ofrecer async con la ergonomía de Go y la seguridad
 de Rust, aprovechando gramática española (futuro verbal = async, subjuntivo =
 fallible) y features de ownership ya implementadas.
 
@@ -36,7 +36,7 @@ fallible) y features de ownership ya implementadas.
 
 ### 2.1 Keyword: `fut función`
 
-```falcato
+```mejia
 fut función descargar(la url: Texto) -> Resultado<Texto, Entero32> {
     la respuesta = esperar http::obtener(url)?;
     retornar Resultado.Exito(esperar respuesta.leer_todo()?);
@@ -52,7 +52,7 @@ fut función descargar(la url: Texto) -> Resultado<Texto, Entero32> {
 - Para llamar async desde sync: `bloquear(expr)` — API explícita, no `esperar`
 - Error `[T080]` si `esperar` aparece fuera de `fut función`
 
-```falcato
+```mejia
 // OK: esperar dentro de fut función
 fut función proceso() -> Entero32 {
     retornar esperar operacion();
@@ -87,7 +87,7 @@ función malo() -> Entero32 {
 | Default (90% de casos) | **Stackless** | CERO |
 
 **Stackless (state machine):**
-```falcato
+```mejia
 // El compiler genera internamente:
 // estructural DescargarFuturo { estado: Entero32, url: Texto, resp: Respuesta }
 // Tamaño: ~96 bytes. Cero stack. Cache-friendly.
@@ -99,7 +99,7 @@ fut función descargar(la url: Texto) -> Texto {
 ```
 
 **Stackful (stack dinámico estilo Go):**
-```falcato
+```mejia
 // Recursión → no puede ser state machine (tamaño infinito)
 // Stack: 8KB inicial, crece ×2 cuando se llena
 fut función recorrer_arbol(el nodo: &Nodo) -> Entero64 {
@@ -112,7 +112,7 @@ fut función recorrer_arbol(el nodo: &Nodo) -> Entero64 {
 ```
 
 **Override explícito (raro):**
-```falcato
+```mejia
 #[stackful]       // forzar stack (debugging, stack traces completos)
 fut función mi_tarea() { ... }
 
@@ -121,7 +121,7 @@ fut función mi_tarea() { ... }
 ```
 
 **Para CPU-bound (inferencia, kernels):** el async NO se toca.
-```falcato
+```mejia
 // Hot path: sync + puro + auto-vectorizable. Cero overhead async.
 puro función forward(la entrada: &[Flotante32; 784]) -> [Flotante32; 128] { ... }
 
@@ -134,7 +134,7 @@ fut función servir(req: Request) -> Response {
 
 ### 2.4 `esperar`: expresión y sentencia
 
-```falcato
+```mejia
 // Como expresión:
 la x = esperar operacion();
 
@@ -144,7 +144,7 @@ esperar dormir(1000);
 
 ### 2.5 Executor: single-thread default, multi-thread opt-in
 
-```falcato
+```mejia
 // Default: single-thread cooperativo (sin data races por construcción)
 fut función principal() {
     lanzar tarea_a();  // mismo thread, scheduling cooperativo
@@ -180,7 +180,7 @@ región crítico con_executor {
 
 ### 3.1 Funciones async
 
-```falcato
+```mejia
 fut función descargar(la url: Texto) -> Resultado<Texto, Entero32> {
     la respuesta: Respuesta = esperar http::obtener(url)?;
     la cuerpo: Texto = esperar respuesta.leer_todo()?;
@@ -190,7 +190,7 @@ fut función descargar(la url: Texto) -> Resultado<Texto, Entero32> {
 
 ### 3.2 Await
 
-```falcato
+```mejia
 la dato: Entero32 = esperar operacion_lenta();
 la dato: Entero32 = esperar operacion_fallible()?;
 esperar dormir(1000);  // como sentencia
@@ -198,7 +198,7 @@ esperar dormir(1000);  // como sentencia
 
 ### 3.3 Spawn
 
-```falcato
+```mejia
 la tarea: Tarea<Entero32> = lanzar calcular(42);
 
 región servidor {
@@ -210,7 +210,7 @@ región servidor {
 
 ### 3.4 Select
 
-```falcato
+```mejia
 seleccionar {
     la dato = esperar canal_a.recibir() => {
         procesar(dato);
@@ -223,7 +223,7 @@ seleccionar {
 
 ### 3.5 Canales
 
-```falcato
+```mejia
 el (tx, rx): (Enviador<Entero32>, Receptor<Entero32>) = canal::nuevo::<Entero32>();
 esperar tx.enviar(42);
 la valor: Entero32 = esperar rx.recibir();
@@ -231,14 +231,14 @@ la valor: Entero32 = esperar rx.recibir();
 
 ### 3.6 Join
 
-```falcato
+```mejia
 la (a, b, c) = esperar todos(tarea1, tarea2, tarea3);
 la resultado: Entero32 = esperar tarea;
 ```
 
 ### 3.7 Blocking desde sync
 
-```falcato
+```mejia
 función sync_main() -> Entero32 {
     la dato = bloquear(descargar("http://..."));
     retornar 0;
@@ -279,7 +279,7 @@ función sync_main() -> Entero32 {
 
 ### 4.2 Tarea (representación interna)
 
-```falcato
+```mejia
 estructural TareaInterna {
     id: Entero64,
     estado: EstadoTarea,
@@ -306,7 +306,7 @@ enumeración EstadoTarea {
 
 ### 4.3 Waker
 
-```falcato
+```mejia
 estructural Waker {
     tarea_id: Entero64,
     executor_ptr: *mut Executor,
@@ -344,7 +344,7 @@ estructural Waker {
 
 ### 5.1 Tipo Futuro<T>
 
-```falcato
+```mejia
 // Todo `fut función` retorna implícitamente Futuro<T>
 fut función calcular(x: Entero32) -> Entero32 { ... }
 // Tipo real: calcular : (Entero32) -> Futuro<Entero32>
@@ -362,7 +362,7 @@ enumeración EstadoFuturo<T> {
 
 ### 5.2 Interacción con Resultado
 
-```falcato
+```mejia
 fut función leer_archivo(la ruta: Palabra) -> Resultado<Texto, IoError> {
     la fd = esperar io::abrir(ruta)?;
     la datos = esperar io::leer_todo(fd)?;
@@ -372,7 +372,7 @@ fut función leer_archivo(la ruta: Palabra) -> Resultado<Texto, IoError> {
 
 ### 5.3 Interacción con ownership
 
-```falcato
+```mejia
 // Futuro captura argumentos por valor (move)
 fut función procesar(el dato: Vector<Entero32>) -> Entero64 {
     // `dato` se MOVIÓ al futuro — caller pierde ownership
@@ -390,7 +390,7 @@ fut función leer_compartido(las datos: &Vector<Entero32>) -> Entero32 {
 
 ### 5.4 Send-ness inferida
 
-```falcato
+```mejia
 // Compiler INFIERE send-ness desde efectos:
 fut función tarea_segura() -> Entero32 {
     // Solo datos locales + funciones puras → Send automático
@@ -414,7 +414,7 @@ fut función principal() con_executor(hilos: 4) {
 
 ### 5.5 Cancelación estructurada
 
-```falcato
+```mejia
 región servidor {
     el listener = esperar TcpListener::vincular("0.0.0.0:8080")?;
     bucle {
@@ -435,7 +435,7 @@ tarea.cancelar();
 
 ### 6.1 Stackless (state machine) — default
 
-```falcato
+```mejia
 // Fuente:
 fut función foo(x: Entero32) -> Entero32 {
     la a = x + 1;
@@ -458,7 +458,7 @@ fut función foo(x: Entero32) -> Entero32 {
 
 ### 6.2 Stackful (stack dinámico) — recursión
 
-```falcato
+```mejia
 // Fuente:
 fut función factorial(n: Entero64) -> Entero64 {
     si n <= 1 { retornar 1; }
@@ -476,7 +476,7 @@ fut función factorial(n: Entero64) -> Entero64 {
 
 ### 6.3 `esperar` — desugaring
 
-```falcato
+```mejia
 // Superficie:
 la y = esperar bar(x);
 
@@ -502,7 +502,7 @@ la y = esperar bar(x);
 
 ### 6.4 `lanzar` — codegen
 
-```falcato
+```mejia
 // Superficie:
 la tarea = lanzar foo(42);
 
@@ -514,7 +514,7 @@ la tarea = lanzar foo(42);
 
 ### 6.5 `seleccionar` — codegen
 
-```falcato
+```mejia
 // Superficie:
 seleccionar {
     la a = esperar fut_a => { manejar(a); }
@@ -554,7 +554,7 @@ seleccionar {
 - [ ] Ejemplo: `async_simple.fc`
 
 **Criterio de éxito:**
-```falcato
+```mejia
 fut función contador(la nombre: Palabra, veces: Entero32) {
     para i en 0..veces {
         imprimir_linea("{nombre}: {i}");
@@ -624,17 +624,17 @@ fut función principal() -> Entero32 {
 
 ### 8.1 `&yo` resuelve Pin
 
-```falcato
+```mejia
 // Futuro self-referential (state machine con self-ref)
 estructural MiFuturo {
     estado: Entero32,
-    dato: &yo Texto,  // OK en Falcato, requiere Pin<Box<>> en Rust
+    dato: &yo Texto,  // OK en mejia, requiere Pin<Box<>> en Rust
 }
 ```
 
 ### 8.2 `región` como arena de tareas
 
-```falcato
+```mejia
 región conexión {
     el buffer: Vector<Entero8> = vector_nuevo();
     lanzar procesar(buffer);
@@ -644,7 +644,7 @@ región conexión {
 
 ### 8.3 Efectos en async
 
-```falcato
+```mejia
 // puro → ejecutable en cualquier thread, paralelizable
 puro fut función calcular_pi(iteraciones: Entero64) -> Flotante64 { ... }
 
@@ -654,7 +654,7 @@ muta(contador) fut función incrementar(el contador: &mut Entero64) { ... }
 
 ### 8.4 Subjuntivo en async
 
-```falcato
+```mejia
 fut función operación() -> Resultado<Entero32, Error> {
     si conexión fuese cerrada {
         // Cold path (subjuntivo) — codegen ya optimiza como rama fría
@@ -668,7 +668,7 @@ fut función operación() -> Resultado<Entero32, Error> {
 
 ## 9. Comparación con otros lenguajes
 
-| Feature | Rust | Go | Erlang | Falcato |
+| Feature | Rust | Go | Erlang | mejia |
 |---------|------|-----|--------|---------|
 | Modelo | Stackless | Stackful (2KB+grow) | Stackful (2KB+grow) | **Ambos** (compiler decide) |
 | Pin/Unpin | Manual | N/A | N/A | `&yo` lo resuelve |
@@ -700,7 +700,7 @@ fut función operación() -> Resultado<Entero32, Error> {
 ## 11. Ejemplos objetivo
 
 ### 18A: async_simple.fc
-```falcato
+```mejia
 fut función contador(la nombre: Palabra, veces: Entero32) {
     para i en 0..veces {
         imprimir_linea("{nombre}: {i}");
@@ -717,7 +717,7 @@ fut función principal() -> Entero32 {
 ```
 
 ### 18B: echo_server.fc
-```falcato
+```mejia
 fut función manejar_cliente(el conn: TcpStream) {
     el buffer: [Entero8; 1024] = todos 0;
     bucle {
@@ -739,7 +739,7 @@ fut función principal() -> Resultado<Entero32, Entero32> {
 ```
 
 ### 18C: productor_consumidor.fc
-```falcato
+```mejia
 fut función productor(el tx: Enviador<Entero32>) {
     para i en 0..10 {
         esperar tx.enviar(i * 10);
@@ -769,7 +769,7 @@ fut función principal() {
 ```
 
 ### 18D: high_concurrency.fc
-```falcato
+```mejia
 fut función worker(id: Entero32, el rx: Receptor<Trabajo>) {
     bucle {
         la trabajo = esperar rx.recibir();
@@ -798,12 +798,12 @@ fut función principal() con_executor(hilos: 4) {
 # Se linkea automáticamente cuando el código usa `fut función`
 [dependencies]
 # Runtime interno — no expuesto al usuario
-# Opción A: runtime en Rust → libfalcato_rt.a
+# Opción A: runtime en Rust → libmejia_rt.a
 # Opción B: runtime en C → más portable
 # Decisión: Rust (ya tenemos toolchain, seguridad de memoria)
 ```
 
-El runtime se distribuye como `libfalcato_rt.a`. El linker lo incluye
+El runtime se distribuye como `libmejia_rt.a`. El linker lo incluye
 automáticamente cuando detecta `fut función` en el código.
 
 ---
@@ -822,3 +822,4 @@ automáticamente cuando detecta `fut función` en el código.
 ---
 
 *"El futuro no se espera — se construye."*
+

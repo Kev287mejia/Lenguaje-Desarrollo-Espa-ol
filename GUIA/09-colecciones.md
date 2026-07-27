@@ -4,7 +4,7 @@
 
 ---
 
-Falcato tiene dos formas de guardar listas de cosas: **arreglos** (tamaño fijo, rápidos) y **vectores** (tamaño variable, flexibles). Los dos usan `[índice]` para acceder.
+mejia tiene dos formas de guardar listas de cosas: **arreglos** (tamaño fijo, rápidos) y **vectores** (tamaño variable, flexibles). Los dos usan `[índice]` para acceder.
 
 ## Arreglo `[T; N]` — tamaño fijo
 
@@ -24,7 +24,7 @@ Cómo se ve en memoria (arreglo de 5 enteros):
    El tamaño (5) se sabe en compilación.
 ```
 
-```falcato
+```mejia
 // Crear
 los numeros: [Entero32; 5] = [10, 20, 30, 40, 50];
 
@@ -47,14 +47,14 @@ para i en 0..5 {
 
 ### Inicializar con `todos`
 
-```falcato
+```mejia
 los ceros: [Entero32; 100] = todos 0;    // 100 ceros
 los unos: [Entero32; 50] = todos -1;     // 50 unos
 ```
 
 ### Copiar un arreglo
 
-```falcato
+```mejia
 los original: [Entero32; 3] = [1, 2, 3];
 los copia: [Entero32; 3] = copiar original;
 // Ahora son independientes. Modificar copia no afecta original.
@@ -62,7 +62,7 @@ los copia: [Entero32; 3] = copiar original;
 
 ### Arreglos en la vida real
 
-```falcato
+```mejia
 // Días de la semana — siempre 7
 los DIAS: [Palabra; 7] = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
 
@@ -89,7 +89,7 @@ historial[9] = nuevo_valor;
 
 ### Matrices 2D (arreglos de arreglos)
 
-```falcato
+```mejia
 // Un tablero 3×3
 los tablero: [[Entero32; 3]; 3] = [
     [1, 2, 3],
@@ -132,7 +132,7 @@ Cómo se ve en memoria:
                             reubicarse al crecer.
 ```
 
-```falcato
+```mejia
 el v: Vector<Entero32> = vector_nuevo();
 v.agregar(10);
 v.agregar(20);
@@ -158,7 +158,7 @@ v.liberar();  // ← SIEMPRE
 
 ### Acumular (sumar todos)
 
-```falcato
+```mejia
 fn sumar_arreglo(nums: [Entero32; 5]) -> Entero32 {
     el total: Entero32 = 0;
     para n en nums {
@@ -178,7 +178,7 @@ fn sumar_vector(v: &Vector<Entero32>) -> Entero32 {
 
 ### Buscar (encontrar elemento)
 
-```falcato
+```mejia
 fn buscar(nums: [Entero32; 5], el buscado: Entero32) -> Entero32 {
     para i en 0..5 {
         si nums[i] es buscado {
@@ -200,7 +200,7 @@ fn buscar_vector(v: &Vector<Entero32>, buscado: Entero32) -> Entero32 {
 
 ### Filtrar (quedarse con algunos)
 
-```falcato
+```mejia
 // Dado un vector de notas, quedarse solo con las aprobadas
 fn aprobados(la notas: &Vector<Entero32>) -> Vector<Entero32> {
     el resultado: Vector<Entero32> = vector_nuevo();
@@ -233,7 +233,7 @@ fn main() {
 
 ### Programa completo: procesar notas
 
-```falcato
+```mejia
 función principal() -> Entero32 {
     // Recolectar datos
     el notas: Vector<Entero32> = vector_nuevo();
@@ -276,7 +276,7 @@ función principal() -> Entero32 {
 
 ## Errores típicos
 
-```falcato
+```mejia
 // Error: índice fuera de rango
 los arr: [Entero32; 3] = [1, 2, 3];
 arr[5] = 99;  // ¡CRASH! Solo hay posiciones 0,1,2
@@ -331,3 +331,4 @@ fn cuantos_usuarios(cantidad: Entero32) {
 ---
 
 ← [08: Texto y Palabra](08-texto.md) | [Indice](../GUIA.md) | [Siguiente: Datos compuestos →](10-datos.md)
+

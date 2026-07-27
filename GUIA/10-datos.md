@@ -8,7 +8,7 @@ Cuando los números sueltos no bastan, agrupas datos en **structs** (estructuras
 
 ## Struct — agrupar datos relacionados
 
-```falcato
+```mejia
 estructural Persona {
     nombre: Palabra,
     edad: Entero32,
@@ -25,7 +25,7 @@ p.edad = 31;  // los campos de 'el' se pueden cambiar
 
 ### Structs anidados
 
-```falcato
+```mejia
 estructural Direccion {
     calle: Palabra,
     numero: Entero32,
@@ -46,7 +46,7 @@ decir("{p.nombre} vive en {p.direccion.calle}");
 
 ### ¿Para qué sirven los structs en la vida real?
 
-```falcato
+```mejia
 // Una petición HTTP
 estructural Peticion {
     metodo: Palabra,        // "GET", "POST"
@@ -81,7 +81,7 @@ fn distancia(origen: Punto, destino: Punto) -> Flotante64 {
 
 Un enum es un tipo que **solo puede ser uno de varios valores** posibles.
 
-```falcato
+```mejia
 enumeración Estado {
     Activo,
     Inactivo,
@@ -94,7 +94,7 @@ el estado: Estado = Estado.Activo;
 
 Cada variante puede llevar datos diferentes:
 
-```falcato
+```mejia
 enumeración Resultado {
     Exito(valor: Entero32),      // trae un número
     Error(codigo: Entero32),     // trae un código
@@ -106,7 +106,7 @@ el error: Resultado = Resultado.Error(404);
 
 ### Ejemplos reales de enums
 
-```falcato
+```mejia
 // Una máquina de estados
 enumeración FaseJuego {
     Menu,
@@ -136,7 +136,7 @@ enumeración FalloArchivo {
 
 ### Pattern matching con `coincidir` y `es...como`
 
-```falcato
+```mejia
 coincidir res {
     Resultado.Exito como valor => {
         decir("Todo bien: {valor}");
@@ -154,9 +154,9 @@ si res es Resultado.Exito como valor {
 
 ## Bitfields — registros de hardware
 
-Cuando trabajas con hardware, los registros son bits individuales. Falcato permite declararlos como campos:
+Cuando trabajas con hardware, los registros son bits individuales. mejia permite declararlos como campos:
 
-```falcato
+```mejia
 estructural RegistroUART {
     bits {
         habilitado: Natural8,    // bit 0: 1 bit
@@ -186,3 +186,4 @@ El compilador genera automáticamente las máscaras y desplazamientos. El códig
 ---
 
 ← [09: Colecciones](09-colecciones.md) | [Indice](../GUIA.md) | [Siguiente: Errores →](11-errores.md)
+

@@ -1,6 +1,6 @@
-# Falcato — Guía de usuario
+# mejia — Guía de usuario
 
-![Falcato Title](assets/images/falcato_title.png)
+![mejia Title](assets/images/mejia_title.png)
 
 > Un lenguaje de sistemas en español, construido sobre Cranelift.
 > Rápido de compilar, fácil de entender, difícil de romper.
@@ -13,7 +13,7 @@ Bienvenido. Cada capítulo son 5-10 minutos y empieza desde lo más básico.
 
 | # | Capítulo | Qué aprenderás |
 |---|----------|----------------|
-| 01 | [¿Qué es Falcato?](GUIA/01-que-es-falcato.md) | La filosofía del lenguaje |
+| 01 | [¿Qué es mejia?](GUIA/01-que-es-mejia.md) | La filosofía del lenguaje |
 | 02 | [Tu primer programa](GUIA/02-tu-primer-programa.md) | "Hola, mundo" |
 | 03 | [Variables](GUIA/03-variables.md) | `el`, `la`, `un`, `los`, `las` |
 | 04 | [Operaciones](GUIA/04-operaciones.md) | Aritmética, comparaciones, bitwise |
@@ -43,4 +43,5 @@ Bienvenido. Cada capítulo son 5-10 minutos y empieza desde lo más básico.
 
 ---
 
-> Empieza por el [Capítulo 1](GUIA/01-que-es-falcato.md). Cada capítulo asume que leíste los anteriores.
+> Empieza por el [Capítulo 1](GUIA/01-que-es-mejia.md). Cada capítulo asume que leíste los anteriores.
+

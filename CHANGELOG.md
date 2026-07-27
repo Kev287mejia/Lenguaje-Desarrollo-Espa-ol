@@ -1,4 +1,4 @@
-# Changelog de Falcato
+# Changelog de mejia
 
 ## [0.1.0] - Pre-alpha funcional con LSP completo
 
@@ -59,11 +59,11 @@
 - **Comunicación stdio**: compatible con VS Code, Vim, Emacs
 
 ### CLI
-- `falcato build` — compila a binario nativo
-- `falcato run` — compila y ejecuta
-- `falcato check` — análisis estático
-- `falcato lsp` — inicia servidor LSP
-- `falcato version` — muestra versión
+- `mejia build` — compila a binario nativo
+- `mejia run` — compila y ejecuta
+- `mejia check` — análisis estático
+- `mejia lsp` — inicia servidor LSP
+- `mejia version` — muestra versión
 
 ### Arrays (Fase 3.5 — COMPLETADO)
 - Tipo `[T; N]` con sintaxis explícita: `los nums: [Entero32; 5]`
@@ -147,3 +147,4 @@
 4. Genéricos en Enums (`enumeración alguno<T> { ... }`)
 
 ## [0.3.0] — Futuro
+

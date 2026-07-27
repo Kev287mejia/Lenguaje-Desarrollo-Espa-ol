@@ -1,4 +1,4 @@
-# 📗 Falcato — Referencia de funciones built-in
+# 📗 mejia — Referencia de funciones built-in
 
 > Todas las funciones que vienen incluidas en el lenguaje.
 > **📖 Primero lee:** [GUIA.md](GUIA.md) — tutorial desde cero
@@ -28,7 +28,7 @@
 > `Palabra` y `Texto`. El compilador elige el formato automáticamente.
 
 **Ejemplo:**
-```falcato
+```mejia
 imprimir("Hola ");
 imprimir_linea("mundo");
 decir(42);               // números
@@ -54,7 +54,7 @@ decir(verdadero);        // booleanos
 | `texto_obtener_byte` | `(Texto, Entero32) -> Entero8` | Byte en la posición indicada |
 
 **Forma preferida (métodos):**
-```falcato
+```mejia
 t.agregar("hola");
 t.tam();
 t.liberar();
@@ -77,7 +77,7 @@ t[0..5];         // texto_subtexto
 | `vector_liberar` | `::<T>(Vector<T>) -> Vacío` | Libera la memoria |
 
 **Forma preferida (métodos):**
-```falcato
+```mejia
 v.agregar(42);
 v.tam();
 v[0];
@@ -95,7 +95,7 @@ v.liberar();
 | `archivo_existe` | `(Palabra) -> Booleano` | Verifica si el archivo existe |
 
 **Ejemplo:**
-```falcato
+```mejia
 el contenido = archivo_leer("datos.txt");
 si contenido.tam() > 0 {
     decir(contenido);
@@ -117,7 +117,7 @@ contenido.liberar();
 | `tamaño_de` | `::<T>() -> Entero64` | Tamaño en bytes de T (comptime) |
 
 **Ejemplo:**
-```falcato
+```mejia
 el r = raiz(25.0);       // 5.0
 el p = potencia(2.0, 10.0); // 1024.0
 el tam = tamaño_de::<Entero32>(); // 4
@@ -147,7 +147,7 @@ el tam = tamaño_de::<Entero32>(); // 4
 | `texto_a_puntero(s)` | `(Palabra) -> Entero64` | Convierte un literal string a puntero (para `GetModuleHandle`, `LoadCursor`, etc.) |
 | `como_entero64(x)` | `(Entero32) -> Entero64` | Convierte `Entero32` a `Entero64` sin pérdida de signo |
 
-> **Nota sobre punteros Win32:** En Falcato, los `HANDLE`, `HWND`, `HINSTANCE` y punteros
+> **Nota sobre punteros Win32:** En mejia, los `HANDLE`, `HWND`, `HINSTANCE` y punteros
 > a funciones se representan como `Entero64` (8 bytes, mismo tamaño que un puntero
 > en x86_64). Las funciones Win32 se declaran como `inseguro función` para llamadas
 > FFI.
@@ -199,7 +199,7 @@ el tam = tamaño_de::<Entero32>(); // 4
 | `afirmar` | `(Booleano) -> Vacío` | Assert en tiempo de ejecución |
 
 **Ejemplo:**
-```falcato
+```mejia
 prueba "suma básica" {
     afirmar(sumar(2, 2) es 4);
 }
@@ -234,7 +234,7 @@ prueba "suma básica" {
 | `seleccionar` | Select sobre canales |
 | `con_executor` | Thread pool |
 
-### Modos verbales (innovación Falcato)
+### Modos verbales (innovación mejia)
 
 | Palabra | Significado |
 |---------|-------------|
@@ -286,3 +286,4 @@ prueba "suma básica" {
 | `yo` | Self en referencias (`&yo T`) |
 | `tipo` | Declaración de tipo (alias) |
 | `verdadero` / `falso` | Booleanos |
+

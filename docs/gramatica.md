@@ -1,4 +1,4 @@
-# Gramática de Falcato (borrador)
+# Gramática de mejia (borrador)
 
 > ⚠️ Este documento es especulativo. Todo puede cambiar.
 
@@ -79,7 +79,7 @@ función fibonacci(hasta: Entero32): Generador<Entero32> {
 
 ## 3. Ser vs. Estar — Permanencia vs. Transitoriedad
 
-| Verbo | Significado en Falcato |
+| Verbo | Significado en mejia |
 |-------|----------------------|
 | `ser` | Constante en tiempo de compilación, inmutable global |
 | `estar` | Variable mutable, puede cambiar en runtime |
@@ -94,7 +94,7 @@ ser función cuadrado(x: Entero32): Entero32 { x * x }  // comptime
 
 ## 4. Prefijos semánticos productivos
 
-| Prefijo | Semántica en Falcato |
+| Prefijo | Semántica en mejia |
 |---------|----------------------|
 | `re-` | Reintentar, rehacer (`retry`, `redo`) |
 | `pre-` | Pre-cálculo, pre-carga (`precompute`) |
@@ -157,7 +157,7 @@ cada_vez_que evento { ... }       // event listener
 
 ## Keywords provisionales
 
-| Falcato | Concepto |
+| mejia | Concepto |
 |---------|----------|
 | `función` | Function declaration |
 | `retornar` | Return value |
@@ -180,3 +180,4 @@ cada_vez_que evento { ... }       // event listener
 | `inseguro` | Unsafe block |
 | `presta` | Borrow |
 | `mueve` | Move ownership |
+

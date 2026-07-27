@@ -1,4 +1,4 @@
-# Falcato — Built-in Functions Reference
+# mejia — Built-in Functions Reference
 
 Loaded on-demand when detailed function signatures are needed.
 
@@ -82,3 +82,4 @@ Loaded on-demand when detailed function signatures are needed.
 | `imprimir(x)` | Print without newline |
 | `imprimir_linea(x)` | Print with newline |
 | `decir(x)` | Alias of imprimir_linea |
+

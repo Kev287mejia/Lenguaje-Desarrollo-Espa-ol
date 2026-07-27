@@ -4,7 +4,7 @@
 
 ---
 
-Las variables en Falcato se declaran con un **artículo**. Como en español de verdad: `el`, `la`, `un`, `los`, `las`.
+Las variables en mejia se declaran con un **artículo**. Como en español de verdad: `el`, `la`, `un`, `los`, `las`.
 
 Cada artículo dice **quién es el dueño** del dato. No es decoración — el compilador lo usa para evitar errores de memoria.
 
@@ -25,7 +25,7 @@ Nadie más tiene acceso directo.
 
 **Cuándo se usa en la vida real:**
 
-```falcato
+```mejia
 // Un contador que incrementa
 el puntos: Entero32 = 0;
 puntos = puntos + 100;
@@ -55,7 +55,7 @@ El dato **no es tuyo**. Te lo prestaron para leerlo. No puedes modificarlo ni li
 
 **Cuándo se usa en la vida real:**
 
-```falcato
+```mejia
 // Constantes de configuración que nunca cambian
 la NOMBRE_APP: Palabra = "Mi Programa";
 la VERSION: Palabra = "1.0";
@@ -92,7 +92,7 @@ Es una alternativa ligera a `Resultado<T,E>` — útil cuando la ausencia de val
 
 **Cuándo se usa en la vida real:**
 
-```falcato
+```mejia
 // Buscar un usuario por ID — puede no existir
 fn buscar_usuario(la id: Entero32) -> un Palabra {
     si id es 1 { retornar admin; }
@@ -133,7 +133,7 @@ Varios hilos o funciones comparten la **propiedad** del dato. Cuando todos termi
 
 **Cuándo se usa en la vida real:**
 
-```falcato
+```mejia
 // Recurso compartido entre varios hilos
 los contador_global: Entero32 = 0;
 
@@ -163,7 +163,7 @@ Varias partes pueden **leer el mismo dato simultáneamente** pero ninguna puede 
 
 **Cuándo se usa en la vida real:**
 
-```falcato
+```mejia
 // Un log centralizado que todos leen
 las registro_global: Texto;
 
@@ -198,7 +198,7 @@ Esta tabla te guía según lo que **necesitas hacer**:
 
 ## Comparativa visual: el mismo programa en 5 artículos
 
-```falcato
+```mejia
 // el — contador personal
 fn mi_contador() {
     el c: Entero32 = 0;
@@ -235,7 +235,7 @@ fn mostrar_global() {
 
 ## Errores típicos
 
-```falcato
+```mejia
 // Error: 'la' no se puede modificar
 la x: Entero32 = 10;
 x = 20;          // [O001] 'la' es inmutable
@@ -260,3 +260,4 @@ z = 20;          // ok
 ---
 
 ← [02: Tu primer programa](02-tu-primer-programa.md) | [Indice](../GUIA.md) | [Siguiente: Operaciones →](04-operaciones.md)
+
