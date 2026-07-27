@@ -61,6 +61,40 @@ Código fuente (.fc) -> Lexer -> Parser -> Análisis Semántico -> Codegen (Cran
 
 ---
 
+## Ejemplo de Código Completo
+
+Este ejemplo demuestra el modelado de datos con estructuras de C ABI, el control de referencias seguras y la mutabilidad temporal utilizando el compilador de Mejia:
+
+```fc
+// Definimos una estructura compatible con C ABI
+estructural Punto {
+    x: Entero32,
+    y: Entero32
+}
+
+// Función que modifica la estructura recibiendo una referencia mutable (el &mut)
+función desplazar(el p: &mut Punto, el dx: Entero32, el dy: Entero32) {
+    // p es mutable exclusivamente por el artículo "el" y el calificador "&mut"
+    p.x = p.x + dx;
+    p.y = p.y + dy;
+}
+
+función principal() -> Entero32 {
+    // "está" define un estado mutable temporal para la variable
+    el mi_punto está Punto { x: 10, y: 20 };
+
+    // Desplazamos pasando una referencia mutable
+    desplazar(&mut mi_punto, 5, -10);
+
+    // Salida por pantalla formateada con interpolación nativa
+    imprimir_linea("Punto desplazado -> x: {mi_punto.x}, y: {mi_punto.y}");
+
+    retornar 0;
+}
+```
+
+---
+
 ## Guía de Inicio Rápido
 
 ### Requisitos Previos
