@@ -2,7 +2,7 @@
 
 **El primer lenguaje de programación de sistemas en español pensado para la educación universitaria y el desarrollo de compiladores.**
 
-Mejia es un lenguaje de programación de bajo nivel compilado de forma nativa a `x86_64` sobre **Cranelift** como backend estratégico. Diseñado con una semántica basada en la gramática española, Mejia aprovecha conceptos lingüísticos naturales para enseñar conceptos avanzados de ingeniería de software como el control de ciclo de vida de memoria (ownership), la mutabilidad estricta, la asincronía y el diseño de compiladores.
+Mejia es un lenguaje de programación de sistemas de alto rendimiento compilado de forma nativa a `x86_64` sobre **Cranelift** como backend estratégico. Diseñado con una semántica basada en la gramática española, Mejia aprovecha conceptos lingüísticos naturales para enseñar conceptos avanzados de ingeniería de software como el control de ciclo de vida de memoria (ownership), la mutabilidad estricta, la asincronía y el diseño de compiladores.
 
 ---
 
